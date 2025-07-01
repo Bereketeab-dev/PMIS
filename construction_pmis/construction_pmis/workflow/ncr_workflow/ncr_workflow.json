@@ -1,0 +1,110 @@
+{
+    "doctype": "Workflow",
+    "name": "NCR Workflow",
+    "module": "Construction PMIS",
+    "document_type": "NCR",
+    "workflow_name": "NCR Workflow",
+    "is_active": 1,
+    "send_email_alert": 1,
+    "workflow_state_field": "status",
+    "states": [
+        {
+            "state": "Open",
+            "doc_status": "0",
+            "allow_edit": "QA QC Engineer,Site Engineer,Safety Officer,Project Manager",
+            "message": "NCR raised and is open."
+        },
+        {
+            "state": "Under Investigation",
+            "doc_status": "1",
+            "allow_edit": "QA QC Engineer,Project Manager",
+            "message": "NCR is under investigation for root cause and impact."
+        },
+        {
+            "state": "Corrective Action Proposed",
+            "doc_status": "1",
+            "allow_edit": "QA QC Engineer,Project Manager",
+            "message": "Corrective and preventive actions have been proposed."
+        },
+        {
+            "state": "Corrective Action Implemented",
+            "doc_status": "1",
+            "allow_edit": "QA QC Engineer,Project Manager,Site Engineer",
+            "message": "Corrective actions have been implemented."
+        },
+        {
+            "state": "Pending Verification",
+            "doc_status": "1",
+            "allow_edit": "QA QC Engineer,Project Manager",
+            "message": "Implemented actions are pending verification for effectiveness."
+        },
+        {
+            "state": "Closed",
+            "doc_status": "1",
+            "allow_edit": "System Manager",
+            "update_field": "status",
+            "update_value": "Closed",
+            "message": "NCR verified and closed."
+        },
+        {
+            "state": "Rejected",
+            "doc_status": "2",
+            "allow_edit": "QA QC Engineer,Project Manager",
+            "message": "NCR has been rejected as invalid or duplicated."
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Open",
+            "action": "Start Investigation",
+            "next_state": "Under Investigation",
+            "allowed": "QA QC Engineer,Project Manager",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "Open",
+            "action": "Reject NCR",
+            "next_state": "Rejected",
+            "allowed": "QA QC Engineer,Project Manager",
+            "custom_action_method": "reject_ncr"
+        },
+        {
+            "state": "Under Investigation",
+            "action": "Propose Corrective Action",
+            "next_state": "Corrective Action Proposed",
+            "allowed": "QA QC Engineer,Project Manager",
+            "condition": "doc.proposed_corrective_action && doc.action_assigned_to",
+            "custom_action_method": "propose_corrective_action"
+        },
+        {
+            "state": "Corrective Action Proposed",
+            "action": "Confirm Action Implementation",
+            "next_state": "Corrective Action Implemented",
+            "allowed": "Site Engineer,Project Manager,QA QC Engineer",
+            "condition": "doc.action_taken_details && doc.action_completion_date",
+            "custom_action_method": "implement_corrective_action"
+        },
+        {
+            "state": "Corrective Action Implemented",
+            "action": "Submit for Verification",
+            "next_state": "Pending Verification",
+            "allowed": "Site Engineer,Project Manager,QA QC Engineer",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Pending Verification",
+            "action": "Verify and Close",
+            "next_state": "Closed",
+            "allowed": "QA QC Engineer,Project Manager",
+            "condition": "doc.verification_by && doc.verification_date && doc.verification_remarks",
+            "custom_action_method": "verify_and_close_ncr"
+        },
+        {
+            "state": "Pending Verification",
+            "action": "Verification Failed (Re-do Action)",
+            "next_state": "Corrective Action Proposed",
+            "allowed": "QA QC Engineer,Project Manager",
+            "description": "If verification fails, actions may need to be revised or re-implemented."
+        }
+    ]
+}

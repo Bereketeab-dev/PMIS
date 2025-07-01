@@ -1,0 +1,174 @@
+{
+    "name": "Subcontract",
+    "engine": "InnoDB",
+    "description": "Manages subcontractor agreements, scope, value, and linked documents.",
+    "creation": "2024-03-10 16:45:00.000000",
+    "modified": "2024-03-10 16:45:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:SUB-{project}-{supplier_abbr}-{#####}",
+    "sort_field": "creation",
+    "sort_order": "DESC",
+    "title_field": "subcontract_title",
+    "search_fields": "subcontract_title, project, supplier, status",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Contracts Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Quantity Surveyor", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"},
+        {"link_doctype": "Supplier", "link_fieldname": "supplier"},
+        {"link_doctype": "Purchase Order", "link_fieldname": "linked_purchase_order"}
+    ],
+    "fields": [
+        {
+            "fieldname": "subcontract_title",
+            "label": "Subcontract Title / Reference",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "supplier",
+            "label": "Subcontractor (Supplier)",
+            "fieldtype": "Link",
+            "options": "Supplier",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nPending Award\nAwarded\nActive\nCompleted\nTerminated\nCancelled",
+            "default": "Draft",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "subcontract_date",
+            "label": "Subcontract Date",
+            "fieldtype": "Date",
+            "default": "Today"
+        },
+        {
+            "fieldname": "currency",
+            "label": "Currency",
+            "fieldtype": "Link",
+            "options": "Currency",
+            "default": "frappe.defaults.get_global_default('currency')",
+            "reqd": 1
+        },
+        {
+            "fieldname": "subcontract_value",
+            "label": "Subcontract Value",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "reqd": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "scope_of_work_tab",
+            "label": "Scope of Work",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "scope_of_work_summary",
+            "label": "Scope of Work Summary",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "subcontract_items",
+            "label": "Subcontract Items / BOQ",
+            "fieldtype": "Table",
+            "options": "Subcontract Item",
+            "description": "Detailed breakdown of subcontracted works, quantities, and rates."
+        },
+        {
+            "fieldname": "terms_and_conditions_tab",
+            "label": "Terms & Conditions",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "payment_terms",
+            "label": "Payment Terms",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "retention_details",
+            "label": "Retention Details",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "liquidated_damages",
+            "label": "Liquidated Damages Clause",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "insurance_requirements",
+            "label": "Insurance Requirements",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "commencement_date",
+            "label": "Planned Commencement Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "completion_date",
+            "label": "Planned Completion Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "documents_tab",
+            "label": "Documents & Links",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "subcontract_agreement_attachment",
+            "label": "Subcontract Agreement Document",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "linked_purchase_order",
+            "label": "Linked Purchase Order (Optional)",
+            "fieldtype": "Link",
+            "options": "Purchase Order",
+            "description": "If this subcontract is formalized via a PO in ERPNext."
+        },
+        {
+            "fieldname": "other_attachments",
+            "label": "Other Supporting Documents",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "TextEditor"
+        }
+    ],
+    "workflow": 1
+}

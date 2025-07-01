@@ -1,0 +1,217 @@
+{
+    "name": "Daily Log",
+    "engine": "InnoDB",
+    "description": "Records daily site activities, conditions, progress, and resource usage.",
+    "creation": "2024-03-10 16:00:00.000000",
+    "modified": "2024-03-10 16:00:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:DL-{project}-{date}-{#####}",
+    "sort_field": "date",
+    "sort_order": "DESC",
+    "title_field": "log_title",
+    "search_fields": "log_title, project, date, status, prepared_by",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Foreman", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 0, "share": 0, "export": 1, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"},
+        {"link_doctype": "Daily Work Plan", "link_fieldname": "linked_daily_work_plan"}
+    ],
+    "fields": [
+        {
+            "fieldname": "log_title",
+            "label": "Log Title / Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "date",
+            "label": "Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "default": "Today",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nSubmitted\nApproved",
+            "default": "Draft",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "prepared_by",
+            "label": "Prepared By (Site Engineer/Foreman)",
+            "fieldtype": "Link",
+            "options": "User",
+            "default": "__user",
+            "read_only": 1
+        },
+        {
+            "fieldname": "approved_by",
+            "label": "Approved By (Project Manager)",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "fieldname": "approval_date",
+            "label": "Approval Date",
+            "fieldtype": "Date",
+            "read_only": 1
+        },
+        {
+            "fieldname": "linked_daily_work_plan",
+            "label": "Linked Daily Work Plan",
+            "fieldtype": "Link",
+            "options": "Daily Work Plan",
+            "get_query": "construction_pmis.construction_pmis.utils.get_daily_work_plan_for_log"
+        },
+        {
+            "fieldname": "site_conditions_tab",
+            "label": "Site Conditions",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "weather_conditions",
+            "label": "Weather Conditions",
+            "fieldtype": "Small Text",
+            "description": "e.g., Sunny, Rainy, Windy. Temperature."
+        },
+        {
+            "fieldname": "working_hours_from",
+            "label": "Working Hours From",
+            "fieldtype": "Time",
+            "default": "08:00:00"
+        },
+        {
+            "fieldname": "working_hours_to",
+            "label": "Working Hours To",
+            "fieldtype": "Time",
+            "default": "17:00:00"
+        },
+        {
+            "fieldname": "site_photos_section",
+            "label": "Site Photos",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "site_photos",
+            "label": "Attach Site Photos",
+            "fieldtype": "Attach Image"
+        },
+        {
+            "fieldname": "work_progress_tab",
+            "label": "Work Progress",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "work_completed_today",
+            "label": "Summary of Work Completed Today",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "tasks_progress",
+            "label": "Tasks Progress Details",
+            "fieldtype": "Table",
+            "options": "Daily Log Task Progress",
+            "description": "Details of progress against planned tasks."
+        },
+        {
+            "fieldname": "resource_usage_tab",
+            "label": "Resource Usage",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "manpower_actual",
+            "label": "Actual Manpower Utilized",
+            "fieldtype": "Table",
+            "options": "Daily Log Manpower"
+        },
+        {
+            "fieldname": "machinery_actual",
+            "label": "Actual Machinery Utilized",
+            "fieldtype": "Table",
+            "options": "Daily Log Machinery"
+        },
+        {
+            "fieldname": "materials_consumed_actual",
+            "label": "Actual Materials Consumed/Received",
+            "fieldtype": "Table",
+            "options": "Daily Log Material"
+        },
+        {
+            "fieldname": "issues_delays_tab",
+            "label": "Issues, Delays & Safety",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "issues_encountered",
+            "label": "Issues Encountered / Hindrances",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "delays_occurred",
+            "label": "Delays Occurred (with reasons)",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "safety_incidents_section",
+            "label": "Safety Incidents / Observations",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "safety_incidents",
+            "label": "Safety Incidents or Near Misses",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "toolbox_talk_conducted",
+            "label": "Toolbox Talk Conducted (Topic)",
+            "fieldtype": "Link",
+            "options": "Toolbox Talk"
+        },
+        {
+            "fieldname": "other_remarks_tab",
+            "label": "Other Remarks",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "visitors_to_site",
+            "label": "Visitors to Site",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "general_remarks",
+            "label": "General Remarks",
+            "fieldtype": "TextEditor"
+        }
+    ],
+    "workflow": 1
+}

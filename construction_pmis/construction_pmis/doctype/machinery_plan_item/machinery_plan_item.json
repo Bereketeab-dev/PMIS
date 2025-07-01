@@ -1,0 +1,80 @@
+{
+    "name": "Machinery Plan Item",
+    "engine": "InnoDB",
+    "description": "Child table for Project to detail machinery and equipment planning.",
+    "creation": "2024-03-10 14:05:00.000000",
+    "modified": "2024-03-10 14:05:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "machinery_asset",
+            "label": "Machinery/Asset",
+            "fieldtype": "Link",
+            "options": "Asset",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "Link to specific asset if known, or use type below."
+        },
+        {
+            "fieldname": "machinery_type",
+            "label": "Machinery Type",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "e.g., Excavator 20T, Crane 50T, Concrete Mixer. Can be fetched from Asset."
+        },
+        {
+            "fieldname": "required_quantity",
+            "label": "Required Quantity",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "in_list_view": 1,
+            "default": 1
+        },
+        {
+            "fieldname": "start_date",
+            "label": "Planned Start Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "end_date",
+            "label": "Planned End Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "planned_total_days",
+            "label": "Planned Total Days",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "description": "Calculated based on start and end date."
+        },
+        {
+            "fieldname": "planned_hours_per_day",
+            "label": "Planned Operational Hours/Day",
+            "fieldtype": "Float",
+            "default": 8
+        },
+        {
+            "fieldname": "total_planned_hours",
+            "label": "Total Planned Operational Hours",
+            "fieldtype": "Float",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

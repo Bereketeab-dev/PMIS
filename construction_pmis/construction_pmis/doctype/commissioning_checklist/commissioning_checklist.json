@@ -1,0 +1,134 @@
+{
+    "name": "Commissioning Checklist",
+    "engine": "InnoDB",
+    "description": "Manages commissioning checklists for systems and equipment.",
+    "creation": "2024-03-10 19:10:00.000000",
+    "modified": "2024-03-10 19:10:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:COMM-{project}-{system_name}-{#####}",
+    "sort_field": "planned_commissioning_date",
+    "sort_order": "ASC",
+    "title_field": "checklist_title",
+    "search_fields": "checklist_title, project, system_name, status",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Commissioning Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 1, "share": 0, "export": 1, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "checklist_title",
+            "label": "Checklist Title",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "system_name",
+            "label": "System / Equipment Being Commissioned",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "e.g., HVAC System - Zone A, Fire Alarm System, Main Power Generator"
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Planned\nPre-Commissioning Checks\nFunctional Tests\nPerformance Tests\nDocumentation Review\nCompleted\nIssues Found\nClosed",
+            "default": "Planned",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "planned_commissioning_date",
+            "label": "Planned Commissioning Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "actual_commissioning_start_date",
+            "label": "Actual Commissioning Start Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "actual_commissioning_end_date",
+            "label": "Actual Commissioning End Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "commissioned_by_team",
+            "label": "Commissioned By (Team/Company)",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "witnessed_by",
+            "label": "Witnessed By (Client/Consultant)",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "checklist_items_tab",
+            "label": "Commissioning Checklist Items",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "commissioning_checklist_items",
+            "label": "Checklist Items",
+            "fieldtype": "Table",
+            "options": "Commissioning Checklist Item",
+            "description": "Detailed list of checks and tests to be performed."
+        },
+        {
+            "fieldname": "overall_result",
+            "label": "Overall Commissioning Result",
+            "fieldtype": "Select",
+            "options": "\nPass\nFail\nPass with Remarks",
+            "depends_on": "eval:doc.status=='Completed' || doc.status=='Closed'"
+        },
+        {
+            "fieldname": "summary_remarks_tab",
+            "label": "Summary & Attachments",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "summary_of_findings",
+            "label": "Summary of Findings / Remarks",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "test_reports_attachment",
+            "label": "Test Reports Attachment",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "signed_off_sheet_attachment",
+            "label": "Signed-off Checklist/Sheet",
+            "fieldtype": "Attach"
+        }
+    ],
+    "workflow": 1
+}
