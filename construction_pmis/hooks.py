@@ -12,8 +12,13 @@ app_version = "0.0.1"
 fixtures = [
     # Workflows
     {"dt": "Workflow", "filters": [["module", "=", "Construction PMIS"]]},
-    # Add Custom Reports, Print Formats, Dashboards if created as fixtures
-    # {"dt": "Report", "filters": [["module", "=", "Construction PMIS"]]},
+    # Reports
+    {"dt": "Report", "filters": [["module", "=", "Construction PMIS"]]},
+    # Dashboards
+    {"dt": "Dashboard", "filters": [["module", "=", "Construction PMIS"]]},
+    {"dt": "Dashboard Chart", "filters": [["module", "=", "Construction PMIS"]]},
+    {"dt": "Number Card", "filters": [["module", "=", "Construction PMIS"]]},
+    # Dashboard Chart Source python files are not fixtures themselves, but the charts linking to them are.
 
     # Optionally, add specific DocTypes if they have default data to be included.
     # Most DocTypes here are transactional or project-specific, so usually not part of fixtures unless for setup/defaults.
