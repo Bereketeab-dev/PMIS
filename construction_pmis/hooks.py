@@ -30,6 +30,10 @@ fixtures = [
 # app_include_css = "/assets/construction_pmis/css/construction_pmis.css"
 # app_include_js = "/assets/construction_pmis/js/construction_pmis.js"
 
+app_include_python = [
+	"construction_pmis.config.desktop"
+]
+
 # Desk Icons
 # icon = "octicon octicon-briefcase"
 

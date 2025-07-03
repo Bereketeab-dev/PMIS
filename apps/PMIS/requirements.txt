@@ -1,0 +1,13 @@
+# Add any specific Python package dependencies here.
+# For example:
+# requests>=2.20
+# pandas
+# If your app only uses packages already part of Frappe/ERPNext,
+# this file can be left empty or list 'frappe' for clarity.
+
+# frappe # Typically not needed as bench manages this.
+# erpnext # Only if you have very specific erpnext version dependencies not managed by bench.
+
+# For now, assuming no external dependencies beyond the Frappe environment.
+# If you later find you need specific libraries (e.g., for complex calculations in reports,
+# or integrations), list them here, one per line.
