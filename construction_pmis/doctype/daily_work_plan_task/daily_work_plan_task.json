@@ -1,0 +1,85 @@
+{
+    "name": "Daily Work Plan Task",
+    "engine": "InnoDB",
+    "description": "Child table for Daily Work Plan, listing tasks for the day.",
+    "creation": "2024-03-10 14:45:00.000000",
+    "modified": "2024-03-10 14:45:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "project_schedule_task",
+            "label": "Project Schedule Task",
+            "fieldtype": "Link",
+            "options": "Project Schedule Task",
+            "in_list_view": 1,
+            "get_query": "construction_pmis.construction_pmis.utils.get_tasks_for_daily_plan"
+        },
+        {
+            "fieldname": "task_name",
+            "label": "Task Name / Description",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "fetch_from": "project_schedule_task.task_name"
+        },
+        {
+            "fieldname": "wbs_reference",
+            "label": "WBS Ref",
+            "fieldtype": "Data",
+            "fetch_from": "project_schedule_task.wbs_reference",
+            "read_only": 1
+        },
+        {
+            "fieldname": "planned_start_time",
+            "label": "Planned Start Time",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "planned_end_time",
+            "label": "Planned End Time",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "location_area",
+            "label": "Location/Area",
+            "fieldtype": "Data",
+            "description": "Specific location for this task today."
+        },
+        {
+            "fieldname": "target_quantity",
+            "label": "Target Quantity",
+            "fieldtype": "Float",
+            "description": "e.g., 10 m³ concrete, 50m formwork"
+        },
+        {
+            "fieldname": "unit_of_measure",
+            "label": "Unit",
+            "fieldtype": "Link",
+            "options": "UOM"
+        },
+        {
+            "fieldname": "notes",
+            "label": "Specific Instructions",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "status",
+            "label": "Actual Status",
+            "fieldtype": "Select",
+            "options": "Pending\nNot Started\nIn Progress\nPartially Completed\nCompleted\nBlocked\nCancelled",
+            "default": "Pending",
+            "in_list_view": 1,
+            "read_only": 1,
+            "description": "This status will be updated from Daily Log."
+        }
+    ]
+}

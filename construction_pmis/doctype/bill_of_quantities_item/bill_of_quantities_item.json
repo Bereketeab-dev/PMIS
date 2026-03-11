@@ -1,0 +1,91 @@
+{
+    "name": "Bill of Quantities Item",
+    "engine": "InnoDB",
+    "description": "Child table for Cost Estimate, detailing individual BOQ items.",
+    "creation": "2024-03-10 10:40:00.000000",
+    "modified": "2024-03-10 10:40:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "sort_field": "item_code",
+    "sort_order": "ASC",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "item_code",
+            "label": "Item Code / Ref",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "width": "100"
+        },
+        {
+            "fieldname": "description",
+            "label": "Description",
+            "fieldtype": "Text",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "300"
+        },
+        {
+            "fieldname": "unit",
+            "label": "Unit",
+            "fieldtype": "Link",
+            "options": "UOM",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "70"
+        },
+        {
+            "fieldname": "quantity",
+            "label": "Quantity",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "100"
+        },
+        {
+            "fieldname": "unit_rate",
+            "label": "Unit Rate",
+            "fieldtype": "Currency",
+            "options": "parent.currency",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "120"
+        },
+        {
+            "fieldname": "amount",
+            "label": "Amount",
+            "fieldtype": "Currency",
+            "options": "parent.currency",
+            "read_only": 1,
+            "in_list_view": 1,
+            "width": "150",
+            "bold": 1
+        },
+        {
+            "fieldname": "wbs_category",
+            "label": "WBS/Category",
+            "fieldtype": "Data",
+            "description": "Link to Work Breakdown Structure or cost category."
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "Small Text",
+            "width": "200"
+        },
+        {
+            "fieldname": "erpnext_item_code",
+            "label": "ERPNext Item",
+            "fieldtype": "Link",
+            "options": "Item",
+            "description": "Link to a standard ERPNext Item if applicable for procurement/inventory."
+        }
+    ]
+}

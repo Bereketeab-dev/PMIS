@@ -1,0 +1,144 @@
+{
+    "name": "Toolbox Talk",
+    "engine": "InnoDB",
+    "description": "Records details of toolbox talks conducted on site.",
+    "creation": "2024-03-10 18:20:00.000000",
+    "modified": "2024-03-10 18:20:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:TBT-{project}-{YYYY}-{MM}-{#####}",
+    "sort_field": "date_conducted",
+    "sort_order": "DESC",
+    "title_field": "topic",
+    "search_fields": "topic, project, conducted_by, location",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Safety Officer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Foreman", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 0, "share": 1, "export": 1, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "topic",
+            "label": "Topic of Toolbox Talk",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "date_conducted",
+            "label": "Date Conducted",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "default": "Today",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "time_conducted",
+            "label": "Time Conducted",
+            "fieldtype": "Time"
+        },
+        {
+            "fieldname": "duration_minutes",
+            "label": "Duration (Minutes)",
+            "fieldtype": "Int"
+        },
+        {
+            "fieldname": "conducted_by",
+            "label": "Conducted By",
+            "fieldtype": "Link",
+            "options": "User",
+            "reqd": 1,
+            "default": "__user"
+        },
+        {
+            "fieldname": "location",
+            "label": "Location on Site",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "details_tab",
+            "label": "Talk Details & Attendance",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "content_covered",
+            "label": "Content Covered / Key Points Discussed",
+            "fieldtype": "TextEditor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "questions_raised_feedback",
+            "label": "Questions Raised / Feedback Received",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "attendees_section",
+            "label": "Attendance",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "attendees",
+            "label": "Attendees",
+            "fieldtype": "Table",
+            "options": "Toolbox Talk Attendee",
+            "description": "List of employees/workers who attended."
+        },
+        {
+            "fieldname": "number_of_attendees",
+            "label": "Number of Attendees",
+            "fieldtype": "Int",
+            "read_only": 1
+        },
+        {
+            "fieldname": "attachments_tab",
+            "label": "Attachments",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "attendance_sheet_attachment",
+            "label": "Attendance Sheet Attachment",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "presentation_material_attachment",
+            "label": "Presentation Material (if any)",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "photos_attachment",
+            "label": "Photos of the Talk (Optional)",
+            "fieldtype": "Attach Image"
+        }
+    ]
+    // No complex workflow needed for Toolbox Talk usually, docstatus 0 or 1 is enough.
+    // If approval is needed, workflow can be added.
+}

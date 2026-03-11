@@ -1,0 +1,76 @@
+{
+    "name": "Subcontract Item",
+    "engine": "InnoDB",
+    "description": "Child table for Subcontract, detailing specific items or BOQ lines.",
+    "creation": "2024-03-10 16:50:00.000000",
+    "modified": "2024-03-10 16:50:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "item_code_ref",
+            "label": "Item Code/Ref (from Main BOQ)",
+            "fieldtype": "Link",
+            "options": "Bill of Quantities Item",
+            "description": "Optional: Link to an item in the main project BOQ."
+        },
+        {
+            "fieldname": "description",
+            "label": "Description of Work",
+            "fieldtype": "Text",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "300"
+        },
+        {
+            "fieldname": "unit",
+            "label": "Unit",
+            "fieldtype": "Link",
+            "options": "UOM",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "80"
+        },
+        {
+            "fieldname": "quantity",
+            "label": "Quantity",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "100"
+        },
+        {
+            "fieldname": "unit_rate",
+            "label": "Unit Rate",
+            "fieldtype": "Currency",
+            "options": "parent.currency",
+            "reqd": 1,
+            "in_list_view": 1,
+            "width": "120"
+        },
+        {
+            "fieldname": "amount",
+            "label": "Amount",
+            "fieldtype": "Currency",
+            "options": "parent.currency",
+            "read_only": 1,
+            "in_list_view": 1,
+            "width": "150",
+            "bold": 1
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes/Specifications",
+            "fieldtype": "Small Text",
+            "width": "200"
+        }
+    ]
+}

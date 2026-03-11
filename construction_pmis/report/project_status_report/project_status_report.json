@@ -1,0 +1,38 @@
+{
+    "report_name": "Project Status Report",
+    "report_type": "Script Report",
+    "module": "Construction PMIS",
+    "is_standard": "No",
+    "reference_doctype": "Project",
+    "add_total_row": 0,
+    "filters": [
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "width": "80"
+        },
+        {
+            "fieldname": "project_manager",
+            "label": "Project Manager",
+            "fieldtype": "Link",
+            "options": "User",
+            "width": "80"
+        },
+        {
+            "fieldname": "status",
+            "label": "Project Status",
+            "fieldtype": "Select",
+            "options": "\nPlanning\nPre-Construction\nExecution\nOn Hold\nCompleted\nCancelled",
+            "width": "80"
+        },
+        {
+            "fieldname": "client_name",
+            "label": "Client",
+            "fieldtype": "Link",
+            "options": "Customer",
+            "width": "80"
+        }
+    ]
+}

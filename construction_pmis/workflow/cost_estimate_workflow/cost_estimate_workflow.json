@@ -1,0 +1,93 @@
+{
+    "doctype": "Workflow",
+    "name": "Cost Estimate Workflow",
+    "module": "Construction PMIS",
+    "document_type": "Cost Estimate",
+    "workflow_name": "Cost Estimate Workflow",
+    "is_active": 1,
+    "workflow_state_field": "status",
+    "states": [
+        {
+            "state": "Draft",
+            "doc_status": "0",
+            "allow_edit": "Quantity Surveyor,Project Manager"
+        },
+        {
+            "state": "Submitted",
+            "doc_status": "1",
+            "allow_edit": "Project Manager",
+            "message": "Cost Estimate has been submitted for approval."
+        },
+        {
+            "state": "Approved",
+            "doc_status": "1",
+            "allow_edit": "Project Manager",
+            "update_field": "status",
+            "update_value": "Approved",
+            "message": "Cost Estimate has been approved."
+        },
+        {
+            "state": "Rejected",
+            "doc_status": "2",
+            "allow_edit": "Quantity Surveyor,Project Manager",
+            "message": "Cost Estimate has been rejected. Please review and resubmit if necessary."
+        },
+        {
+            "state": "Superseded",
+            "doc_status": "2",
+            "allow_edit": "System Manager",
+            "message": "This Cost Estimate has been superseded by a newer version."
+        },
+        {
+            "state": "Cancelled",
+            "doc_status": "2",
+            "allow_edit": "System Manager",
+            "message": "This Cost Estimate has been cancelled."
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Draft",
+            "action": "Submit",
+            "next_state": "Submitted",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Submitted",
+            "action": "Approve",
+            "next_state": "Approved",
+            "allowed": "Project Manager,System Manager",
+            "allow_self_approval": 0,
+            "condition": "doc.total_estimated_amount > 0"
+        },
+        {
+            "state": "Submitted",
+            "action": "Reject",
+            "next_state": "Rejected",
+            "allowed": "Project Manager,System Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Rejected",
+            "action": "Amend & Resubmit",
+            "next_state": "Draft",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "Approved",
+            "action": "Supersede",
+            "next_state": "Superseded",
+            "allowed": "Project Manager,System Manager",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "Approved",
+            "action": "Revise",
+            "next_state": "Draft",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "description": "Revise this estimate. Current one will be marked as Superseded or user can choose to cancel it and create new."
+        }
+    ]
+}

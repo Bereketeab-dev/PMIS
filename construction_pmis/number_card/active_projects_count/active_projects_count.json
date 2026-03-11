@@ -1,0 +1,14 @@
+{
+    "label": "Active Projects Count",
+    "doctype": "Number Card",
+    "document_type": "Project",
+    "function": "Count",
+    "filters_json": "[[\"Project\",\"status\",\"in\",[\"Planning\",\"Pre-Construction\",\"Execution\"]]]",
+    "is_public": 1,
+    "is_standard": 0,
+    "module": "Construction PMIS",
+    "name": "Active Projects Count",
+    "owner": "Administrator",
+    "report_function": "Sum",
+    "color": "Green"
+}
