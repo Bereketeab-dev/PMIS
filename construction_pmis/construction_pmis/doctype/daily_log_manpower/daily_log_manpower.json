@@ -1,0 +1,74 @@
+{
+    "name": "Daily Log Manpower",
+    "engine": "InnoDB",
+    "description": "Child table for Daily Log to record actual manpower usage.",
+    "creation": "2024-03-10 16:10:00.000000",
+    "modified": "2024-03-10 16:10:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "daily_work_plan_manpower",
+            "label": "From Daily Work Plan Manpower",
+            "fieldtype": "Link",
+            "options": "Daily Work Plan Manpower",
+            "get_query": "construction_pmis.construction_pmis.utils.get_dwp_manpower_for_log"
+        },
+        {
+            "fieldname": "resource_type",
+            "label": "Resource Type/Trade",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "fetch_from": "daily_work_plan_manpower.resource_type"
+        },
+        {
+            "fieldname": "specific_employee",
+            "label": "Specific Employee",
+            "fieldtype": "Link",
+            "options": "Employee",
+            "fetch_from": "daily_work_plan_manpower.specific_employee"
+        },
+        {
+            "fieldname": "actual_quantity",
+            "label": "Actual Quantity Present",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "in_list_view": 1,
+            "fetch_from": "daily_work_plan_manpower.planned_quantity"
+        },
+        {
+            "fieldname": "actual_hours_worked",
+            "label": "Actual Hours Worked",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "default": 8,
+            "fetch_from": "daily_work_plan_manpower.planned_hours"
+        },
+        {
+            "fieldname": "overtime_hours",
+            "label": "Overtime Hours",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "task_worked_on",
+            "label": "Task Worked On (Optional)",
+            "fieldtype": "Link",
+            "options": "Daily Log Task Progress"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

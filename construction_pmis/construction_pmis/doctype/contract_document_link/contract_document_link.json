@@ -1,0 +1,39 @@
+{
+    "name": "Contract Document Link",
+    "engine": "InnoDB",
+    "description": "Child table for Contract Document to link to other related contract documents.",
+    "creation": "2024-03-10 10:20:00.000000",
+    "modified": "2024-03-10 10:20:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "linked_document",
+            "label": "Linked Contract Document",
+            "fieldtype": "Link",
+            "options": "Contract Document",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "relationship_type",
+            "label": "Relationship Type",
+            "fieldtype": "Select",
+            "options": "Related\nAmendment To\nSupersedes\nAddendum To\nOther",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "description",
+            "label": "Description",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

@@ -1,0 +1,162 @@
+{
+    "name": "Daily Work Plan",
+    "engine": "InnoDB",
+    "description": "Plan daily activities, tasks, and resource allocation for a project.",
+    "creation": "2024-03-10 14:40:00.000000",
+    "modified": "2024-03-10 14:40:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:DWP-{project}-{date}-{#####}",
+    "sort_field": "date",
+    "sort_order": "DESC",
+    "title_field": "plan_title",
+    "search_fields": "plan_title, project, date, status",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Foreman", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 0, "share": 0, "export": 0, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"},
+        {"link_doctype": "Daily Log", "link_fieldname": "linked_daily_log"}
+    ],
+    "fields": [
+        {
+            "fieldname": "plan_title",
+            "label": "Plan Title / Reference",
+            "fieldtype": "Data",
+            "description": "e.g., Daily Plan for Zone A - Concreting"
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "date",
+            "label": "Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "default": "Today",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nPlanned\nIn Progress\nCompleted\nCancelled",
+            "default": "Draft",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "prepared_by",
+            "label": "Prepared By",
+            "fieldtype": "Link",
+            "options": "User",
+            "default": "__user",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_main",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "linked_daily_log",
+            "label": "Linked Daily Log",
+            "fieldtype": "Link",
+            "options": "Daily Log",
+            "read_only": 1,
+            "description": "Link to the Daily Log created from this plan."
+        },
+        {
+            "fieldname": "tasks_tab",
+            "label": "Planned Tasks",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "planned_tasks_for_day",
+            "label": "Planned Tasks for the Day",
+            "fieldtype": "Table",
+            "options": "Daily Work Plan Task",
+            "description": "Select tasks from the Project Schedule scheduled for this day or add ad-hoc tasks."
+        },
+        {
+            "fieldname": "resources_tab",
+            "label": "Planned Resources",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "manpower_section",
+            "label": "Planned Manpower",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "planned_manpower",
+            "label": "Manpower Details",
+            "fieldtype": "Table",
+            "options": "Daily Work Plan Manpower"
+        },
+        {
+            "fieldname": "machinery_section",
+            "label": "Planned Machinery",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "planned_machinery",
+            "label": "Machinery Details",
+            "fieldtype": "Table",
+            "options": "Daily Work Plan Machinery"
+        },
+        {
+            "fieldname": "materials_section",
+            "label": "Planned Materials (Optional)",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "planned_materials",
+            "label": "Materials to be Used/Required",
+            "fieldtype": "Table",
+            "options": "Daily Work Plan Material",
+            "description": "List key materials required for the day's tasks."
+        },
+        {
+            "fieldname": "notes_tab",
+            "label": "Instructions & Notes",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "specific_instructions",
+            "label": "Specific Instructions for the Day",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "safety_precautions",
+            "label": "Safety Precautions / Toolbox Talk Points",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "general_notes",
+            "label": "General Notes",
+            "fieldtype": "TextEditor"
+        }
+    ]
+}

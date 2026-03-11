@@ -1,0 +1,78 @@
+{
+    "name": "Manpower Plan Item",
+    "engine": "InnoDB",
+    "description": "Child table for Project to detail manpower planning.",
+    "creation": "2024-03-10 14:00:00.000000",
+    "modified": "2024-03-10 14:00:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "resource_type",
+            "label": "Resource Type/Trade",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "description": "e.g., Skilled Labor, Mason, Electrician, Project Engineer"
+        },
+        {
+            "fieldname": "employee",
+            "label": "Specific Employee (Optional)",
+            "fieldtype": "Link",
+            "options": "Employee"
+        },
+        {
+            "fieldname": "required_quantity",
+            "label": "Required Quantity",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "in_list_view": 1,
+            "default": 1
+        },
+        {
+            "fieldname": "start_date",
+            "label": "Planned Start Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "end_date",
+            "label": "Planned End Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "planned_total_days",
+            "label": "Planned Total Days",
+            "fieldtype": "Int",
+            "read_only": 1,
+            "description": "Calculated based on start and end date."
+        },
+        {
+            "fieldname": "planned_hours_per_day",
+            "label": "Planned Hours/Day",
+            "fieldtype": "Float",
+            "default": 8
+        },
+        {
+            "fieldname": "total_planned_hours",
+            "label": "Total Planned Hours",
+            "fieldtype": "Float",
+            "read_only": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

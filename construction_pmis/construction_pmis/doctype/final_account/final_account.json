@@ -1,0 +1,228 @@
+{
+    "name": "Final Account",
+    "engine": "InnoDB",
+    "description": "Manages the project final account, summarizing all financial transactions and final payments.",
+    "creation": "2024-03-10 19:25:00.000000",
+    "modified": "2024-03-10 19:25:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:FINACC-{project}-{YYYY}",
+    "sort_field": "final_account_date",
+    "sort_order": "DESC",
+    "title_field": "title",
+    "search_fields": "title, project, status",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Quantity Surveyor", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Accountant", "read": 1, "write": 1, "create": 0, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"},
+        {"link_doctype": "Payment Certificate", "link_fieldname": "last_payment_certificate"}
+    ],
+    "fields": [
+        {
+            "fieldname": "title",
+            "label": "Title",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nPending Agreement\nAgreed\nCertified for Payment\nPaid & Closed\nDisputed",
+            "default": "Draft",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "final_account_date",
+            "label": "Final Account Date",
+            "fieldtype": "Date",
+            "default": "Today",
+            "reqd": 1
+        },
+        {
+            "fieldname": "currency",
+            "label": "Currency",
+            "fieldtype": "Link",
+            "options": "Currency",
+            "default": "frappe.defaults.get_global_default('currency')",
+            "reqd": 1
+        },
+        {
+            "fieldname": "summary_section",
+            "label": "Final Account Summary",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "original_contract_sum",
+            "label": "A. Original Contract Sum",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "reqd": 1,
+            "description": "As per initial contract/cost estimate."
+        },
+        {
+            "fieldname": "total_approved_variations",
+            "label": "B. Net Total of Approved Variations (+/-)",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "description": "Sum of all additions and omissions from Variation Orders."
+        },
+        {
+            "fieldname": "adjusted_contract_sum",
+            "label": "C. Adjusted Contract Sum (A+B)",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "read_only": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_amount_previously_certified",
+            "label": "D. Total Amount Previously Certified",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "description": "Sum of all interim payment certificates."
+        },
+        {
+            "fieldname": "amount_due_this_final_account",
+            "label": "E. Amount Due in this Final Account (C-D)",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "read_only": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "retention_section",
+            "label": "Retention Details",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "total_retention_held",
+            "label": "F. Total Retention Held (from previous certs)",
+            "fieldtype": "Currency",
+            "options": "currency"
+        },
+        {
+            "fieldname": "retention_to_be_released",
+            "label": "G. Retention to be Released in this Final Account",
+            "fieldtype": "Currency",
+            "options": "currency"
+        },
+        {
+            "fieldname": "remaining_retention_held",
+            "label": "H. Remaining Retention Held (F-G)",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "read_only": 1
+        },
+        {
+            "fieldname": "other_adjustments_section",
+            "label": "Other Adjustments / Claims",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "claims_by_contractor",
+            "label": "I. Agreed Claims by Contractor (+)",
+            "fieldtype": "Currency",
+            "options": "currency"
+        },
+        {
+            "fieldname": "claims_by_client_ld",
+            "label": "J. Agreed Claims by Client / Liquidated Damages (-)",
+            "fieldtype": "Currency",
+            "options": "currency"
+        },
+        {
+            "fieldname": "other_adjustments_details",
+            "label": "Details of Other Adjustments/Claims",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "final_payment_section",
+            "label": "Final Payment Calculation",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "net_final_payment_due_before_vat",
+            "label": "K. Net Final Payment Due (E+G+I-J or similar)",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "read_only": 1,
+            "bold": 1
+        },
+        {
+            "fieldname": "vat_percentage",
+            "label": "VAT Percentage (%)",
+            "fieldtype": "Percent"
+        },
+        {
+            "fieldname": "vat_amount",
+            "label": "L. VAT Amount",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "read_only": 1
+        },
+        {
+            "fieldname": "total_final_payment_due",
+            "label": "M. TOTAL FINAL PAYMENT DUE (K+L)",
+            "fieldtype": "Currency",
+            "options": "currency",
+            "read_only": 1,
+            "bold": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "last_payment_certificate",
+            "label": "Reference Last Payment Certificate",
+            "fieldtype": "Link",
+            "options": "Payment Certificate"
+        },
+        {
+            "fieldname": "notes_attachments_tab",
+            "label": "Notes & Attachments",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes / Remarks",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "supporting_documents",
+            "label": "Supporting Documents",
+            "fieldtype": "Attach"
+        }
+    ],
+    "workflow": 1
+}

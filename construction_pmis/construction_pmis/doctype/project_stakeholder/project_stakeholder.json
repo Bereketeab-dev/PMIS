@@ -1,0 +1,68 @@
+{
+    "name": "Project Stakeholder",
+    "engine": "InnoDB",
+    "description": "Child table for Project to list external stakeholders like consultants, contractors.",
+    "creation": "2024-03-10 10:10:00.000000",
+    "modified": "2024-03-10 10:10:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "stakeholder_type",
+            "label": "Stakeholder Type",
+            "fieldtype": "Select",
+            "options": "Consultant\nContractor\nSupplier\nOther",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "stakeholder_name",
+            "label": "Stakeholder Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "supplier",
+            "label": "Supplier Link",
+            "fieldtype": "Link",
+            "options": "Supplier",
+            "description": "Link to Supplier master if this stakeholder is a registered supplier."
+        },
+        {
+            "fieldname": "contact_person",
+            "label": "Contact Person",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "contact_number",
+            "label": "Contact Number",
+            "fieldtype": "Data",
+            "options": "Phone"
+        },
+        {
+            "fieldname": "email_id",
+            "label": "Email ID",
+            "fieldtype": "Data",
+            "options": "Email"
+        },
+        {
+            "fieldname": "company_name",
+            "label": "Company Name",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

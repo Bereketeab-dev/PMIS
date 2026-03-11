@@ -1,0 +1,110 @@
+{
+    "doctype": "Workflow",
+    "name": "Snag List Item Workflow",
+    "module": "Construction PMIS",
+    "document_type": "Snag List Item",
+    "workflow_name": "Snag List Item Workflow",
+    "is_active": 1,
+    "send_email_alert": 1,
+    "workflow_state_field": "status",
+    "states": [
+        {
+            "state": "Open",
+            "doc_status": "0",
+            "allow_edit": "Site Engineer,QA QC Engineer,Project Manager,Foreman"
+        },
+        {
+            "state": "Assigned",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,Site Engineer",
+            "message": "Snag assigned for rectification."
+        },
+        {
+            "state": "Work In Progress",
+            "doc_status": "1",
+            "allow_edit": "User specified in assigned_to_user field,Supplier specified in assigned_to_party field,Site Engineer,Project Manager",
+            "message": "Rectification work is in progress."
+        },
+        {
+            "state": "Rectified",
+            "doc_status": "1",
+            "allow_edit": "User specified in assigned_to_user field,Supplier specified in assigned_to_party field,Site Engineer,Project Manager",
+            "message": "Snag has been reported as rectified. Pending re-inspection."
+        },
+        {
+            "state": "Pending Re-inspection",
+            "doc_status": "1",
+            "allow_edit": "QA QC Engineer,Site Engineer,Project Manager",
+            "message": "Rectification complete. Awaiting re-inspection."
+        },
+        {
+            "state": "Closed",
+            "doc_status": "1",
+            "allow_edit": "System Manager",
+            "update_field": "status",
+            "update_value": "Closed",
+            "message": "Snag rectified, re-inspected, and closed."
+        },
+        {
+            "state": "Rejected",
+            "doc_status": "2",
+            "allow_edit": "Project Manager,QA QC Engineer",
+            "message": "Snag has been rejected as invalid or not a defect."
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Open",
+            "action": "Assign for Rectification",
+            "next_state": "Assigned",
+            "allowed": "Project Manager,Site Engineer,QA QC Engineer",
+            "condition": "doc.assigned_to_party || doc.assigned_to_user",
+            "custom_action_method": "assign_for_rectification"
+        },
+        {
+            "state": "Open",
+            "action": "Reject Snag",
+            "next_state": "Rejected",
+            "allowed": "Project Manager,QA QC Engineer",
+            "custom_action_method": "reject_snag"
+        },
+        {
+            "state": "Assigned",
+            "action": "Start Rectification",
+            "next_state": "Work In Progress",
+            "allowed": "User specified in assigned_to_user field,Supplier specified in assigned_to_party field,Site Engineer,Project Manager",
+            "custom_action_method": "start_rectification_work"
+        },
+        {
+            "state": "Work In Progress",
+            "action": "Mark as Rectified",
+            "next_state": "Rectified",
+            "allowed": "User specified in assigned_to_user field,Supplier specified in assigned_to_party field,Site Engineer,Project Manager",
+            "condition": "doc.rectification_action_taken && doc.date_rectified",
+            "custom_action_method": "mark_as_rectified"
+        },
+        {
+            "state": "Rectified",
+            "action": "Submit for Re-inspection",
+            "next_state": "Pending Re-inspection",
+            "allowed": "User specified in assigned_to_user field,Supplier specified in assigned_to_party field,Site Engineer,Project Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Pending Re-inspection",
+            "action": "Re-inspect & Approve",
+            "next_state": "Closed",
+            "allowed": "QA QC Engineer,Site Engineer,Project Manager",
+            "condition": "doc.re_inspection_status == 'Approved' && doc.re_inspection_date",
+            "custom_action_method": "re_inspect_and_close"
+        },
+        {
+            "state": "Pending Re-inspection",
+            "action": "Re-inspect & Reject",
+            "next_state": "Work In Progress",
+            "allowed": "QA QC Engineer,Site Engineer,Project Manager",
+            "condition": "doc.re_inspection_status == 'Rejected' && doc.re_inspection_date",
+            "custom_action_method": "re_inspect_and_close"
+        }
+    ]
+}

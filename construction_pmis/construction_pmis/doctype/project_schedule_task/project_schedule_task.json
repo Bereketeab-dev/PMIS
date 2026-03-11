@@ -1,0 +1,165 @@
+{
+    "name": "Project Schedule Task",
+    "engine": "InnoDB",
+    "description": "Detailed task management for construction project schedules.",
+    "creation": "2024-03-10 14:15:00.000000",
+    "modified": "2024-03-10 14:15:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:TASK-{project}-{#####}",
+    "sort_field": "start_date",
+    "sort_order": "ASC",
+    "title_field": "task_name",
+    "search_fields": "task_name, project, status, wbs_reference",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project User", "read": 1, "write": 0, "create": 0, "report": 1, "share": 0, "export": 0, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "task_name",
+            "label": "Task Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "wbs_reference",
+            "label": "WBS Reference",
+            "fieldtype": "Data",
+            "description": "Reference to Work Breakdown Structure item (e.g., 1.1.2).",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Open\nPending\nScheduled\nIn Progress\nOn Hold\nCompleted\nCancelled",
+            "default": "Open",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "priority",
+            "label": "Priority",
+            "fieldtype": "Select",
+            "options": "Low\nMedium\nHigh",
+            "default": "Medium"
+        },
+        {
+            "fieldname": "percent_complete",
+            "label": "% Complete",
+            "fieldtype": "Percent",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "start_date",
+            "label": "Planned Start Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "end_date",
+            "label": "Planned End Date",
+            "fieldtype": "Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "duration",
+            "label": "Planned Duration (Days)",
+            "fieldtype": "Int",
+            "read_only": 1
+        },
+        {
+            "fieldname": "actual_start_date",
+            "label": "Actual Start Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "actual_end_date",
+            "label": "Actual End Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "details_tab",
+            "label": "Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "description",
+            "label": "Task Description",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "dependencies_section",
+            "label": "Dependencies",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "predecessor_tasks",
+            "label": "Predecessor Tasks",
+            "fieldtype": "Table",
+            "options": "Project Task Predecessor"
+        },
+        {
+            "fieldname": "resources_tab",
+            "label": "Resources",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "assigned_manpower",
+            "label": "Assigned Manpower",
+            "fieldtype": "Table",
+            "options": "Task Assigned Manpower",
+            "description": "Manpower resources assigned to this task."
+        },
+        {
+            "fieldname": "assigned_machinery",
+            "label": "Assigned Machinery",
+            "fieldtype": "Table",
+            "options": "Task Assigned Machinery",
+            "description": "Machinery resources assigned to this task."
+        },
+        {
+            "fieldname": "notes_tab",
+            "label": "Notes & Attachments",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "attachments",
+            "label": "Attachments",
+            "fieldtype": "Attach"
+        }
+    ]
+}

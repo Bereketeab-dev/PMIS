@@ -1,0 +1,142 @@
+{
+    "name": "As-Built Drawing",
+    "engine": "InnoDB",
+    "description": "Stores As-Built drawings and related documentation for project handover.",
+    "creation": "2024-03-10 19:00:00.000000",
+    "modified": "2024-03-10 19:00:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:ABD-{project}-{drawing_number}",
+    "sort_field": "submission_date",
+    "sort_order": "DESC",
+    "title_field": "drawing_title",
+    "search_fields": "drawing_title, drawing_number, project, discipline",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Document Controller", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "drawing_title",
+            "label": "Drawing Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "drawing_number",
+            "label": "Drawing Number",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "revision_number",
+            "label": "Revision Number",
+            "fieldtype": "Data",
+            "default": "0"
+        },
+        {
+            "fieldname": "discipline",
+            "label": "Discipline",
+            "fieldtype": "Select",
+            "options": "Architectural\nStructural\nElectrical\nMechanical (HVAC)\nPlumbing\nCivil\nLandscaping\nOther",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Draft\nSubmitted for Review\nApproved\nSuperseded",
+            "default": "Draft"
+        },
+        {
+            "fieldname": "submission_date",
+            "label": "Submission Date",
+            "fieldtype": "Date",
+            "default": "Today"
+        },
+        {
+            "fieldname": "approval_date",
+            "label": "Approval Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "approved_by",
+            "label": "Approved By",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "drawing_details_tab",
+            "label": "Drawing File & Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "drawing_file_pdf",
+            "label": "Drawing File (PDF)",
+            "fieldtype": "Attach",
+            "reqd": 1
+        },
+        {
+            "fieldname": "drawing_file_cad",
+            "label": "Native CAD File (e.g., DWG, RVT)",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "source_software",
+            "label": "Source Software",
+            "fieldtype": "Data",
+            "description": "e.g., AutoCAD 2023, Revit 2024, Tekla Structures"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks / Notes",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "related_documents_tab",
+            "label": "Related Documents",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "related_specifications",
+            "label": "Related Specifications",
+            "fieldtype": "Text"
+        },
+        {
+            "fieldname": "related_manuals",
+            "label": "Related O&M Manuals",
+            "fieldtype": "Text"
+        }
+    ]
+    // Workflow can be added if complex approval process is needed.
+}

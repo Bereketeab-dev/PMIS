@@ -1,0 +1,177 @@
+{
+    "name": "Site Inspection",
+    "engine": "InnoDB",
+    "description": "Records site inspections for quality, safety, or environmental checks.",
+    "creation": "2024-03-10 17:30:00.000000",
+    "modified": "2024-03-10 17:30:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:INSP-{project}-{date}-{#####}",
+    "sort_field": "inspection_date",
+    "sort_order": "DESC",
+    "title_field": "inspection_title",
+    "search_fields": "inspection_title, project, inspection_type, status, inspected_by",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "QA QC Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Safety Officer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "inspection_title",
+            "label": "Inspection Title / Reference",
+            "fieldtype": "Data",
+            "reqd": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "inspection_type",
+            "label": "Inspection Type",
+            "fieldtype": "Select",
+            "options": "Quality Control\nSafety Audit\nEnvironmental Check\nProgress Review\nMaterial Inspection\nEquipment Inspection\nOther",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Scheduled\nIn Progress\nPending Review\nCompleted\nAction Required\nClosed\nCancelled",
+            "default": "Scheduled",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "inspection_date",
+            "label": "Inspection Date",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "default": "Today",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "inspected_by_user",
+            "label": "Inspected By (User)",
+            "fieldtype": "Link",
+            "options": "User",
+            "default": "__user"
+        },
+        {
+            "fieldname": "inspected_by_name",
+            "label": "Inspected By (Name/External)",
+            "fieldtype": "Data",
+            "description": "If inspector is not an ERPNext user."
+        },
+        {
+            "fieldname": "location_details",
+            "label": "Location of Inspection",
+            "fieldtype": "Small Text",
+            "description": "e.g., Zone A, Level 2, Grid C-D/1-2"
+        },
+        {
+            "fieldname": "checklist_template",
+            "label": "Checklist Template Used (Optional)",
+            "fieldtype": "Link",
+            "options": "Site Inspection Checklist Template",
+            "description": "Link to a predefined checklist template."
+        },
+        {
+            "fieldname": "inspection_details_tab",
+            "label": "Inspection Details & Findings",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "inspection_summary",
+            "label": "Inspection Summary / Overall Observation",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "checklist_items",
+            "label": "Checklist Items / Observations",
+            "fieldtype": "Table",
+            "options": "Site Inspection Checklist Item",
+            "description": "Detailed checklist items and their status (Pass/Fail/NA)."
+        },
+        {
+            "fieldname": "non_conformances_raised",
+            "label": "Non-Conformances Raised (NCRs)",
+            "fieldtype": "Table",
+            "options": "Site Inspection NCR Link",
+            "description": "Links to NCRs raised as a result of this inspection."
+        },
+        {
+            "fieldname": "corrective_actions_tab",
+            "label": "Corrective & Preventive Actions",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "corrective_actions_required",
+            "label": "Corrective Actions Required",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "preventive_actions_suggested",
+            "label": "Preventive Actions Suggested",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "action_by_user",
+            "label": "Action By (User)",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "action_due_date",
+            "label": "Action Due Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "closure_remarks",
+            "label": "Closure Remarks (when actions completed)",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "attachments_tab",
+            "label": "Attachments",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "inspection_photos",
+            "label": "Inspection Photos/Videos",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "signed_report_attachment",
+            "label": "Signed Inspection Report",
+            "fieldtype": "Attach"
+        }
+    ],
+    "workflow": 1
+}

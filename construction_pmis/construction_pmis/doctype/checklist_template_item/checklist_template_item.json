@@ -1,0 +1,50 @@
+{
+    "name": "Checklist Template Item",
+    "engine": "InnoDB",
+    "description": "Child table for Site Inspection Checklist Template.",
+    "creation": "2024-03-10 17:40:00.000000",
+    "modified": "2024-03-10 17:40:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "sequence_id",
+            "label": "Sequence ID",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "description": "e.g., 1.1, A.2"
+        },
+        {
+            "fieldname": "checkpoint_description",
+            "label": "Checkpoint / Question",
+            "fieldtype": "Text",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "expected_outcome_criteria",
+            "label": "Expected Outcome / Acceptance Criteria",
+            "fieldtype": "Small Text"
+        },
+        {
+            "fieldname": "reference_document_clause",
+            "label": "Reference (Doc/Clause)",
+            "fieldtype": "Small Text",
+            "description": "e.g., Specification Sec 2.3, Drawing XYZ-001"
+        },
+        {
+            "fieldname": "is_mandatory",
+            "label": "Is Mandatory",
+            "fieldtype": "Check",
+            "default": 1
+        }
+    ]
+}
