@@ -1,0 +1,223 @@
+{
+    "name": "RFI",
+    "engine": "InnoDB",
+    "description": "Request for Information to clarify project details, drawings, or specifications.",
+    "creation": "2024-03-10 12:00:00.000000",
+    "modified": "2024-03-10 12:00:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:RFI-{project}-{#####}",
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "title_field": "subject",
+    "search_fields": "subject, project, status, assigned_to",
+    "track_seen": 1,
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Quantity Surveyor", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project User", "read": 1, "write": 0, "create": 0, "delete": 0, "report": 0, "share": 0, "export": 0, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "subject",
+            "label": "Subject / Question",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Open\nSubmitted\nUnder Review\nResponded\nClosed\nVoid",
+            "default": "Open",
+            "in_list_view": 1,
+            "read_only_on_submit": 1
+        },
+        {
+            "fieldname": "priority",
+            "label": "Priority",
+            "fieldtype": "Select",
+            "options": "Low\nMedium\nHigh\nUrgent",
+            "default": "Medium",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "raised_by",
+            "label": "Raised By",
+            "fieldtype": "Link",
+            "options": "User",
+            "default": "__user",
+            "read_only": 1
+        },
+        {
+            "fieldname": "date_raised",
+            "label": "Date Raised",
+            "fieldtype": "Date",
+            "default": "Today",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "assigned_to",
+            "label": "Assigned To (for response)",
+            "fieldtype": "Link",
+            "options": "User",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "due_date_for_response",
+            "label": "Due Date for Response",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "related_document_type",
+            "label": "Related Document Type",
+            "fieldtype": "Link",
+            "options": "DocType"
+        },
+        {
+            "fieldname": "related_document_name",
+            "label": "Related Document Name",
+            "fieldtype": "Dynamic Link",
+            "options": "related_document_type"
+        },
+        {
+            "fieldname": "drawing_reference",
+            "label": "Drawing Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "specification_reference",
+            "label": "Specification Reference",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "details_tab",
+            "label": "RFI Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "question_details",
+            "label": "Question / Clarification Needed",
+            "fieldtype": "TextEditor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "suggested_solution",
+            "label": "Suggested Solution (Optional)",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "attachments",
+            "label": "Attachments",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "response_tab",
+            "label": "Response",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "response",
+            "label": "Response",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "responded_by",
+            "label": "Responded By",
+            "fieldtype": "Link",
+            "options": "User",
+            "read_only": 1
+        },
+        {
+            "fieldname": "date_responded",
+            "label": "Date Responded",
+            "fieldtype": "Datetime",
+            "read_only": 1
+        },
+        {
+            "fieldname": "response_attachments",
+            "label": "Response Attachments",
+            "fieldtype": "Attach"
+        },
+        {
+            "fieldname": "impact_assessment_tab",
+            "label": "Impact Assessment",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "cost_impact",
+            "label": "Cost Impact",
+            "fieldtype": "Select",
+            "options": "\nYes\nNo\nPotential",
+            "default": "No"
+        },
+        {
+            "fieldname": "cost_impact_details",
+            "label": "Cost Impact Details",
+            "fieldtype": "Small Text",
+            "depends_on": "eval:doc.cost_impact=='Yes' || doc.cost_impact=='Potential'"
+        },
+        {
+            "fieldname": "schedule_impact",
+            "label": "Schedule Impact",
+            "fieldtype": "Select",
+            "options": "\nYes\nNo\nPotential",
+            "default": "No"
+        },
+        {
+            "fieldname": "schedule_impact_details",
+            "label": "Schedule Impact Details",
+            "fieldtype": "Small Text",
+            "depends_on": "eval:doc.schedule_impact=='Yes' || doc.schedule_impact=='Potential'"
+        },
+        {
+            "fieldname": "variation_order_required",
+            "label": "Variation Order Required?",
+            "fieldtype": "Select",
+            "options": "\nYes\nNo",
+            "default": "No"
+        },
+        {
+            "fieldname": "linked_variation_order",
+            "label": "Linked Variation Order",
+            "fieldtype": "Link",
+            "options": "Variation Order",
+            "depends_on": "eval:doc.variation_order_required=='Yes'"
+        }
+    ],
+    "workflow": 1
+}

@@ -1,0 +1,139 @@
+{
+    "name": "Lessons Learned",
+    "engine": "InnoDB",
+    "description": "Documents lessons learned during the project for future reference and improvement.",
+    "creation": "2024-03-10 19:35:00.000000",
+    "modified": "2024-03-10 19:35:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "format:LL-{project}-{YYYY}-{MM}-{#####}",
+    "sort_field": "date_recorded",
+    "sort_order": "DESC",
+    "title_field": "lesson_summary",
+    "search_fields": "lesson_summary, project, category, keywords",
+    "permissions": [
+        {
+            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 0, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
+        },
+        {
+            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 0
+        },
+        {
+            "role": "QA QC Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Project", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "lesson_summary",
+            "label": "Lesson Summary / Title",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "project",
+            "label": "Project",
+            "fieldtype": "Link",
+            "options": "Project",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "date_recorded",
+            "label": "Date Recorded",
+            "fieldtype": "Date",
+            "default": "Today",
+            "reqd": 1
+        },
+        {
+            "fieldname": "recorded_by",
+            "label": "Recorded By",
+            "fieldtype": "Link",
+            "options": "User",
+            "default": "__user",
+            "read_only": 1
+        },
+        {
+            "fieldname": "category",
+            "label": "Category",
+            "fieldtype": "Select",
+            "options": "Technical\nManagement\nCommunication\nSafety\nQuality\nProcurement\nFinancial\nStakeholder Management\nRisk Management\nOther",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "phase_of_project",
+            "label": "Phase of Project When Lesson Occurred",
+            "fieldtype": "Select",
+            "options": "Initiation\nPlanning\nDesign\nProcurement\nExecution\nMonitoring & Control\nCloseout\nPost-Project",
+            "description": "The project phase this lesson relates to."
+        },
+        {
+            "fieldname": "details_tab",
+            "label": "Lesson Details",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "situation_context",
+            "label": "Situation / Context",
+            "fieldtype": "TextEditor",
+            "description": "Describe the situation or context in which the lesson was learned."
+        },
+        {
+            "fieldname": "what_happened_observation",
+            "label": "What Happened / Observation",
+            "fieldtype": "TextEditor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "impact_outcome",
+            "label": "Impact / Outcome",
+            "fieldtype": "TextEditor",
+            "description": "What was the result or impact of what happened?"
+        },
+        {
+            "fieldname": "analysis_tab",
+            "label": "Analysis & Recommendations",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "what_went_well",
+            "label": "What Went Well?",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "what_could_be_improved",
+            "label": "What Could Be Improved?",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "recommendations_for_future",
+            "label": "Recommendations for Future Projects/Actions",
+            "fieldtype": "TextEditor",
+            "reqd": 1
+        },
+        {
+            "fieldname": "keywords_tags",
+            "label": "Keywords / Tags",
+            "fieldtype": "Small Text",
+            "description": "Comma-separated keywords for searching."
+        },
+        {
+            "fieldname": "attachments",
+            "label": "Supporting Attachments",
+            "fieldtype": "Attach"
+        }
+    ]
+    // Typically no workflow for Lessons Learned, it's a record. Docstatus 0 or 1.
+}

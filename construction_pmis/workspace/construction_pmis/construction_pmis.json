@@ -1,0 +1,96 @@
+{
+ "category": "Modules",
+ "content": "[{\"id\":\"0\",\"type\":\"header\",\"data\":{\"text\":\"Construction PMIS\",\"level\":4}},{\"id\":\"1\",\"type\":\"card\",\"data\":{\"card_name\":\"Project Core\"}},{\"id\":\"2\",\"type\":\"card\",\"data\":{\"card_name\":\"Financial & Contracts\"}},{\"id\":\"3\",\"type\":\"card\",\"data\":{\"card_name\":\"Quality & Safety\"}},{\"id\":\"4\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup & Masters\"}}]",
+ "creation": "2024-05-20 10:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "icon": "octicon octicon-tools",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "Construction PMIS",
+ "links": [
+  {
+   "dependencies": "",
+   "description": "Manage construction projects.",
+   "label": "Projects",
+   "link_doctype": "Project",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "description": "Detailed project task scheduling.",
+   "label": "Project Schedule Tasks",
+   "link_doctype": "Project Schedule Task",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "description": "Plan daily site activities.",
+   "label": "Daily Work Plans",
+   "link_doctype": "Daily Work Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "description": "Record daily site progress and events.",
+   "label": "Daily Logs",
+   "link_doctype": "Daily Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "description": "Manage project cost estimates and BOQs.",
+   "label": "Cost Estimates (BOQ)",
+   "link_doctype": "Cost Estimate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "description": "Manage payment certificates.",
+   "label": "Payment Certificates",
+   "link_doctype": "Payment Certificate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "description": "Record site inspections.",
+   "label": "Site Inspections",
+   "link_doctype": "Site Inspection",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-05-20 10:00:00.000000",
+ "module": "Construction PMIS",
+ "name": "Construction PMIS",
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "label": "New Project",
+   "link_to": "Project",
+   "type": "DocType"
+  },
+  {
+   "label": "New Daily Log",
+   "link_to": "Daily Log",
+   "type": "DocType"
+  }
+ ]
+}

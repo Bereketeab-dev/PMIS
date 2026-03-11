@@ -1,0 +1,86 @@
+{
+    "name": "Daily Log Machinery",
+    "engine": "InnoDB",
+    "description": "Child table for Daily Log to record actual machinery usage.",
+    "creation": "2024-03-10 16:15:00.000000",
+    "modified": "2024-03-10 16:15:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "daily_work_plan_machinery",
+            "label": "From Daily Work Plan Machinery",
+            "fieldtype": "Link",
+            "options": "Daily Work Plan Machinery",
+            "get_query": "construction_pmis.construction_pmis.utils.get_dwp_machinery_for_log"
+        },
+        {
+            "fieldname": "machinery_asset",
+            "label": "Specific Machinery/Asset",
+            "fieldtype": "Link",
+            "options": "Asset",
+            "fetch_from": "daily_work_plan_machinery.machinery_asset"
+        },
+        {
+            "fieldname": "machinery_type",
+            "label": "Machinery Type",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "in_list_view": 1,
+            "fetch_from": "daily_work_plan_machinery.machinery_type"
+        },
+        {
+            "fieldname": "actual_quantity",
+            "label": "Actual Quantity Used",
+            "fieldtype": "Int",
+            "reqd": 1,
+            "in_list_view": 1,
+            "fetch_from": "daily_work_plan_machinery.planned_quantity"
+        },
+        {
+            "fieldname": "actual_running_hours",
+            "label": "Actual Running Hours",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "default": 0,
+            "fetch_from": "daily_work_plan_machinery.planned_hours"
+        },
+        {
+            "fieldname": "idle_hours",
+            "label": "Idle Hours",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "breakdown_hours",
+            "label": "Breakdown Hours",
+            "fieldtype": "Float",
+            "default": 0
+        },
+        {
+            "fieldname": "operator_name",
+            "label": "Operator Name(s)",
+            "fieldtype": "Small Text",
+            "fetch_from": "daily_work_plan_machinery.operator_name"
+        },
+        {
+            "fieldname": "task_worked_on",
+            "label": "Task Worked On (Optional)",
+            "fieldtype": "Link",
+            "options": "Daily Log Task Progress"
+        },
+        {
+            "fieldname": "remarks",
+            "label": "Remarks (e.g., fuel consumption, issues)",
+            "fieldtype": "Small Text"
+        }
+    ]
+}

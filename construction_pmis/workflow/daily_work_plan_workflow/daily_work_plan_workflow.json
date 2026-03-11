@@ -1,0 +1,78 @@
+{
+    "doctype": "Workflow",
+    "name": "Daily Work Plan Workflow",
+    "module": "Construction PMIS",
+    "document_type": "Daily Work Plan",
+    "workflow_name": "Daily Work Plan Workflow",
+    "is_active": 1,
+    "send_email_alert": 0,
+    "workflow_state_field": "status",
+    "states": [
+        {
+            "state": "Draft",
+            "doc_status": "0",
+            "allow_edit": "Site Engineer,Foreman,Project Manager"
+        },
+        {
+            "state": "Planned",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Daily Work Plan submitted and confirmed."
+        },
+        {
+            "state": "In Progress",
+            "doc_status": "1",
+            "allow_edit": "Site Engineer,Project Manager",
+            "message": "Work for the day is in progress based on this plan."
+        },
+        {
+            "state": "Completed",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "All planned activities for the day are reported as completed (via Daily Log)."
+        },
+        {
+            "state": "Cancelled",
+            "doc_status": "2",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Daily Work Plan has been cancelled."
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Draft",
+            "action": "Confirm Plan",
+            "next_state": "Planned",
+            "allowed": "Site Engineer,Foreman,Project Manager",
+            "allow_self_approval": 0,
+            "condition": "doc.planned_tasks_for_day && doc.planned_tasks_for_day.length > 0"
+        },
+        {
+            "state": "Planned",
+            "action": "Start Day's Work",
+            "next_state": "In Progress",
+            "allowed": "Site Engineer,Foreman,Project Manager",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "In Progress",
+            "action": "Mark as Completed",
+            "next_state": "Completed",
+            "allowed": "Site Engineer,Project Manager",
+            "allow_self_approval": 0,
+            "description": "Typically marked completed after referencing Daily Log for the day."
+        },
+        {
+            "state": "Planned",
+            "action": "Cancel Plan",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,Site Engineer"
+        },
+        {
+            "state": "In Progress",
+            "action": "Cancel Plan",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager"
+        }
+    ]
+}

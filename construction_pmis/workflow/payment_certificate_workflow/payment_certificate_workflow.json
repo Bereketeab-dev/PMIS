@@ -1,0 +1,124 @@
+{
+    "doctype": "Workflow",
+    "name": "Payment Certificate Workflow",
+    "module": "Construction PMIS",
+    "document_type": "Payment Certificate",
+    "workflow_name": "Payment Certificate Workflow",
+    "is_active": 1,
+    "send_email_alert": 1,
+    "workflow_state_field": "status",
+    "states": [
+        {
+            "state": "Draft",
+            "doc_status": "0",
+            "allow_edit": "Quantity Surveyor,Project Manager"
+        },
+        {
+            "state": "Pending Approval",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,Client Representative,System Manager",
+            "message": "Payment Certificate submitted. Awaiting approval."
+        },
+        {
+            "state": "Approved",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,Quantity Surveyor,System Manager",
+            "message": "Payment Certificate approved. Ready for payment processing.",
+            "update_field": "status",
+            "update_value": "Approved"
+        },
+        {
+            "state": "Rejected",
+            "doc_status": "2",
+            "allow_edit": "Quantity Surveyor,Project Manager",
+            "message": "Payment Certificate rejected. Please review and amend."
+        },
+        {
+            "state": "Processed for Payment",
+            "doc_status": "1",
+            "allow_edit": "Accountant,Project Manager,System Manager",
+            "message": "Payment Certificate processed. Awaiting confirmation of payment.",
+            "update_field": "status",
+            "update_value": "Processed for Payment"
+        },
+        {
+            "state": "Paid",
+            "doc_status": "1",
+            "allow_edit": "Accountant,System Manager",
+            "message": "Payment has been made for this certificate.",
+            "update_field": "status",
+            "update_value": "Paid"
+        },
+        {
+            "state": "Cancelled",
+            "doc_status": "2",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Payment Certificate has been cancelled."
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Draft",
+            "action": "Submit for Approval",
+            "next_state": "Pending Approval",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Pending Approval",
+            "action": "Approve",
+            "next_state": "Approved",
+            "allowed": "Project Manager,Client Representative,System Manager",
+            "allow_self_approval": 0,
+            "condition": "doc.total_amount_due_this_certificate >= 0"
+        },
+        {
+            "state": "Pending Approval",
+            "action": "Reject",
+            "next_state": "Rejected",
+            "allowed": "Project Manager,Client Representative,System Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Rejected",
+            "action": "Amend & Resubmit",
+            "next_state": "Draft",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "Approved",
+            "action": "Process for Payment",
+            "next_state": "Processed for Payment",
+            "allowed": "Accountant,Project Manager,System Manager",
+            "allow_self_approval": 0,
+            "custom_action_method": "process_for_payment"
+        },
+        {
+            "state": "Processed for Payment",
+            "action": "Mark as Paid",
+            "next_state": "Paid",
+            "allowed": "Accountant,System Manager",
+            "allow_self_approval": 0,
+            "custom_action_method": "mark_as_paid"
+        },
+        {
+            "state": "Approved",
+            "action": "Cancel",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,System Manager"
+        },
+        {
+            "state": "Pending Approval",
+            "action": "Cancel",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,System Manager"
+        },
+        {
+            "state": "Rejected",
+            "action": "Cancel",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,System Manager"
+        }
+    ]
+}

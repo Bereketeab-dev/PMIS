@@ -1,0 +1,237 @@
+{
+    "name": "Project",
+    "engine": "InnoDB",
+    "description": "Central DocType for managing construction project details.",
+    "creation": "2024-03-10 10:00:00.000000",
+    "modified": "2024-03-10 10:00:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 0,
+    "editable_grid": 1,
+    "track_changes": 1,
+    "autoname": "field:project_name",
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "title_field": "project_name",
+    "search_fields": "project_name, client_name, location",
+    "track_seen": 1,
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "submit": 1,
+            "cancel": 1,
+            "amend": 1,
+            "report": 1,
+            "share": 1,
+            "export": 1,
+            "print": 1,
+            "email": 1
+        },
+        {
+            "role": "Project Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 0,
+            "submit": 1,
+            "cancel": 0,
+            "amend": 0,
+            "report": 1,
+            "share": 1,
+            "export": 1,
+            "print": 1,
+            "email": 1
+        },
+        {
+            "role": "Project User",
+            "read": 1,
+            "write": 0,
+            "create": 0,
+            "delete": 0,
+            "submit": 0,
+            "cancel": 0,
+            "amend": 0,
+            "report": 0,
+            "share": 0,
+            "export": 0,
+            "print": 1,
+            "email": 0
+        }
+    ],
+    "links": [
+        {"link_doctype": "Contract Document", "link_fieldname": "project"},
+        {"link_doctype": "Rebar Model", "link_fieldname": "project"},
+        {"link_doctype": "Cost Estimate", "link_fieldname": "project"},
+        {"link_doctype": "Daily Log", "link_fieldname": "project"},
+        {"link_doctype": "Payment Certificate", "link_fieldname": "project"},
+        {"link_doctype": "Site Inspection", "link_fieldname": "project"},
+        {"link_doctype": "RFI", "link_fieldname": "project"},
+        {"link_doctype": "Variation Order", "link_fieldname": "project"},
+        {"link_doctype": "As-Built Drawing", "link_fieldname": "project"},
+        {"link_doctype": "Final Account", "link_fieldname": "project"},
+        {"link_doctype": "Lessons Learned", "link_fieldname": "project"}
+    ],
+    "fields": [
+        {
+            "fieldname": "project_name",
+            "label": "Project Name",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "unique": 1,
+            "in_list_view": 1,
+            "search_index": 1
+        },
+        {
+            "fieldname": "status",
+            "label": "Status",
+            "fieldtype": "Select",
+            "options": "Planning\nPre-Construction\nExecution\nOn Hold\nCompleted\nCancelled",
+            "default": "Planning",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "client_name",
+            "label": "Client Name",
+            "fieldtype": "Link",
+            "options": "Customer",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "location",
+            "label": "Location",
+            "fieldtype": "Data"
+        },
+        {
+            "fieldname": "project_manager",
+            "label": "Project Manager",
+            "fieldtype": "Link",
+            "options": "User"
+        },
+        {
+            "fieldname": "start_date",
+            "label": "Start Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "end_date",
+            "label": "End Date",
+            "fieldtype": "Date"
+        },
+        {
+            "fieldname": "description",
+            "label": "Description",
+            "fieldtype": "TextEditor"
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "work_breakdown_structure",
+            "label": "Work Breakdown Structure (WBS)",
+            "fieldtype": "TextEditor",
+            "description": "Define the WBS for the project. Can be a structured list or link to a WBS document/tool."
+        },
+        {
+            "fieldname": "total_estimated_cost",
+            "label": "Total Estimated Cost",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "description": "Sum of all cost estimates related to this project."
+        },
+        {
+            "fieldname": "total_actual_cost",
+            "label": "Total Actual Cost",
+            "fieldtype": "Currency",
+            "read_only": 1,
+            "description": "Sum of all actual costs incurred on this project."
+        },
+        {
+            "fieldname": "team_members_tab",
+            "label": "Team & Stakeholders",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "team_members",
+            "label": "Team Members",
+            "fieldtype": "Table",
+            "options": "Project Team Member",
+            "description": "Internal team members assigned to the project."
+        },
+        {
+            "fieldname": "consultants",
+            "label": "Consultants",
+            "fieldtype": "Table",
+            "options": "Project Stakeholder",
+            "description": "External consultants involved in the project."
+        },
+        {
+            "fieldname": "contractors",
+            "label": "Contractors",
+            "fieldtype": "Table",
+            "options": "Project Stakeholder",
+            "description": "Contractors and subcontractors working on the project."
+        },
+        {
+            "fieldname": "documents_tab",
+            "label": "Documents",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "contract_documents_html",
+            "label": "Contract Documents",
+            "fieldtype": "HTML",
+            "description": "Links to related Contract Documents will appear here."
+        },
+        {
+            "fieldname": "planning_tab",
+            "label": "Resource & Task Planning",
+            "fieldtype": "Tab Break"
+        },
+        {
+            "fieldname": "manpower_plan_section",
+            "label": "Manpower Plan",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "manpower_plan",
+            "label": "Manpower Plan",
+            "fieldtype": "Table",
+            "options": "Manpower Plan Item"
+        },
+        {
+            "fieldname": "machinery_plan_section",
+            "label": "Machinery Plan",
+            "fieldtype": "Section Break",
+            "collapsible": 1
+        },
+        {
+            "fieldname": "machinery_plan",
+            "label": "Machinery Plan",
+            "fieldtype": "Table",
+            "options": "Machinery Plan Item"
+        },
+        {
+            "fieldname": "project_tasks_section",
+            "label": "Project Schedule Tasks",
+            "fieldtype": "Section Break",
+            "collapsible": 1,
+            "description": "High-level tasks or link to a more detailed schedule. Actual tasks can be managed in 'Project Schedule Task' doctype linking to this project."
+        },
+        {
+            "fieldname": "tasks_html",
+            "label": "Tasks Overview",
+            "fieldtype": "HTML",
+            "description": "A summary or quick link to Project Schedule Tasks related to this project will appear here."
+        }
+    ]
+}

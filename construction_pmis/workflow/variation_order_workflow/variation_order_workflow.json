@@ -1,0 +1,108 @@
+{
+    "doctype": "Workflow",
+    "name": "Variation Order Workflow",
+    "module": "Construction PMIS",
+    "document_type": "Variation Order",
+    "workflow_name": "Variation Order Workflow",
+    "is_active": 1,
+    "send_email_alert": 1,
+    "workflow_state_field": "status",
+    "states": [
+        {
+            "state": "Draft",
+            "doc_status": "0",
+            "allow_edit": "Quantity Surveyor,Project Manager"
+        },
+        {
+            "state": "Pending Approval",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Variation Order submitted. Awaiting necessary approvals."
+        },
+        {
+            "state": "Approved",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Variation Order has been approved. Ready for implementation.",
+            "update_field": "status",
+            "update_value": "Approved"
+        },
+        {
+            "state": "Rejected",
+            "doc_status": "2",
+            "allow_edit": "Quantity Surveyor,Project Manager",
+            "message": "Variation Order has been rejected. Please review and amend or cancel."
+        },
+        {
+            "state": "Implemented",
+            "doc_status": "1",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Variation Order has been implemented and its impacts are applied.",
+            "update_field": "status",
+            "update_value": "Implemented"
+        },
+        {
+            "state": "Cancelled",
+            "doc_status": "2",
+            "allow_edit": "Project Manager,System Manager",
+            "message": "Variation Order has been cancelled."
+        }
+    ],
+    "transitions": [
+        {
+            "state": "Draft",
+            "action": "Submit for Approval",
+            "next_state": "Pending Approval",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Pending Approval",
+            "action": "Approve",
+            "next_state": "Approved",
+            "allowed": "Project Manager,System Manager",
+            "allow_self_approval": 0,
+            "condition": "doc.estimated_cost_impact != null || doc.linked_cost_estimate"
+        },
+        {
+            "state": "Pending Approval",
+            "action": "Reject",
+            "next_state": "Rejected",
+            "allowed": "Project Manager,System Manager",
+            "allow_self_approval": 0
+        },
+        {
+            "state": "Rejected",
+            "action": "Amend & Resubmit",
+            "next_state": "Draft",
+            "allowed": "Quantity Surveyor,Project Manager",
+            "allow_self_approval": 1
+        },
+        {
+            "state": "Approved",
+            "action": "Implement",
+            "next_state": "Implemented",
+            "allowed": "Project Manager,System Manager",
+            "allow_self_approval": 0,
+            "custom_action_method": "implement_variation"
+        },
+        {
+            "state": "Approved",
+            "action": "Cancel",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,System Manager"
+        },
+        {
+            "state": "Pending Approval",
+            "action": "Cancel",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,System Manager"
+        },
+        {
+            "state": "Rejected",
+            "action": "Cancel",
+            "next_state": "Cancelled",
+            "allowed": "Project Manager,System Manager"
+        }
+    ]
+}

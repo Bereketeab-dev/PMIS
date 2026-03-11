@@ -1,0 +1,74 @@
+{
+    "name": "Daily Work Plan Material",
+    "engine": "InnoDB",
+    "description": "Child table for Daily Work Plan, listing key materials for the day.",
+    "creation": "2024-03-10 15:00:00.000000",
+    "modified": "2024-03-10 15:00:00.000000",
+    "modified_by": "Administrator",
+    "owner": "Administrator",
+    "docstatus": 0,
+    "idx": 0,
+    "issingle": 0,
+    "istable": 1,
+    "editable_grid": 1,
+    "track_changes": 0,
+    "autoname": "Prompt",
+    "permissions": [],
+    "fields": [
+        {
+            "fieldname": "item_code",
+            "label": "Material/Item",
+            "fieldtype": "Link",
+            "options": "Item",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "item_name",
+            "label": "Item Name",
+            "fieldtype": "Data",
+            "fetch_from": "item_code.item_name",
+            "read_only": 1
+        },
+        {
+            "fieldname": "description",
+            "label": "Description",
+            "fieldtype": "Small Text",
+            "fetch_from": "item_code.description",
+            "read_only": 1
+        },
+        {
+            "fieldname": "required_quantity",
+            "label": "Required Quantity",
+            "fieldtype": "Float",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "uom",
+            "label": "Unit of Measure",
+            "fieldtype": "Link",
+            "options": "UOM",
+            "reqd": 1,
+            "fetch_from": "item_code.stock_uom",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "source_warehouse",
+            "label": "Source Warehouse (Optional)",
+            "fieldtype": "Link",
+            "options": "Warehouse"
+        },
+        {
+            "fieldname": "assigned_task",
+            "label": "For Task (Optional)",
+            "fieldtype": "Link",
+            "options": "Daily Work Plan Task"
+        },
+        {
+            "fieldname": "notes",
+            "label": "Notes",
+            "fieldtype": "Small Text"
+        }
+    ]
+}
