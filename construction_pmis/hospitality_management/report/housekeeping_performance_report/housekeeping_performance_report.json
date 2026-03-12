@@ -1,0 +1,54 @@
+{
+  "name": "Housekeeping Performance Report",
+  "doctype": "Report",
+  "module": "Hospitality Management",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "columns": [
+    {
+      "fieldname": "room",
+      "label": "Room",
+      "fieldtype": "Link",
+      "options": "Room",
+      "width": 120
+    },
+    {
+      "fieldname": "trigger_user",
+      "label": "Trigger User (Dirty)",
+      "fieldtype": "Link",
+      "options": "User",
+      "width": 150
+    },
+    {
+      "fieldname": "trigger_time",
+      "label": "Trigger Time",
+      "fieldtype": "Datetime",
+      "width": 160
+    },
+    {
+      "fieldname": "cleaning_user",
+      "label": "Cleaning User",
+      "fieldtype": "Link",
+      "options": "User",
+      "width": 150
+    },
+    {
+      "fieldname": "cleaning_start_time",
+      "label": "Cleaning Start Time",
+      "fieldtype": "Datetime",
+      "width": 160
+    },
+    {
+      "fieldname": "cleaning_end_time",
+      "label": "Cleaning End Time",
+      "fieldtype": "Datetime",
+      "width": 160
+    },
+    {
+      "fieldname": "duration",
+      "label": "Duration (Mins)",
+      "fieldtype": "Float",
+      "width": 120
+    }
+  ]
+}

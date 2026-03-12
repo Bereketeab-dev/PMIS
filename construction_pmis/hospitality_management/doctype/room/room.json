@@ -1,0 +1,56 @@
+{
+  "name": "Room",
+  "doctype": "DocType",
+  "module": "Hospitality Management",
+  "autoname": "field:room_number",
+  "fields": [
+    {
+      "fieldname": "room_number",
+      "label": "Room Number",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "room_type",
+      "label": "Room Type",
+      "fieldtype": "Link",
+      "options": "Room Type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "hotel",
+      "label": "Hotel",
+      "fieldtype": "Link",
+      "options": "Hotel",
+      "reqd": 1
+    },
+    {
+      "fieldname": "floor",
+      "label": "Floor",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Available\nOccupied\nDirty\nCleaning\nMaintenance",
+      "default": "Available"
+    },
+    {
+      "fieldname": "housekeeping_user",
+      "label": "Housekeeping Attendant",
+      "fieldtype": "Link",
+      "options": "User"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}

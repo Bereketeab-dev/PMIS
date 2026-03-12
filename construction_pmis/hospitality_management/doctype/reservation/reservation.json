@@ -1,0 +1,74 @@
+{
+  "name": "Reservation",
+  "doctype": "DocType",
+  "module": "Hospitality Management",
+  "autoname": "naming_series:",
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "label": "Series",
+      "fieldtype": "Select",
+      "options": "RES-"
+    },
+    {
+      "fieldname": "guest",
+      "label": "Guest",
+      "fieldtype": "Link",
+      "options": "Customer",
+      "reqd": 1
+    },
+    {
+      "fieldname": "hotel",
+      "label": "Hotel",
+      "fieldtype": "Link",
+      "options": "Hotel",
+      "reqd": 1
+    },
+    {
+      "fieldname": "room",
+      "label": "Room",
+      "fieldtype": "Link",
+      "options": "Room"
+    },
+    {
+      "fieldname": "check_in_date",
+      "label": "Check-in Date",
+      "fieldtype": "Datetime",
+      "reqd": 1
+    },
+    {
+      "fieldname": "check_out_date",
+      "label": "Check-out Date",
+      "fieldtype": "Datetime",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Tentative\nConfirmed\nChecked-in\nChecked-out\nCancelled",
+      "default": "Confirmed"
+    },
+    {
+      "fieldname": "total_amount",
+      "label": "Total Amount",
+      "fieldtype": "Currency",
+      "options": "currency"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "Hospitality Desk",
+  "doctype": "Workspace",
+  "module": "Hospitality Management",
+  "label": "Hospitality Management",
+  "icon": "home",
+  "is_standard": 1,
+  "public": 1,
+  "links": [
+    {
+      "link_type": "DocType",
+      "link_to": "Hotel",
+      "label": "Hotels"
+    },
+    {
+      "link_type": "DocType",
+      "link_to": "Room Type",
+      "label": "Room Types"
+    },
+    {
+      "link_type": "DocType",
+      "link_to": "Room",
+      "label": "Rooms"
+    },
+    {
+      "link_type": "DocType",
+      "link_to": "Reservation",
+      "label": "Reservations"
+    },
+    {
+      "link_type": "DocType",
+      "link_to": "Housekeeping Log",
+      "label": "Housekeeping Logs"
+    },
+    {
+      "link_type": "Report",
+      "link_to": "Housekeeping Performance Report",
+      "label": "Cleaning Performance"
+    }
+  ],
+  "cards": [
+    {
+      "label": "Property Setup",
+      "links": [
+        {"link_type": "DocType", "link_to": "Hotel", "label": "Hotels"},
+        {"link_type": "DocType", "link_to": "Room Type", "label": "Room Types"},
+        {"link_type": "DocType", "link_to": "Room", "label": "Rooms"}
+      ]
+    },
+    {
+      "label": "Operations",
+      "links": [
+        {"link_type": "DocType", "link_to": "Reservation", "label": "Reservations"},
+        {"link_type": "DocType", "link_to": "Housekeeping Log", "label": "Housekeeping Logs"}
+      ]
+    }
+  ]
+}

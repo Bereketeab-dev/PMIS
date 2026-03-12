@@ -1,0 +1,47 @@
+{
+  "name": "Room Type",
+  "doctype": "DocType",
+  "module": "Hospitality Management",
+  "autoname": "field:type_name",
+  "fields": [
+    {
+      "fieldname": "type_name",
+      "label": "Type Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Text"
+    },
+    {
+      "fieldname": "capacity",
+      "label": "Capacity",
+      "fieldtype": "Int",
+      "default": 1
+    },
+    {
+      "fieldname": "base_rate",
+      "label": "Base Rate",
+      "fieldtype": "Currency",
+      "options": "currency"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}
