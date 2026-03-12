@@ -1,75 +1,75 @@
 {
-    "doctype": "Workflow",
-    "name": "Daily Log Workflow",
-    "module": "Construction PMIS",
-    "document_type": "Daily Log",
-    "workflow_name": "Daily Log Workflow",
-    "is_active": 1,
-    "send_email_alert": 0,
-    "workflow_state_field": "status",
-    "states": [
-        {
-            "state": "Draft",
-            "doc_status": "0",
-            "allow_edit": "Site Engineer,Foreman,Project Manager"
-        },
-        {
-            "state": "Submitted",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "Daily Log submitted for approval."
-        },
-        {
-            "state": "Approved",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "Daily Log approved.",
-            "update_field": "status",
-            "update_value": "Approved"
-        },
-        {
-            "state": "Rejected",
-            "doc_status": "2",
-            "allow_edit": "Site Engineer,Foreman,Project Manager",
-            "message": "Daily Log rejected. Please review and amend."
-        }
-    ],
-    "transitions": [
-        {
-            "state": "Draft",
-            "action": "Submit",
-            "next_state": "Submitted",
-            "allowed": "Site Engineer,Foreman,Project Manager",
-            "allow_self_approval": 0
-        },
-        {
-            "state": "Submitted",
-            "action": "Approve",
-            "next_state": "Approved",
-            "allowed": "Project Manager,System Manager",
-            "allow_self_approval": 0,
-            "condition": "doc.prepared_by"
-        },
-        {
-            "state": "Submitted",
-            "action": "Reject",
-            "next_state": "Rejected",
-            "allowed": "Project Manager,System Manager",
-            "allow_self_approval": 0
-        },
-        {
-            "state": "Rejected",
-            "action": "Amend & Resubmit",
-            "next_state": "Draft",
-            "allowed": "Site Engineer,Foreman,Project Manager",
-            "allow_self_approval": 1
-        },
-        {
-            "state": "Approved",
-            "action": "Re-open for Amendment",
-            "next_state": "Draft",
-            "allowed": "Project Manager,System Manager",
-            "description": "Allows amendment of an approved Daily Log. Use with caution."
-        }
-    ]
+ "doctype": "Workflow",
+ "document_type": "Daily Log",
+ "is_active": 1,
+ "module": "Construction PMIS",
+ "name": "Daily Log Workflow",
+ "send_email_alert": 0,
+ "states": [
+  {
+   "allow_edit": "Site Engineer,Foreman,Project Manager",
+   "doc_status": "0",
+   "state": "Draft"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Daily Log submitted for approval.",
+   "state": "Submitted"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Daily Log approved.",
+   "state": "Approved",
+   "update_field": "status",
+   "update_value": "Approved"
+  },
+  {
+   "allow_edit": "Site Engineer,Foreman,Project Manager",
+   "doc_status": "2",
+   "message": "Daily Log rejected. Please review and amend.",
+   "state": "Rejected"
+  }
+ ],
+ "transitions": [
+  {
+   "action": "Submit",
+   "allow_self_approval": 0,
+   "allowed": "Site Engineer,Foreman,Project Manager",
+   "next_state": "Submitted",
+   "state": "Draft"
+  },
+  {
+   "action": "Approve",
+   "allow_self_approval": 0,
+   "allowed": "Project Manager,System Manager",
+   "condition": "doc.prepared_by",
+   "next_state": "Approved",
+   "state": "Submitted"
+  },
+  {
+   "action": "Reject",
+   "allow_self_approval": 0,
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Rejected",
+   "state": "Submitted"
+  },
+  {
+   "action": "Amend & Resubmit",
+   "allow_self_approval": 1,
+   "allowed": "Site Engineer,Foreman,Project Manager",
+   "next_state": "Draft",
+   "state": "Rejected"
+  },
+  {
+   "action": "Re-open for Amendment",
+   "allowed": "Project Manager,System Manager",
+   "description": "Allows amendment of an approved Daily Log. Use with caution.",
+   "next_state": "Draft",
+   "state": "Approved"
+  }
+ ],
+ "workflow_name": "Daily Log Workflow",
+ "workflow_state_field": "status"
 }

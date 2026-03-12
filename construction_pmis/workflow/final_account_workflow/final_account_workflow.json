@@ -1,92 +1,92 @@
 {
-    "doctype": "Workflow",
-    "name": "Final Account Workflow",
-    "module": "Construction PMIS",
-    "document_type": "Final Account",
-    "workflow_name": "Final Account Workflow",
-    "is_active": 1,
-    "send_email_alert": 1,
-    "workflow_state_field": "status",
-    "states": [
-        {
-            "state": "Draft",
-            "doc_status": "0",
-            "allow_edit": "Quantity Surveyor,Project Manager"
-        },
-        {
-            "state": "Pending Agreement",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,Client Representative,System Manager",
-            "message": "Final Account submitted and is pending agreement from all parties."
-        },
-        {
-            "state": "Agreed",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "Final Account has been agreed by all parties."
-        },
-        {
-            "state": "Certified for Payment",
-            "doc_status": "1",
-            "allow_edit": "Accountant,Project Manager,System Manager",
-            "message": "Final Account agreed and certified for final payment processing."
-        },
-        {
-            "state": "Paid & Closed",
-            "doc_status": "1",
-            "allow_edit": "System Manager",
-            "message": "Final payment made and project financially closed.",
-            "update_field": "status",
-            "update_value": "Paid & Closed"
-        },
-        {
-            "state": "Disputed",
-            "doc_status": "1",
-            "allow_edit": "Quantity Surveyor,Project Manager,System Manager",
-            "message": "Final Account is disputed. Requires review and resolution."
-        }
-    ],
-    "transitions": [
-        {
-            "state": "Draft",
-            "action": "Submit for Agreement",
-            "next_state": "Pending Agreement",
-            "allowed": "Quantity Surveyor,Project Manager",
-            "allow_self_approval": 0,
-            "condition": "doc.total_final_payment_due != null"
-        },
-        {
-            "state": "Pending Agreement",
-            "action": "Agree Final Account",
-            "next_state": "Agreed",
-            "allowed": "Client Representative,Project Manager,System Manager",
-            "custom_action_method": "agree_final_account"
-        },
-        {
-            "state": "Pending Agreement",
-            "action": "Dispute Final Account",
-            "next_state": "Disputed",
-            "allowed": "Client Representative,Project Manager,System Manager"
-        },
-        {
-            "state": "Disputed",
-            "action": "Resolve and Resubmit",
-            "next_state": "Pending Agreement",
-            "allowed": "Quantity Surveyor,Project Manager"
-        },
-        {
-            "state": "Agreed",
-            "action": "Certify for Payment",
-            "next_state": "Certified for Payment",
-            "allowed": "Project Manager,System Manager",
-            "custom_action_method": "certify_for_payment"
-        },
-        {
-            "state": "Certified for Payment",
-            "action": "Mark as Paid & Close",
-            "next_state": "Paid & Closed",
-            "allowed": "Accountant,Project Manager,System Manager",
-            "custom_action_method": "mark_as_paid_and_closed"
-        }
-    ]
+ "doctype": "Workflow",
+ "document_type": "Final Account",
+ "is_active": 1,
+ "module": "Construction PMIS",
+ "name": "Final Account Workflow",
+ "send_email_alert": 1,
+ "states": [
+  {
+   "allow_edit": "Quantity Surveyor,Project Manager",
+   "doc_status": "0",
+   "state": "Draft"
+  },
+  {
+   "allow_edit": "Project Manager,Client Representative,System Manager",
+   "doc_status": "1",
+   "message": "Final Account submitted and is pending agreement from all parties.",
+   "state": "Pending Agreement"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Final Account has been agreed by all parties.",
+   "state": "Agreed"
+  },
+  {
+   "allow_edit": "Accountant,Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Final Account agreed and certified for final payment processing.",
+   "state": "Certified for Payment"
+  },
+  {
+   "allow_edit": "System Manager",
+   "doc_status": "1",
+   "message": "Final payment made and project financially closed.",
+   "state": "Paid & Closed",
+   "update_field": "status",
+   "update_value": "Paid & Closed"
+  },
+  {
+   "allow_edit": "Quantity Surveyor,Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Final Account is disputed. Requires review and resolution.",
+   "state": "Disputed"
+  }
+ ],
+ "transitions": [
+  {
+   "action": "Submit for Agreement",
+   "allow_self_approval": 0,
+   "allowed": "Quantity Surveyor,Project Manager",
+   "condition": "doc.total_final_payment_due != null",
+   "next_state": "Pending Agreement",
+   "state": "Draft"
+  },
+  {
+   "action": "Agree Final Account",
+   "allowed": "Client Representative,Project Manager,System Manager",
+   "custom_action_method": "agree_final_account",
+   "next_state": "Agreed",
+   "state": "Pending Agreement"
+  },
+  {
+   "action": "Dispute Final Account",
+   "allowed": "Client Representative,Project Manager,System Manager",
+   "next_state": "Disputed",
+   "state": "Pending Agreement"
+  },
+  {
+   "action": "Resolve and Resubmit",
+   "allowed": "Quantity Surveyor,Project Manager",
+   "next_state": "Pending Agreement",
+   "state": "Disputed"
+  },
+  {
+   "action": "Certify for Payment",
+   "allowed": "Project Manager,System Manager",
+   "custom_action_method": "certify_for_payment",
+   "next_state": "Certified for Payment",
+   "state": "Agreed"
+  },
+  {
+   "action": "Mark as Paid & Close",
+   "allowed": "Accountant,Project Manager,System Manager",
+   "custom_action_method": "mark_as_paid_and_closed",
+   "next_state": "Paid & Closed",
+   "state": "Certified for Payment"
+  }
+ ],
+ "workflow_name": "Final Account Workflow",
+ "workflow_state_field": "status"
 }

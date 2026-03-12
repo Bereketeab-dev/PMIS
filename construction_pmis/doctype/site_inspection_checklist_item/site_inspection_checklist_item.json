@@ -1,80 +1,82 @@
 {
-    "name": "Site Inspection Checklist Item",
-    "engine": "InnoDB",
-    "description": "Child table for Site Inspection, detailing checklist items and observations.",
-    "creation": "2024-03-10 17:45:00.000000",
-    "modified": "2024-03-10 17:45:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "template_item_ref",
-            "label": "Template Item Ref (Optional)",
-            "fieldtype": "Link",
-            "options": "Checklist Template Item",
-            "description": "Link to the original item from a checklist template."
-        },
-        {
-            "fieldname": "sequence_id",
-            "label": "Sequence ID",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "fetch_from": "template_item_ref.sequence_id"
-        },
-        {
-            "fieldname": "checkpoint_description",
-            "label": "Checkpoint / Question",
-            "fieldtype": "Text",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "template_item_ref.checkpoint_description"
-        },
-        {
-            "fieldname": "expected_outcome_criteria",
-            "label": "Expected Outcome / Criteria",
-            "fieldtype": "Small Text",
-            "fetch_from": "template_item_ref.expected_outcome_criteria",
-            "read_only": 1
-        },
-        {
-            "fieldname": "observation_status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Pass\nFail\nN/A (Not Applicable)\nObservation",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "actual_observation",
-            "label": "Actual Observation / Remarks",
-            "fieldtype": "Text"
-        },
-        {
-            "fieldname": "attached_photo",
-            "label": "Attach Photo (Optional)",
-            "fieldtype": "Attach Image"
-        },
-        {
-            "fieldname": "corrective_action_needed",
-            "label": "Corrective Action Needed?",
-            "fieldtype": "Check",
-            "default": 0,
-            "depends_on": "eval:doc.observation_status=='Fail' || doc.observation_status=='Observation'"
-        },
-        {
-            "fieldname": "ncr_raised_link",
-            "label": "Linked NCR",
-            "fieldtype": "Link",
-            "options": "NCR",
-            "description": "Link to NCR if raised for this item."
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 17:45:00.000000",
+ "description": "Child table for Site Inspection, detailing checklist items and observations.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "Link to the original item from a checklist template.",
+   "fieldname": "template_item_ref",
+   "fieldtype": "Link",
+   "label": "Template Item Ref (Optional)",
+   "options": "Checklist Template Item"
+  },
+  {
+   "fetch_from": "template_item_ref.sequence_id",
+   "fieldname": "sequence_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Sequence ID"
+  },
+  {
+   "fetch_from": "template_item_ref.checkpoint_description",
+   "fieldname": "checkpoint_description",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Checkpoint / Question",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "template_item_ref.expected_outcome_criteria",
+   "fieldname": "expected_outcome_criteria",
+   "fieldtype": "Small Text",
+   "label": "Expected Outcome / Criteria",
+   "read_only": 1
+  },
+  {
+   "fieldname": "observation_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pass\nFail\nN/A (Not Applicable)\nObservation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "actual_observation",
+   "fieldtype": "Text",
+   "label": "Actual Observation / Remarks"
+  },
+  {
+   "fieldname": "attached_photo",
+   "fieldtype": "Attach Image",
+   "label": "Attach Photo (Optional)"
+  },
+  {
+   "default": 0,
+   "depends_on": "eval:doc.observation_status=='Fail' || doc.observation_status=='Observation'",
+   "fieldname": "corrective_action_needed",
+   "fieldtype": "Check",
+   "label": "Corrective Action Needed?"
+  },
+  {
+   "description": "Link to NCR if raised for this item.",
+   "fieldname": "ncr_raised_link",
+   "fieldtype": "Link",
+   "label": "Linked NCR",
+   "options": "NCR"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 17:45:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Site Inspection Checklist Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

@@ -1,102 +1,102 @@
 {
-    "doctype": "Workflow",
-    "name": "Subcontract Workflow",
-    "module": "Construction PMIS",
-    "document_type": "Subcontract",
-    "workflow_name": "Subcontract Workflow",
-    "is_active": 1,
-    "send_email_alert": 1,
-    "workflow_state_field": "status",
-    "states": [
-        {
-            "state": "Draft",
-            "doc_status": "0",
-            "allow_edit": "Quantity Surveyor,Contracts Manager,Project Manager"
-        },
-        {
-            "state": "Pending Award",
-            "doc_status": "1",
-            "allow_edit": "Contracts Manager,Project Manager,System Manager",
-            "message": "Subcontract submitted and is pending award."
-        },
-        {
-            "state": "Awarded",
-            "doc_status": "1",
-            "allow_edit": "Contracts Manager,Project Manager,System Manager",
-            "message": "Subcontract has been awarded."
-        },
-        {
-            "state": "Active",
-            "doc_status": "1",
-            "allow_edit": "Contracts Manager,Project Manager,System Manager",
-            "message": "Subcontract is active and work can commence/is ongoing."
-        },
-        {
-            "state": "Completed",
-            "doc_status": "1",
-            "allow_edit": "System Manager",
-            "message": "All works under this subcontract are completed and certified."
-        },
-        {
-            "state": "Terminated",
-            "doc_status": "2",
-            "allow_edit": "Contracts Manager,Project Manager,System Manager",
-            "message": "Subcontract has been terminated."
-        },
-        {
-            "state": "Cancelled",
-            "doc_status": "2",
-            "allow_edit": "Contracts Manager,Project Manager,System Manager",
-            "message": "Subcontract has been cancelled before award/activation."
-        }
-    ],
-    "transitions": [
-        {
-            "state": "Draft",
-            "action": "Submit for Award",
-            "next_state": "Pending Award",
-            "allowed": "Quantity Surveyor,Contracts Manager,Project Manager",
-            "allow_self_approval": 0,
-            "condition": "doc.subcontract_value > 0 && doc.supplier"
-        },
-        {
-            "state": "Pending Award",
-            "action": "Award Subcontract",
-            "next_state": "Awarded",
-            "allowed": "Contracts Manager,Project Manager,System Manager",
-            "custom_action_method": "award_subcontract"
-        },
-        {
-            "state": "Pending Award",
-            "action": "Cancel",
-            "next_state": "Cancelled",
-            "allowed": "Contracts Manager,Project Manager,System Manager"
-        },
-        {
-            "state": "Awarded",
-            "action": "Activate Subcontract",
-            "next_state": "Active",
-            "allowed": "Contracts Manager,Project Manager",
-            "description": "Mark when work officially starts or contract is fully effective."
-        },
-        {
-            "state": "Awarded",
-            "action": "Terminate",
-            "next_state": "Terminated",
-            "allowed": "Contracts Manager,Project Manager,System Manager"
-        },
-        {
-            "state": "Active",
-            "action": "Mark as Completed",
-            "next_state": "Completed",
-            "allowed": "Contracts Manager,Project Manager",
-            "description": "Mark once all obligations are fulfilled and final payments processed."
-        },
-        {
-            "state": "Active",
-            "action": "Terminate",
-            "next_state": "Terminated",
-            "allowed": "Contracts Manager,Project Manager,System Manager"
-        }
-    ]
+ "doctype": "Workflow",
+ "document_type": "Subcontract",
+ "is_active": 1,
+ "module": "Construction PMIS",
+ "name": "Subcontract Workflow",
+ "send_email_alert": 1,
+ "states": [
+  {
+   "allow_edit": "Quantity Surveyor,Contracts Manager,Project Manager",
+   "doc_status": "0",
+   "state": "Draft"
+  },
+  {
+   "allow_edit": "Contracts Manager,Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Subcontract submitted and is pending award.",
+   "state": "Pending Award"
+  },
+  {
+   "allow_edit": "Contracts Manager,Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Subcontract has been awarded.",
+   "state": "Awarded"
+  },
+  {
+   "allow_edit": "Contracts Manager,Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Subcontract is active and work can commence/is ongoing.",
+   "state": "Active"
+  },
+  {
+   "allow_edit": "System Manager",
+   "doc_status": "1",
+   "message": "All works under this subcontract are completed and certified.",
+   "state": "Completed"
+  },
+  {
+   "allow_edit": "Contracts Manager,Project Manager,System Manager",
+   "doc_status": "2",
+   "message": "Subcontract has been terminated.",
+   "state": "Terminated"
+  },
+  {
+   "allow_edit": "Contracts Manager,Project Manager,System Manager",
+   "doc_status": "2",
+   "message": "Subcontract has been cancelled before award/activation.",
+   "state": "Cancelled"
+  }
+ ],
+ "transitions": [
+  {
+   "action": "Submit for Award",
+   "allow_self_approval": 0,
+   "allowed": "Quantity Surveyor,Contracts Manager,Project Manager",
+   "condition": "doc.subcontract_value > 0 && doc.supplier",
+   "next_state": "Pending Award",
+   "state": "Draft"
+  },
+  {
+   "action": "Award Subcontract",
+   "allowed": "Contracts Manager,Project Manager,System Manager",
+   "custom_action_method": "award_subcontract",
+   "next_state": "Awarded",
+   "state": "Pending Award"
+  },
+  {
+   "action": "Cancel",
+   "allowed": "Contracts Manager,Project Manager,System Manager",
+   "next_state": "Cancelled",
+   "state": "Pending Award"
+  },
+  {
+   "action": "Activate Subcontract",
+   "allowed": "Contracts Manager,Project Manager",
+   "description": "Mark when work officially starts or contract is fully effective.",
+   "next_state": "Active",
+   "state": "Awarded"
+  },
+  {
+   "action": "Terminate",
+   "allowed": "Contracts Manager,Project Manager,System Manager",
+   "next_state": "Terminated",
+   "state": "Awarded"
+  },
+  {
+   "action": "Mark as Completed",
+   "allowed": "Contracts Manager,Project Manager",
+   "description": "Mark once all obligations are fulfilled and final payments processed.",
+   "next_state": "Completed",
+   "state": "Active"
+  },
+  {
+   "action": "Terminate",
+   "allowed": "Contracts Manager,Project Manager,System Manager",
+   "next_state": "Terminated",
+   "state": "Active"
+  }
+ ],
+ "workflow_name": "Subcontract Workflow",
+ "workflow_state_field": "status"
 }

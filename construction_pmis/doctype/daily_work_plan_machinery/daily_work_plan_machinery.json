@@ -1,73 +1,75 @@
 {
-    "name": "Daily Work Plan Machinery",
-    "engine": "InnoDB",
-    "description": "Child table for Daily Work Plan, detailing machinery for the day.",
-    "creation": "2024-03-10 14:55:00.000000",
-    "modified": "2024-03-10 14:55:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "machinery_plan_item",
-            "label": "From Project Machinery Plan",
-            "fieldtype": "Link",
-            "options": "Machinery Plan Item",
-            "get_query": "construction_pmis.construction_pmis.utils.get_machinery_plan_items_for_project_daily"
-        },
-        {
-            "fieldname": "machinery_asset",
-            "label": "Specific Machinery/Asset",
-            "fieldtype": "Link",
-            "options": "Asset",
-            "fetch_from": "machinery_plan_item.machinery_asset"
-        },
-        {
-            "fieldname": "machinery_type",
-            "label": "Machinery Type",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "machinery_plan_item.machinery_type"
-        },
-        {
-            "fieldname": "planned_quantity",
-            "label": "Planned Quantity",
-            "fieldtype": "Int",
-            "reqd": 1,
-            "default": 1,
-            "in_list_view": 1,
-            "fetch_from": "machinery_plan_item.required_quantity"
-        },
-        {
-            "fieldname": "planned_hours",
-            "label": "Planned Operational Hours",
-            "fieldtype": "Float",
-            "default": 8,
-            "fetch_from": "machinery_plan_item.planned_hours_per_day"
-        },
-        {
-            "fieldname": "assigned_task",
-            "label": "Assigned Task (Optional)",
-            "fieldtype": "Link",
-            "options": "Daily Work Plan Task"
-        },
-        {
-            "fieldname": "operator_name",
-            "label": "Operator Name(s)",
-            "fieldtype": "Small Text"
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:55:00.000000",
+ "description": "Child table for Daily Work Plan, detailing machinery for the day.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "machinery_plan_item",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_machinery_plan_items_for_project_daily",
+   "label": "From Project Machinery Plan",
+   "options": "Machinery Plan Item"
+  },
+  {
+   "fetch_from": "machinery_plan_item.machinery_asset",
+   "fieldname": "machinery_asset",
+   "fieldtype": "Link",
+   "label": "Specific Machinery/Asset",
+   "options": "Asset"
+  },
+  {
+   "fetch_from": "machinery_plan_item.machinery_type",
+   "fieldname": "machinery_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Machinery Type",
+   "reqd": 1
+  },
+  {
+   "default": 1,
+   "fetch_from": "machinery_plan_item.required_quantity",
+   "fieldname": "planned_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Planned Quantity",
+   "reqd": 1
+  },
+  {
+   "default": 8,
+   "fetch_from": "machinery_plan_item.planned_hours_per_day",
+   "fieldname": "planned_hours",
+   "fieldtype": "Float",
+   "label": "Planned Operational Hours"
+  },
+  {
+   "fieldname": "assigned_task",
+   "fieldtype": "Link",
+   "label": "Assigned Task (Optional)",
+   "options": "Daily Work Plan Task"
+  },
+  {
+   "fieldname": "operator_name",
+   "fieldtype": "Small Text",
+   "label": "Operator Name(s)"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:55:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Daily Work Plan Machinery",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

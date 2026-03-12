@@ -1,83 +1,85 @@
 {
-    "name": "Daily Log Task Progress",
-    "engine": "InnoDB",
-    "description": "Child table for Daily Log to record progress of specific tasks.",
-    "creation": "2024-03-10 16:05:00.000000",
-    "modified": "2024-03-10 16:05:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "daily_work_plan_task",
-            "label": "Planned Task Reference",
-            "fieldtype": "Link",
-            "options": "Daily Work Plan Task",
-            "in_list_view": 1,
-            "description": "Link to the task from the Daily Work Plan for this day.",
-            "get_query": "construction_pmis.construction_pmis.utils.get_daily_plan_tasks_for_log"
-        },
-        {
-            "fieldname": "project_schedule_task",
-            "label": "Project Schedule Task",
-            "fieldtype": "Link",
-            "options": "Project Schedule Task",
-            "read_only": 1,
-            "fetch_from": "daily_work_plan_task.project_schedule_task"
-        },
-        {
-            "fieldname": "task_name",
-            "label": "Task Name",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "daily_work_plan_task.task_name",
-            "read_only": 1
-        },
-        {
-            "fieldname": "quantity_completed_today",
-            "label": "Quantity Completed Today",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "unit_of_measure",
-            "label": "Unit",
-            "fieldtype": "Link",
-            "options": "UOM",
-            "fetch_from": "daily_work_plan_task.unit_of_measure",
-            "read_only": 1
-        },
-        {
-            "fieldname": "percent_complete_today",
-            "label": "% Complete Today (for this task)",
-            "fieldtype": "Percent"
-        },
-        {
-            "fieldname": "cumulative_percent_complete",
-            "label": "Cumulative % Complete (for this task)",
-            "fieldtype": "Percent",
-            "description": "Overall completion of the Project Schedule Task."
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Not Started\nIn Progress\nPartially Completed\nCompleted\nBlocked\nCancelled",
-            "default": "In Progress",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "remarks",
-            "label": "Remarks / Issues",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 16:05:00.000000",
+ "description": "Child table for Daily Log to record progress of specific tasks.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "Link to the task from the Daily Work Plan for this day.",
+   "fieldname": "daily_work_plan_task",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_daily_plan_tasks_for_log",
+   "in_list_view": 1,
+   "label": "Planned Task Reference",
+   "options": "Daily Work Plan Task"
+  },
+  {
+   "fetch_from": "daily_work_plan_task.project_schedule_task",
+   "fieldname": "project_schedule_task",
+   "fieldtype": "Link",
+   "label": "Project Schedule Task",
+   "options": "Project Schedule Task",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "daily_work_plan_task.task_name",
+   "fieldname": "task_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Task Name",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "quantity_completed_today",
+   "fieldtype": "Float",
+   "label": "Quantity Completed Today"
+  },
+  {
+   "fetch_from": "daily_work_plan_task.unit_of_measure",
+   "fieldname": "unit_of_measure",
+   "fieldtype": "Link",
+   "label": "Unit",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "percent_complete_today",
+   "fieldtype": "Percent",
+   "label": "% Complete Today (for this task)"
+  },
+  {
+   "description": "Overall completion of the Project Schedule Task.",
+   "fieldname": "cumulative_percent_complete",
+   "fieldtype": "Percent",
+   "label": "Cumulative % Complete (for this task)"
+  },
+  {
+   "default": "In Progress",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Not Started\nIn Progress\nPartially Completed\nCompleted\nBlocked\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks / Issues"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 16:05:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Daily Log Task Progress",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

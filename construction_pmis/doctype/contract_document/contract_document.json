@@ -1,125 +1,160 @@
 {
-    "name": "Contract Document",
-    "engine": "InnoDB",
-    "description": "Manages contract documents related to a project.",
-    "creation": "2024-03-10 10:15:00.000000",
-    "modified": "2024-03-10 10:15:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:CDOC-{project}-{#####}",
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "title_field": "document_name",
-    "search_fields": "document_name, project, document_type",
-    "permissions": [
-        {
-            "role": "System Manager",
-            "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager",
-            "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project User",
-            "read": 1, "write": 0, "create": 0, "delete": 0, "report": 1, "share": 0, "export": 1, "print": 1, "email": 0
-        }
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"}
-    ],
-    "fields": [
-        {
-            "fieldname": "document_name",
-            "label": "Document Name/Title",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "document_type",
-            "label": "Document Type",
-            "fieldtype": "Select",
-            "options": "Main Contract\nSubcontract\nLetter of Intent\nNDA\nVariation Order\nDrawing\nSpecification\nOther",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Draft\nUnder Review\nActive\nExpired\nTerminated",
-            "default": "Draft",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "column_break_1",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "effective_date",
-            "label": "Effective Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "expiry_date",
-            "label": "Expiry Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "document_id",
-            "label": "Document ID/Reference",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "version",
-            "label": "Version",
-            "fieldtype": "Data",
-            "default": "1.0"
-        },
-        {
-            "fieldname": "details_tab",
-            "label": "Details",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "description",
-            "label": "Description/Scope",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "attachment_section",
-            "label": "Attachments",
-            "fieldtype": "Section Break"
-        },
-        {
-            "fieldname": "document_attachment",
-            "label": "Attach Document File",
-            "fieldtype": "Attach"
-        },
-        {
-            "fieldname": "related_documents_tab",
-            "label": "Related Documents",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "related_documents",
-            "label": "Related Contract Documents",
-            "fieldtype": "Table",
-            "options": "Contract Document Link"
-        }
-    ]
+ "autoname": "format:CDOC-{project}-{#####}",
+ "creation": "2024-03-10 10:15:00.000000",
+ "description": "Manages contract documents related to a project.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "document_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Document Name/Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "Main Contract\nSubcontract\nLetter of Intent\nNDA\nVariation Order\nDrawing\nSpecification\nOther"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nUnder Review\nActive\nExpired\nTerminated"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "label": "Effective Date"
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "document_id",
+   "fieldtype": "Data",
+   "label": "Document ID/Reference"
+  },
+  {
+   "default": "1.0",
+   "fieldname": "version",
+   "fieldtype": "Data",
+   "label": "Version"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "TextEditor",
+   "label": "Description/Scope"
+  },
+  {
+   "fieldname": "attachment_section",
+   "fieldtype": "Section Break",
+   "label": "Attachments"
+  },
+  {
+   "fieldname": "document_attachment",
+   "fieldtype": "Attach",
+   "label": "Attach Document File"
+  },
+  {
+   "fieldname": "related_documents_tab",
+   "fieldtype": "Tab Break",
+   "label": "Related Documents"
+  },
+  {
+   "fieldname": "related_documents",
+   "fieldtype": "Table",
+   "label": "Related Contract Documents",
+   "options": "Contract Document Link"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  }
+ ],
+ "modified": "2024-03-10 10:15:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Contract Document",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project User",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "search_fields": "document_name, project, document_type",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "document_name",
+ "track_changes": 1
 }

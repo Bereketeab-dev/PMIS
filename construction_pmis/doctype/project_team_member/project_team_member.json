@@ -1,45 +1,47 @@
 {
-    "name": "Project Team Member",
-    "engine": "InnoDB",
-    "description": "Child table for Project to list internal team members.",
-    "creation": "2024-03-10 10:05:00.000000",
-    "modified": "2024-03-10 10:05:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "user",
-            "label": "User",
-            "fieldtype": "Link",
-            "options": "User",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "role_in_project",
-            "label": "Role in Project",
-            "fieldtype": "Data",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "contact_number",
-            "label": "Contact Number",
-            "fieldtype": "Data",
-            "options": "Phone"
-        },
-        {
-            "fieldname": "email_id",
-            "label": "Email ID",
-            "fieldtype": "Data",
-            "options": "Email"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 10:05:00.000000",
+ "description": "Child table for Project to list internal team members.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "role_in_project",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Role in Project"
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email ID",
+   "options": "Email"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 10:05:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Project Team Member",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

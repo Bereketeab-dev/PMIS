@@ -1,15 +1,15 @@
 {
-    "label": "Total Project Value Sum",
-    "doctype": "Number Card",
-    "document_type": "Project",
-    "function": "Sum",
-    "aggregate_function_based_on": "total_estimated_cost",
-    "filters_json": "[[\"Project\",\"status\",\"not in\",[\"Cancelled\"]]]",
-    "is_public": 1,
-    "is_standard": 0,
-    "module": "Construction PMIS",
-    "name": "Total Project Value Sum",
-    "owner": "Administrator",
-    "report_function": "Sum",
-    "color": "Blue"
+ "aggregate_function_based_on": "total_estimated_cost",
+ "color": "Blue",
+ "doctype": "Number Card",
+ "document_type": "Project",
+ "filters_json": "[[\"Project\",\"status\",\"not in\",[\"Cancelled\"]]]",
+ "function": "Sum",
+ "is_public": 1,
+ "is_standard": 0,
+ "label": "Total Project Value Sum",
+ "module": "Construction PMIS",
+ "name": "Total Project Value Sum",
+ "owner": "Administrator",
+ "report_function": "Sum"
 }

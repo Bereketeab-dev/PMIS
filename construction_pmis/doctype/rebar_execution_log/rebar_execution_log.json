@@ -1,146 +1,217 @@
 {
-    "name": "Rebar Execution Log",
-    "engine": "InnoDB",
-    "description": "Tracks daily rebar cutting, bending, placement, wastage, and consumption.",
-    "creation": "2024-03-10 16:30:00.000000",
-    "modified": "2024-03-10 16:30:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:REL-{project}-{date}-{#####}",
-    "sort_field": "date",
-    "sort_order": "DESC",
-    "title_field": "title",
-    "search_fields": "title, project, date, status",
-    "permissions": [
-        {
-            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Foreman", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 0, "share": 0, "export": 1, "print": 1, "email": 0
-        },
-        {
-            "role": "Rebar Foreman", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 0, "share": 0, "export": 1, "print": 1, "email": 0
-        }
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"},
-        {"link_doctype": "Rebar Model", "link_fieldname": "rebar_model_reference"},
-        {"link_doctype": "Daily Log", "link_fieldname": "daily_log_reference"}
-    ],
-    "fields": [
-        {
-            "fieldname": "title",
-            "label": "Title / Reference",
-            "fieldtype": "Data",
-            "description": "e.g., Rebar Log - Zone A Foundation"
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "date",
-            "label": "Date",
-            "fieldtype": "Date",
-            "reqd": 1,
-            "default": "Today",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Draft\nSubmitted\nApproved",
-            "default": "Draft",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "prepared_by",
-            "label": "Prepared By",
-            "fieldtype": "Link",
-            "options": "User",
-            "default": "__user",
-            "read_only": 1
-        },
-        {
-            "fieldname": "rebar_model_reference",
-            "label": "Rebar Model / BBS Reference",
-            "fieldtype": "Link",
-            "options": "Rebar Model",
-            "description": "Link to the relevant Rebar Model containing the BBS."
-        },
-        {
-            "fieldname": "daily_log_reference",
-            "label": "Daily Log Reference (Optional)",
-            "fieldtype": "Link",
-            "options": "Daily Log",
-            "description": "Link to the main Daily Log for this date if activities are related."
-        },
-        {
-            "fieldname": "rebar_activities_tab",
-            "label": "Rebar Activities",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "rebar_items_log",
-            "label": "Rebar Items Log",
-            "fieldtype": "Table",
-            "options": "Rebar Execution Log Item",
-            "description": "Log details for each rebar mark or type."
-        },
-        {
-            "fieldname": "summary_tab",
-            "label": "Summary & Wastage",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "total_rebar_placed_kg",
-            "label": "Total Rebar Placed (kg)",
-            "fieldtype": "Float",
-            "read_only": 1,
-            "precision": "2"
-        },
-        {
-            "fieldname": "total_rebar_cut_bent_kg",
-            "label": "Total Rebar Cut/Bent (kg)",
-            "fieldtype": "Float",
-            "read_only": 1,
-            "precision": "2"
-        },
-        {
-            "fieldname": "total_wastage_kg",
-            "label": "Total Wastage (kg)",
-            "fieldtype": "Float",
-            "read_only": 1,
-            "precision": "2"
-        },
-        {
-            "fieldname": "wastage_percentage",
-            "label": "Wastage Percentage (%)",
-            "fieldtype": "Percent",
-            "read_only": 1,
-            "precision": "2"
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes / Remarks",
-            "fieldtype": "TextEditor"
-        }
-    ]
+ "autoname": "format:REL-{project}-{date}-{#####}",
+ "creation": "2024-03-10 16:30:00.000000",
+ "description": "Tracks daily rebar cutting, bending, placement, wastage, and consumption.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "e.g., Rebar Log - Zone A Foundation",
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title / Reference"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nSubmitted\nApproved"
+  },
+  {
+   "default": "__user",
+   "fieldname": "prepared_by",
+   "fieldtype": "Link",
+   "label": "Prepared By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "description": "Link to the relevant Rebar Model containing the BBS.",
+   "fieldname": "rebar_model_reference",
+   "fieldtype": "Link",
+   "label": "Rebar Model / BBS Reference",
+   "options": "Rebar Model"
+  },
+  {
+   "description": "Link to the main Daily Log for this date if activities are related.",
+   "fieldname": "daily_log_reference",
+   "fieldtype": "Link",
+   "label": "Daily Log Reference (Optional)",
+   "options": "Daily Log"
+  },
+  {
+   "fieldname": "rebar_activities_tab",
+   "fieldtype": "Tab Break",
+   "label": "Rebar Activities"
+  },
+  {
+   "description": "Log details for each rebar mark or type.",
+   "fieldname": "rebar_items_log",
+   "fieldtype": "Table",
+   "label": "Rebar Items Log",
+   "options": "Rebar Execution Log Item"
+  },
+  {
+   "fieldname": "summary_tab",
+   "fieldtype": "Tab Break",
+   "label": "Summary & Wastage"
+  },
+  {
+   "fieldname": "total_rebar_placed_kg",
+   "fieldtype": "Float",
+   "label": "Total Rebar Placed (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_rebar_cut_bent_kg",
+   "fieldtype": "Float",
+   "label": "Total Rebar Cut/Bent (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_wastage_kg",
+   "fieldtype": "Float",
+   "label": "Total Wastage (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "wastage_percentage",
+   "fieldtype": "Percent",
+   "label": "Wastage Percentage (%)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "TextEditor",
+   "label": "Notes / Remarks"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  },
+  {
+   "link_doctype": "Rebar Model",
+   "link_fieldname": "rebar_model_reference"
+  },
+  {
+   "link_doctype": "Daily Log",
+   "link_fieldname": "daily_log_reference"
+  }
+ ],
+ "modified": "2024-03-10 16:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Rebar Execution Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Site Engineer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 0,
+   "role": "Foreman",
+   "share": 0,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 0,
+   "role": "Rebar Foreman",
+   "share": 0,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "title, project, date, status",
+ "sort_field": "date",
+ "sort_order": "DESC",
+ "title_field": "title",
+ "track_changes": 1
 }

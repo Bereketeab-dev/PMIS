@@ -1,78 +1,80 @@
 {
-    "name": "Manpower Plan Item",
-    "engine": "InnoDB",
-    "description": "Child table for Project to detail manpower planning.",
-    "creation": "2024-03-10 14:00:00.000000",
-    "modified": "2024-03-10 14:00:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "resource_type",
-            "label": "Resource Type/Trade",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1,
-            "description": "e.g., Skilled Labor, Mason, Electrician, Project Engineer"
-        },
-        {
-            "fieldname": "employee",
-            "label": "Specific Employee (Optional)",
-            "fieldtype": "Link",
-            "options": "Employee"
-        },
-        {
-            "fieldname": "required_quantity",
-            "label": "Required Quantity",
-            "fieldtype": "Int",
-            "reqd": 1,
-            "in_list_view": 1,
-            "default": 1
-        },
-        {
-            "fieldname": "start_date",
-            "label": "Planned Start Date",
-            "fieldtype": "Date",
-            "reqd": 1
-        },
-        {
-            "fieldname": "end_date",
-            "label": "Planned End Date",
-            "fieldtype": "Date",
-            "reqd": 1
-        },
-        {
-            "fieldname": "planned_total_days",
-            "label": "Planned Total Days",
-            "fieldtype": "Int",
-            "read_only": 1,
-            "description": "Calculated based on start and end date."
-        },
-        {
-            "fieldname": "planned_hours_per_day",
-            "label": "Planned Hours/Day",
-            "fieldtype": "Float",
-            "default": 8
-        },
-        {
-            "fieldname": "total_planned_hours",
-            "label": "Total Planned Hours",
-            "fieldtype": "Float",
-            "read_only": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:00:00.000000",
+ "description": "Child table for Project to detail manpower planning.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "e.g., Skilled Labor, Mason, Electrician, Project Engineer",
+   "fieldname": "resource_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Resource Type/Trade",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Specific Employee (Optional)",
+   "options": "Employee"
+  },
+  {
+   "default": 1,
+   "fieldname": "required_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Required Quantity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Planned Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Planned End Date",
+   "reqd": 1
+  },
+  {
+   "description": "Calculated based on start and end date.",
+   "fieldname": "planned_total_days",
+   "fieldtype": "Int",
+   "label": "Planned Total Days",
+   "read_only": 1
+  },
+  {
+   "default": 8,
+   "fieldname": "planned_hours_per_day",
+   "fieldtype": "Float",
+   "label": "Planned Hours/Day"
+  },
+  {
+   "fieldname": "total_planned_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Planned Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Manpower Plan Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

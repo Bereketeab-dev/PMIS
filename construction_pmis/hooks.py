@@ -26,14 +26,6 @@ fixtures = [
 # Hook on document methods and events
 
 doc_events = {
-    "Project": {
-        "validate": "construction_pmis.doctype.project.project.Project.validate",
-        "on_update": "construction_pmis.doctype.project.project.Project.update_all_html_links"
-    },
-    "Daily Log": {
-        "on_submit": "construction_pmis.doctype.daily_log.daily_log.DailyLog.on_submit",
-        "on_update_after_submit": "construction_pmis.doctype.daily_log.daily_log.DailyLog.on_update_after_submit"
-    }
 }
 
 # User Data Protection

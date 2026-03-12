@@ -1,175 +1,221 @@
 {
-    "name": "Cost Estimate",
-    "engine": "InnoDB",
-    "description": "Manages project cost estimation, BOQ import, and unit rates.",
-    "creation": "2024-03-10 10:35:00.000000",
-    "modified": "2024-03-10 10:35:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:CE-{project}-{#####}",
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "title_field": "estimate_title",
-    "search_fields": "estimate_title, project, status",
-    "track_seen": 1,
-    "permissions": [
-        {
-            "role": "System Manager",
-            "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager",
-            "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Quantity Surveyor",
-            "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project User",
-            "read": 1, "write": 0, "create": 0, "delete": 0, "report": 0, "share": 0, "export": 0, "print": 1, "email": 0
-        }
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"}
-    ],
-    "fields": [
-        {
-            "fieldname": "estimate_title",
-            "label": "Estimate Title/Reference",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Draft\nSubmitted\nApproved\nRejected\nSuperseded",
-            "default": "Draft",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "estimate_date",
-            "label": "Estimate Date",
-            "fieldtype": "Date",
-            "default": "Today",
-            "reqd": 1
-        },
-        {
-            "fieldname": "prepared_by",
-            "label": "Prepared By",
-            "fieldtype": "Link",
-            "options": "User",
-            "default": "__user"
-        },
-        {
-            "fieldname": "currency",
-            "label": "Currency",
-            "fieldtype": "Link",
-            "options": "Currency",
-            "default": "frappe.defaults.get_global_default('currency') or frappe.db.get_default('currency')",
-            "reqd": 1
-        },
-        {
-            "fieldname": "column_break_1",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "source_of_quantities",
-            "label": "Source of Quantities",
-            "fieldtype": "Select",
-            "options": "Manual BOQ\nBIM Import\nTake-off Software\nOther"
-        },
-        {
-            "fieldname": "bim_model_reference",
-            "label": "BIM Model Reference",
-            "fieldtype": "Link",
-            "options": "Rebar Model",
-            "description": "Link to Rebar Model or other BIM DocType if quantities are from BIM."
-        },
-        {
-            "fieldname": "boq_attachment",
-            "label": "BOQ/Quantity Import File",
-            "fieldtype": "Attach",
-            "description": "Attach original BOQ file (Excel, CSV, etc.)"
-        },
-        {
-            "fieldname": "boq_items_tab",
-            "label": "Bill of Quantities (BOQ) Items",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "boq_items",
-            "label": "BOQ Items",
-            "fieldtype": "Table",
-            "options": "Bill of Quantities Item",
-            "cannot_add_rows": 0,
-            "description": "Detailed breakdown of items, quantities, rates, and amounts."
-        },
-        {
-            "fieldname": "summary_section",
-            "label": "Summary",
-            "fieldtype": "Section Break",
-            "collapsible": 1
-        },
-        {
-            "fieldname": "total_boq_amount",
-            "label": "Total BOQ Amount",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1,
-            "bold": 1
-        },
-        {
-            "fieldname": "contingency_percentage",
-            "label": "Contingency (%)",
-            "fieldtype": "Percent"
-        },
-        {
-            "fieldname": "contingency_amount",
-            "label": "Contingency Amount",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1
-        },
-        {
-            "fieldname": "total_estimated_amount",
-            "label": "Total Estimated Amount",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1,
-            "bold": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "notes_tab",
-            "label": "Notes & Assumptions",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "assumptions",
-            "label": "Assumptions",
-            "fieldtype": "TextEditor"
-        }
-    ]
+ "autoname": "format:CE-{project}-{#####}",
+ "creation": "2024-03-10 10:35:00.000000",
+ "description": "Manages project cost estimation, BOQ import, and unit rates.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "estimate_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Estimate Title/Reference",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nSubmitted\nApproved\nRejected\nSuperseded"
+  },
+  {
+   "default": "Today",
+   "fieldname": "estimate_date",
+   "fieldtype": "Date",
+   "label": "Estimate Date",
+   "reqd": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "prepared_by",
+   "fieldtype": "Link",
+   "label": "Prepared By",
+   "options": "User"
+  },
+  {
+   "default": "frappe.defaults.get_global_default('currency') or frappe.db.get_default('currency')",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_of_quantities",
+   "fieldtype": "Select",
+   "label": "Source of Quantities",
+   "options": "Manual BOQ\nBIM Import\nTake-off Software\nOther"
+  },
+  {
+   "description": "Link to Rebar Model or other BIM DocType if quantities are from BIM.",
+   "fieldname": "bim_model_reference",
+   "fieldtype": "Link",
+   "label": "BIM Model Reference",
+   "options": "Rebar Model"
+  },
+  {
+   "description": "Attach original BOQ file (Excel, CSV, etc.)",
+   "fieldname": "boq_attachment",
+   "fieldtype": "Attach",
+   "label": "BOQ/Quantity Import File"
+  },
+  {
+   "fieldname": "boq_items_tab",
+   "fieldtype": "Tab Break",
+   "label": "Bill of Quantities (BOQ) Items"
+  },
+  {
+   "cannot_add_rows": 0,
+   "description": "Detailed breakdown of items, quantities, rates, and amounts.",
+   "fieldname": "boq_items",
+   "fieldtype": "Table",
+   "label": "BOQ Items",
+   "options": "Bill of Quantities Item"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_boq_amount",
+   "fieldtype": "Currency",
+   "label": "Total BOQ Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contingency_percentage",
+   "fieldtype": "Percent",
+   "label": "Contingency (%)"
+  },
+  {
+   "fieldname": "contingency_amount",
+   "fieldtype": "Currency",
+   "label": "Contingency Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_estimated_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Estimated Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes_tab",
+   "fieldtype": "Tab Break",
+   "label": "Notes & Assumptions"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "TextEditor",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "assumptions",
+   "fieldtype": "TextEditor",
+   "label": "Assumptions"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  }
+ ],
+ "modified": "2024-03-10 10:35:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Cost Estimate",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Quantity Surveyor",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 0,
+   "export": 0,
+   "print": 1,
+   "read": 1,
+   "report": 0,
+   "role": "Project User",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "search_fields": "estimate_title, project, status",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "estimate_title",
+ "track_changes": 1,
+ "track_seen": 1
 }

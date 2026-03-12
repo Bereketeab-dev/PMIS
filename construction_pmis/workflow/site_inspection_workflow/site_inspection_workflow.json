@@ -1,115 +1,115 @@
 {
-    "doctype": "Workflow",
-    "name": "Site Inspection Workflow",
-    "module": "Construction PMIS",
-    "document_type": "Site Inspection",
-    "workflow_name": "Site Inspection Workflow",
-    "is_active": 1,
-    "send_email_alert": 0,
-    "workflow_state_field": "status",
-    "states": [
-        {
-            "state": "Scheduled",
-            "doc_status": "0",
-            "allow_edit": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager"
-        },
-        {
-            "state": "In Progress",
-            "doc_status": "1",
-            "allow_edit": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
-            "message": "Inspection is currently in progress."
-        },
-        {
-            "state": "Pending Review",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "Inspection completed and submitted for review."
-        },
-        {
-            "state": "Action Required",
-            "doc_status": "1",
-            "allow_edit": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
-            "message": "Review complete. Corrective actions are required."
-        },
-        {
-            "state": "Completed",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "Inspection completed. All items satisfactory or actions addressed (if any)."
-        },
-        {
-            "state": "Closed",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "update_field": "status",
-            "update_value": "Closed",
-            "message": "Inspection process is formally closed. No further actions pending."
-        },
-        {
-            "state": "Cancelled",
-            "doc_status": "2",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "Inspection has been cancelled."
-        }
-    ],
-    "transitions": [
-        {
-            "state": "Scheduled",
-            "action": "Start Inspection",
-            "next_state": "In Progress",
-            "allowed": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
-            "allow_self_approval": 1
-        },
-        {
-            "state": "In Progress",
-            "action": "Submit for Review",
-            "next_state": "Pending Review",
-            "allowed": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
-            "allow_self_approval": 0,
-            "condition": "doc.checklist_items && doc.checklist_items.length > 0"
-        },
-        {
-            "state": "Pending Review",
-            "action": "Approve / Mark Completed",
-            "next_state": "Completed",
-            "allowed": "Project Manager,System Manager",
-            "allow_self_approval": 0,
-            "description": "Approve if all findings are satisfactory or minor."
-        },
-        {
-            "state": "Pending Review",
-            "action": "Request Actions",
-            "next_state": "Action Required",
-            "allowed": "Project Manager,System Manager",
-            "allow_self_approval": 0,
-            "condition": "doc.corrective_actions_required"
-        },
-        {
-            "state": "Action Required",
-            "action": "Resubmit after Actions",
-            "next_state": "Pending Review",
-            "allowed": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
-            "allow_self_approval": 0,
-            "description": "Resubmit once corrective actions are documented as completed."
-        },
-        {
-            "state": "Completed",
-            "action": "Close Inspection",
-            "next_state": "Closed",
-            "allowed": "Project Manager,System Manager",
-            "allow_self_approval": 0
-        },
-        {
-            "state": "Scheduled",
-            "action": "Cancel",
-            "next_state": "Cancelled",
-            "allowed": "Project Manager,System Manager"
-        },
-        {
-            "state": "In Progress",
-            "action": "Cancel",
-            "next_state": "Cancelled",
-            "allowed": "Project Manager,System Manager"
-        }
-    ]
+ "doctype": "Workflow",
+ "document_type": "Site Inspection",
+ "is_active": 1,
+ "module": "Construction PMIS",
+ "name": "Site Inspection Workflow",
+ "send_email_alert": 0,
+ "states": [
+  {
+   "allow_edit": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
+   "doc_status": "0",
+   "state": "Scheduled"
+  },
+  {
+   "allow_edit": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
+   "doc_status": "1",
+   "message": "Inspection is currently in progress.",
+   "state": "In Progress"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Inspection completed and submitted for review.",
+   "state": "Pending Review"
+  },
+  {
+   "allow_edit": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
+   "doc_status": "1",
+   "message": "Review complete. Corrective actions are required.",
+   "state": "Action Required"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Inspection completed. All items satisfactory or actions addressed (if any).",
+   "state": "Completed"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "Inspection process is formally closed. No further actions pending.",
+   "state": "Closed",
+   "update_field": "status",
+   "update_value": "Closed"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "2",
+   "message": "Inspection has been cancelled.",
+   "state": "Cancelled"
+  }
+ ],
+ "transitions": [
+  {
+   "action": "Start Inspection",
+   "allow_self_approval": 1,
+   "allowed": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
+   "next_state": "In Progress",
+   "state": "Scheduled"
+  },
+  {
+   "action": "Submit for Review",
+   "allow_self_approval": 0,
+   "allowed": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
+   "condition": "doc.checklist_items && doc.checklist_items.length > 0",
+   "next_state": "Pending Review",
+   "state": "In Progress"
+  },
+  {
+   "action": "Approve / Mark Completed",
+   "allow_self_approval": 0,
+   "allowed": "Project Manager,System Manager",
+   "description": "Approve if all findings are satisfactory or minor.",
+   "next_state": "Completed",
+   "state": "Pending Review"
+  },
+  {
+   "action": "Request Actions",
+   "allow_self_approval": 0,
+   "allowed": "Project Manager,System Manager",
+   "condition": "doc.corrective_actions_required",
+   "next_state": "Action Required",
+   "state": "Pending Review"
+  },
+  {
+   "action": "Resubmit after Actions",
+   "allow_self_approval": 0,
+   "allowed": "Site Engineer,QA QC Engineer,Safety Officer,Project Manager",
+   "description": "Resubmit once corrective actions are documented as completed.",
+   "next_state": "Pending Review",
+   "state": "Action Required"
+  },
+  {
+   "action": "Close Inspection",
+   "allow_self_approval": 0,
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Closed",
+   "state": "Completed"
+  },
+  {
+   "action": "Cancel",
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Cancelled",
+   "state": "Scheduled"
+  },
+  {
+   "action": "Cancel",
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Cancelled",
+   "state": "In Progress"
+  }
+ ],
+ "workflow_name": "Site Inspection Workflow",
+ "workflow_state_field": "status"
 }

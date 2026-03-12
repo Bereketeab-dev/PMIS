@@ -1,189 +1,251 @@
 {
-    "name": "Snag List Item",
-    "engine": "InnoDB",
-    "description": "Tracks defects, punch list items, or snags identified during project execution or handover.",
-    "creation": "2024-03-10 18:10:00.000000",
-    "modified": "2024-03-10 18:10:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:SNAG-{project}-{YYYY}-{MM}-{#####}",
-    "sort_field": "creation",
-    "sort_order": "DESC",
-    "title_field": "description",
-    "search_fields": "description, project, location, status, assigned_to_party",
-    "permissions": [
-        {
-            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "QA QC Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Foreman", "read": 1, "write": 1, "create": 1, "report": 0, "share": 0}
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"},
-        {"link_doctype": "Site Inspection", "link_fieldname": "source_inspection"}
-    ],
-    "fields": [
-        {
-            "fieldname": "description",
-            "label": "Snag Description",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Open\nAssigned\nWork In Progress\nRectified\nPending Re-inspection\nClosed\nRejected",
-            "default": "Open",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "priority",
-            "label": "Priority",
-            "fieldtype": "Select",
-            "options": "Low\nMedium\nHigh\nCritical",
-            "default": "Medium",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "date_identified",
-            "label": "Date Identified",
-            "fieldtype": "Date",
-            "default": "Today",
-            "reqd": 1
-        },
-        {
-            "fieldname": "identified_by",
-            "label": "Identified By",
-            "fieldtype": "Link",
-            "options": "User",
-            "default": "__user"
-        },
-        {
-            "fieldname": "location",
-            "label": "Location of Snag",
-            "fieldtype": "Small Text",
-            "reqd": 1,
-            "description": "e.g., Apartment 101 - Master Bedroom, Zone B - Column C3"
-        },
-        {
-            "fieldname": "source_inspection",
-            "label": "Source Site Inspection (if any)",
-            "fieldtype": "Link",
-            "options": "Site Inspection"
-        },
-        {
-            "fieldname": "snag_type_category",
-            "label": "Snag Type / Category",
-            "fieldtype": "Select",
-            "options": "Architectural\nStructural\nMEP - Electrical\nMEP - Plumbing\nMEP - HVAC\nFinishing\nSafety\nOther",
-            "description": "Helps in categorizing and assigning."
-        },
-        {
-            "fieldname": "details_tab",
-            "label": "Snag Details & Rectification",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "detailed_description",
-            "label": "Detailed Description (Optional)",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "photo_evidence",
-            "label": "Photo Evidence",
-            "fieldtype": "Attach Image"
-        },
-        {
-            "fieldname": "assigned_to_party",
-            "label": "Assigned To (Contractor/Party)",
-            "fieldtype": "Link",
-            "options": "Supplier",
-            "description": "Subcontractor or party responsible for rectification."
-        },
-        {
-            "fieldname": "assigned_to_user",
-            "label": "Assigned To (User - Internal)",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "target_rectification_date",
-            "label": "Target Rectification Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "rectification_details_tab",
-            "label": "Rectification & Closure",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "rectification_action_taken",
-            "label": "Action Taken for Rectification",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "rectified_photo_evidence",
-            "label": "Photo Evidence of Rectification",
-            "fieldtype": "Attach Image"
-        },
-        {
-            "fieldname": "date_rectified",
-            "label": "Date Rectified",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "re_inspected_by",
-            "label": "Re-inspected By",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "re_inspection_date",
-            "label": "Re-inspection Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "re_inspection_status",
-            "label": "Re-inspection Status",
-            "fieldtype": "Select",
-            "options": "\nApproved\nRejected"
-        },
-        {
-            "fieldname": "closure_remarks",
-            "label": "Closure Remarks",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "date_closed",
-            "label": "Date Closed",
-            "fieldtype": "Date",
-            "read_only": 1
-        }
-    ],
-    "workflow": 1
+ "autoname": "format:SNAG-{project}-{YYYY}-{MM}-{#####}",
+ "creation": "2024-03-10 18:10:00.000000",
+ "description": "Tracks defects, punch list items, or snags identified during project execution or handover.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Snag Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Open\nAssigned\nWork In Progress\nRectified\nPending Re-inspection\nClosed\nRejected"
+  },
+  {
+   "default": "Medium",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Priority",
+   "options": "Low\nMedium\nHigh\nCritical"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date_identified",
+   "fieldtype": "Date",
+   "label": "Date Identified",
+   "reqd": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "identified_by",
+   "fieldtype": "Link",
+   "label": "Identified By",
+   "options": "User"
+  },
+  {
+   "description": "e.g., Apartment 101 - Master Bedroom, Zone B - Column C3",
+   "fieldname": "location",
+   "fieldtype": "Small Text",
+   "label": "Location of Snag",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_inspection",
+   "fieldtype": "Link",
+   "label": "Source Site Inspection (if any)",
+   "options": "Site Inspection"
+  },
+  {
+   "description": "Helps in categorizing and assigning.",
+   "fieldname": "snag_type_category",
+   "fieldtype": "Select",
+   "label": "Snag Type / Category",
+   "options": "Architectural\nStructural\nMEP - Electrical\nMEP - Plumbing\nMEP - HVAC\nFinishing\nSafety\nOther"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Snag Details & Rectification"
+  },
+  {
+   "fieldname": "detailed_description",
+   "fieldtype": "TextEditor",
+   "label": "Detailed Description (Optional)"
+  },
+  {
+   "fieldname": "photo_evidence",
+   "fieldtype": "Attach Image",
+   "label": "Photo Evidence"
+  },
+  {
+   "description": "Subcontractor or party responsible for rectification.",
+   "fieldname": "assigned_to_party",
+   "fieldtype": "Link",
+   "label": "Assigned To (Contractor/Party)",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "assigned_to_user",
+   "fieldtype": "Link",
+   "label": "Assigned To (User - Internal)",
+   "options": "User"
+  },
+  {
+   "fieldname": "target_rectification_date",
+   "fieldtype": "Date",
+   "label": "Target Rectification Date"
+  },
+  {
+   "fieldname": "rectification_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Rectification & Closure"
+  },
+  {
+   "fieldname": "rectification_action_taken",
+   "fieldtype": "TextEditor",
+   "label": "Action Taken for Rectification"
+  },
+  {
+   "fieldname": "rectified_photo_evidence",
+   "fieldtype": "Attach Image",
+   "label": "Photo Evidence of Rectification"
+  },
+  {
+   "fieldname": "date_rectified",
+   "fieldtype": "Date",
+   "label": "Date Rectified"
+  },
+  {
+   "fieldname": "re_inspected_by",
+   "fieldtype": "Link",
+   "label": "Re-inspected By",
+   "options": "User"
+  },
+  {
+   "fieldname": "re_inspection_date",
+   "fieldtype": "Date",
+   "label": "Re-inspection Date"
+  },
+  {
+   "fieldname": "re_inspection_status",
+   "fieldtype": "Select",
+   "label": "Re-inspection Status",
+   "options": "\nApproved\nRejected"
+  },
+  {
+   "fieldname": "closure_remarks",
+   "fieldtype": "TextEditor",
+   "label": "Closure Remarks"
+  },
+  {
+   "fieldname": "date_closed",
+   "fieldtype": "Date",
+   "label": "Date Closed",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  },
+  {
+   "link_doctype": "Site Inspection",
+   "link_fieldname": "source_inspection"
+  }
+ ],
+ "modified": "2024-03-10 18:10:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Snag List Item",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Site Engineer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "QA QC Engineer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 0,
+   "role": "Foreman",
+   "share": 0,
+   "write": 1
+  }
+ ],
+ "search_fields": "description, project, location, status, assigned_to_party",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "title_field": "description",
+ "track_changes": 1,
+ "workflow": 1
 }

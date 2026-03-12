@@ -1,286 +1,346 @@
 {
-    "name": "Payment Certificate",
-    "engine": "InnoDB",
-    "description": "Manages interim and final payment certificates for projects.",
-    "creation": "2024-03-10 12:30:00.000000",
-    "modified": "2024-03-10 12:30:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:PC-{project}-{#####}",
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "title_field": "certificate_number",
-    "search_fields": "certificate_number, project, status, payment_application_number",
-    "track_seen": 1,
-    "permissions": [
-        {
-            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Quantity Surveyor", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Client Representative", "read": 1, "write": 0, "create": 0, "report": 1, "share": 1, "print": 1}
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"},
-        {"link_doctype": "Cost Estimate", "link_fieldname": "boq_reference"},
-        {"link_doctype": "Sales Invoice", "link_fieldname": "linked_sales_invoice"}
-    ],
-    "fields": [
-        {
-            "fieldname": "certificate_number",
-            "label": "Certificate Number",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1,
-            "description": "e.g., IPC-001, Final Certificate"
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Draft\nPending Approval\nApproved\nRejected\nProcessed for Payment\nPaid\nCancelled",
-            "default": "Draft",
-            "in_list_view": 1,
-            "read_only_on_submit": 1
-        },
-        {
-            "fieldname": "certificate_type",
-            "label": "Certificate Type",
-            "fieldtype": "Select",
-            "options": "Interim Payment Certificate (IPC)\nFinal Certificate",
-            "default": "Interim Payment Certificate (IPC)",
-            "reqd": 1
-        },
-        {
-            "fieldname": "certificate_date",
-            "label": "Certificate Date",
-            "fieldtype": "Date",
-            "default": "Today",
-            "reqd": 1
-        },
-        {
-            "fieldname": "payment_application_number",
-            "label": "Payment Application Number",
-            "fieldtype": "Data",
-            "description": "Reference to contractor's payment application."
-        },
-        {
-            "fieldname": "period_start_date",
-            "label": "Valuation Period Start Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "period_end_date",
-            "label": "Valuation Period End Date",
-            "fieldtype": "Date",
-            "reqd": 1
-        },
-        {
-            "fieldname": "currency",
-            "label": "Currency",
-            "fieldtype": "Link",
-            "options": "Currency",
-            "default": "frappe.defaults.get_global_default('currency') or frappe.db.get_default('currency')",
-            "reqd": 1
-        },
-        {
-            "fieldname": "boq_reference",
-            "label": "BOQ Reference (Cost Estimate)",
-            "fieldtype": "Link",
-            "options": "Cost Estimate",
-            "description": "Link to the main Cost Estimate/BOQ document for rates and items."
-        },
-        {
-            "fieldname": "progress_details_tab",
-            "label": "Progress Details (Valuation of Work Done)",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "progress_items",
-            "label": "Progress Items",
-            "fieldtype": "Table",
-            "options": "Payment Certificate Progress Item",
-            "description": "Detailed breakdown of work done against BOQ items."
-        },
-        {
-            "fieldname": "summary_tab",
-            "label": "Payment Summary",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "gross_value_of_work_done",
-            "label": "A. Gross Value of Work Done to Date",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1, "bold": 1
-        },
-        {
-            "fieldname": "materials_on_site_value",
-            "label": "B. Value of Materials on Site (if applicable)",
-            "fieldtype": "Currency",
-            "options": "currency"
-        },
-        {
-            "fieldname": "total_value_to_date",
-            "label": "C. Total Value to Date (A+B)",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1, "bold": 1
-        },
-        {
-            "fieldname": "less_previous_payments",
-            "label": "D. Less: Amount Previously Certified",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "bold": 1
-        },
-        {
-            "fieldname": "value_of_work_this_period",
-            "label": "E. Value of Work for This Period (C-D)",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1, "bold": 1
-        },
-        {
-            "fieldname": "column_break_summary_1",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "retention_percentage",
-            "label": "Retention Percentage (%)",
-            "fieldtype": "Percent"
-        },
-        {
-            "fieldname": "retention_this_period",
-            "label": "F. Retention for This Period",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1
-        },
-        {
-            "fieldname": "total_retention_to_date",
-            "label": "G. Total Retention to Date",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1
-        },
-        {
-            "fieldname": "less_retention_released",
-            "label": "H. Less: Retention Released (if any)",
-            "fieldtype": "Currency",
-            "options": "currency"
-        },
-        {
-            "fieldname": "net_retention_held",
-            "label": "I. Net Retention Held (G-H)",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1
-        },
-        {
-            "fieldname": "adjustments_section",
-            "label": "Adjustments (Variations, Claims, etc.)",
-            "fieldtype": "Section Break",
-            "collapsible": 1
-        },
-        {
-            "fieldname": "approved_variations_value",
-            "label": "J. Value of Approved Variations",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "description": "Sum of approved variation orders for this period or cumulative."
-        },
-        {
-            "fieldname": "other_adjustments",
-            "label": "K. Other Adjustments (+/-)",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "description": "e.g., Claims, Liquidated Damages"
-        },
-        {
-            "fieldname": "adjustment_details",
-            "label": "Adjustment Details",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "final_calculation_section",
-            "label": "Final Calculation",
-            "fieldtype": "Section Break"
-        },
-        {
-            "fieldname": "net_amount_due_before_vat",
-            "label": "L. Net Amount Due Before VAT (E-F+J+K or similar based on contract)",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1, "bold": 1
-        },
-        {
-            "fieldname": "vat_percentage",
-            "label": "VAT Percentage (%)",
-            "fieldtype": "Percent"
-        },
-        {
-            "fieldname": "vat_amount",
-            "label": "M. VAT Amount",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1
-        },
-        {
-            "fieldname": "total_amount_due_this_certificate",
-            "label": "N. TOTAL AMOUNT DUE THIS CERTIFICATE (L+M)",
-            "fieldtype": "Currency",
-            "options": "currency",
-            "read_only": 1, "bold": 1, "in_list_view": 1
-        },
-        {
-            "fieldname": "payment_processing_tab",
-            "label": "Payment Processing",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "linked_sales_invoice",
-            "label": "Linked Sales Invoice",
-            "fieldtype": "Link",
-            "options": "Sales Invoice",
-            "read_only": 1
-        },
-        {
-            "fieldname": "payment_date",
-            "label": "Payment Date",
-            "fieldtype": "Date",
-            "read_only": 1
-        },
-        {
-            "fieldname": "payment_reference",
-            "label": "Payment Reference",
-            "fieldtype": "Data",
-            "read_only": 1
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes / Remarks",
-            "fieldtype": "TextEditor"
-        }
-    ],
-    "workflow": 1
+ "autoname": "format:PC-{project}-{#####}",
+ "creation": "2024-03-10 12:30:00.000000",
+ "description": "Manages interim and final payment certificates for projects.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "e.g., IPC-001, Final Certificate",
+   "fieldname": "certificate_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Certificate Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nPending Approval\nApproved\nRejected\nProcessed for Payment\nPaid\nCancelled",
+   "read_only_on_submit": 1
+  },
+  {
+   "default": "Interim Payment Certificate (IPC)",
+   "fieldname": "certificate_type",
+   "fieldtype": "Select",
+   "label": "Certificate Type",
+   "options": "Interim Payment Certificate (IPC)\nFinal Certificate",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "certificate_date",
+   "fieldtype": "Date",
+   "label": "Certificate Date",
+   "reqd": 1
+  },
+  {
+   "description": "Reference to contractor's payment application.",
+   "fieldname": "payment_application_number",
+   "fieldtype": "Data",
+   "label": "Payment Application Number"
+  },
+  {
+   "fieldname": "period_start_date",
+   "fieldtype": "Date",
+   "label": "Valuation Period Start Date"
+  },
+  {
+   "fieldname": "period_end_date",
+   "fieldtype": "Date",
+   "label": "Valuation Period End Date",
+   "reqd": 1
+  },
+  {
+   "default": "frappe.defaults.get_global_default('currency') or frappe.db.get_default('currency')",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "description": "Link to the main Cost Estimate/BOQ document for rates and items.",
+   "fieldname": "boq_reference",
+   "fieldtype": "Link",
+   "label": "BOQ Reference (Cost Estimate)",
+   "options": "Cost Estimate"
+  },
+  {
+   "fieldname": "progress_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Progress Details (Valuation of Work Done)"
+  },
+  {
+   "description": "Detailed breakdown of work done against BOQ items.",
+   "fieldname": "progress_items",
+   "fieldtype": "Table",
+   "label": "Progress Items",
+   "options": "Payment Certificate Progress Item"
+  },
+  {
+   "fieldname": "summary_tab",
+   "fieldtype": "Tab Break",
+   "label": "Payment Summary"
+  },
+  {
+   "bold": 1,
+   "fieldname": "gross_value_of_work_done",
+   "fieldtype": "Currency",
+   "label": "A. Gross Value of Work Done to Date",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "materials_on_site_value",
+   "fieldtype": "Currency",
+   "label": "B. Value of Materials on Site (if applicable)",
+   "options": "currency"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_value_to_date",
+   "fieldtype": "Currency",
+   "label": "C. Total Value to Date (A+B)",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "less_previous_payments",
+   "fieldtype": "Currency",
+   "label": "D. Less: Amount Previously Certified",
+   "options": "currency"
+  },
+  {
+   "bold": 1,
+   "fieldname": "value_of_work_this_period",
+   "fieldtype": "Currency",
+   "label": "E. Value of Work for This Period (C-D)",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_summary_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "retention_percentage",
+   "fieldtype": "Percent",
+   "label": "Retention Percentage (%)"
+  },
+  {
+   "fieldname": "retention_this_period",
+   "fieldtype": "Currency",
+   "label": "F. Retention for This Period",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_retention_to_date",
+   "fieldtype": "Currency",
+   "label": "G. Total Retention to Date",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "less_retention_released",
+   "fieldtype": "Currency",
+   "label": "H. Less: Retention Released (if any)",
+   "options": "currency"
+  },
+  {
+   "fieldname": "net_retention_held",
+   "fieldtype": "Currency",
+   "label": "I. Net Retention Held (G-H)",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "adjustments_section",
+   "fieldtype": "Section Break",
+   "label": "Adjustments (Variations, Claims, etc.)"
+  },
+  {
+   "description": "Sum of approved variation orders for this period or cumulative.",
+   "fieldname": "approved_variations_value",
+   "fieldtype": "Currency",
+   "label": "J. Value of Approved Variations",
+   "options": "currency"
+  },
+  {
+   "description": "e.g., Claims, Liquidated Damages",
+   "fieldname": "other_adjustments",
+   "fieldtype": "Currency",
+   "label": "K. Other Adjustments (+/-)",
+   "options": "currency"
+  },
+  {
+   "fieldname": "adjustment_details",
+   "fieldtype": "TextEditor",
+   "label": "Adjustment Details"
+  },
+  {
+   "fieldname": "final_calculation_section",
+   "fieldtype": "Section Break",
+   "label": "Final Calculation"
+  },
+  {
+   "bold": 1,
+   "fieldname": "net_amount_due_before_vat",
+   "fieldtype": "Currency",
+   "label": "L. Net Amount Due Before VAT (E-F+J+K or similar based on contract)",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vat_percentage",
+   "fieldtype": "Percent",
+   "label": "VAT Percentage (%)"
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "label": "M. VAT Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_amount_due_this_certificate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "N. TOTAL AMOUNT DUE THIS CERTIFICATE (L+M)",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_processing_tab",
+   "fieldtype": "Tab Break",
+   "label": "Payment Processing"
+  },
+  {
+   "fieldname": "linked_sales_invoice",
+   "fieldtype": "Link",
+   "label": "Linked Sales Invoice",
+   "options": "Sales Invoice",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "TextEditor",
+   "label": "Notes / Remarks"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  },
+  {
+   "link_doctype": "Cost Estimate",
+   "link_fieldname": "boq_reference"
+  },
+  {
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "linked_sales_invoice"
+  }
+ ],
+ "modified": "2024-03-10 12:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Payment Certificate",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Quantity Surveyor",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Client Representative",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "search_fields": "certificate_number, project, status, payment_application_number",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "certificate_number",
+ "track_changes": 1,
+ "track_seen": 1,
+ "workflow": 1
 }

@@ -1,37 +1,38 @@
 {
-    "dashboard_name": "Construction Projects Dashboard",
-    "module": "Construction PMIS",
-    "cards": [
-        {
-            "label": "Total Active Projects",
-            "type": "Number Card",
-            "number_card_name": "Active Projects Count"
-        },
-        {
-            "label": "Projects Past Due Date",
-            "type": "Number Card",
-            "number_card_name": "Overdue Projects Count"
-        },
-        {
-            "label": "Total Estimated Project Value",
-            "type": "Number Card",
-            "number_card_name": "Total Project Value Sum"
-        }
-    ],
-    "charts": [
-        {
-            "chart_name": "Projects by Status Chart",
-            "width": "Half Width"
-        },
-        {
-            "chart_name": "Projects Nearing Deadline Chart",
-            "width": "Half Width"
-        }
-    ],
-    "creation": "2024-03-10 20:00:00.000000",
-    "modified": "2024-03-10 20:00:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx":0
+ "cards": [
+  {
+   "label": "Total Active Projects",
+   "number_card_name": "Active Projects Count",
+   "type": "Number Card"
+  },
+  {
+   "label": "Projects Past Due Date",
+   "number_card_name": "Overdue Projects Count",
+   "type": "Number Card"
+  },
+  {
+   "label": "Total Estimated Project Value",
+   "number_card_name": "Total Project Value Sum",
+   "type": "Number Card"
+  }
+ ],
+ "charts": [
+  {
+   "chart_name": "Projects by Status Chart",
+   "width": "Half Width"
+  },
+  {
+   "chart_name": "Projects Nearing Deadline Chart",
+   "width": "Half Width"
+  }
+ ],
+ "creation": "2024-03-10 20:00:00.000000",
+ "dashboard_name": "Construction Projects Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "modified": "2024-03-10 20:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "owner": "Administrator"
 }

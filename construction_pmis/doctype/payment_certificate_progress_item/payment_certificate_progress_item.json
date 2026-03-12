@@ -1,145 +1,147 @@
 {
-    "name": "Payment Certificate Progress Item",
-    "engine": "InnoDB",
-    "description": "Child table for Payment Certificate, detailing progress of individual BOQ items.",
-    "creation": "2024-03-10 12:35:00.000000",
-    "modified": "2024-03-10 12:35:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "boq_item_code",
-            "label": "BOQ Item Code",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "width": "120",
-            "fetch_from": "boq_item_link.item_code",
-            "read_only": 1
-        },
-        {
-            "fieldname": "boq_item_description",
-            "label": "BOQ Item Description",
-            "fieldtype": "Text",
-            "in_list_view": 1,
-            "width": "250",
-            "fetch_from": "boq_item_link.description",
-            "read_only": 1
-        },
-        {
-            "fieldname": "boq_item_unit",
-            "label": "Unit",
-            "fieldtype": "Link",
-            "options": "UOM",
-            "in_list_view": 1,
-            "width": "70",
-            "fetch_from": "boq_item_link.unit",
-            "read_only": 1
-        },
-        {
-            "fieldname": "boq_item_link",
-            "label": "Link to BOQ Item in Cost Estimate",
-            "fieldtype": "Link",
-            "options": "Bill of Quantities Item",
-            "reqd": 1,
-            "description": "Select the BOQ item from the referenced Cost Estimate."
-        },
-        {
-            "fieldname": "contract_quantity",
-            "label": "Contract Qty",
-            "fieldtype": "Float",
-            "read_only": 1,
-            "in_list_view": 1,
-            "width": "100",
-            "fetch_from": "boq_item_link.quantity"
-        },
-        {
-            "fieldname": "unit_rate",
-            "label": "Unit Rate",
-            "fieldtype": "Currency",
-            "options": "parent.currency",
-            "read_only": 1,
-            "in_list_view": 1,
-            "width": "110",
-            "fetch_from": "boq_item_link.unit_rate"
-        },
-        {
-            "fieldname": "contract_amount",
-            "label": "Contract Amount",
-            "fieldtype": "Currency",
-            "options": "parent.currency",
-            "read_only": 1,
-            "in_list_view": 1,
-            "width": "130",
-            "fetch_from": "boq_item_link.amount"
-        },
-        {
-            "fieldname": "column_break_1",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "previous_quantity_executed",
-            "label": "Previous Qty Executed",
-            "fieldtype": "Float",
-            "default": 0,
-            "width": "100",
-            "read_only": 1,
-            "description": "Cumulative quantity executed and certified in previous certificates."
-        },
-        {
-            "fieldname": "quantity_executed_this_period",
-            "label": "Qty Executed This Period",
-            "fieldtype": "Float",
-            "reqd": 1,
-            "in_list_view": 1,
-            "width": "100"
-        },
-        {
-            "fieldname": "cumulative_quantity_executed",
-            "label": "Cumulative Qty Executed",
-            "fieldtype": "Float",
-            "read_only": 1,
-            "in_list_view": 1,
-            "width": "110"
-        },
-        {
-            "fieldname": "percentage_complete",
-            "label": "% Complete (Cumulative)",
-            "fieldtype": "Percent",
-            "read_only": 1,
-            "width": "100"
-        },
-        {
-            "fieldname": "value_of_work_done_this_period",
-            "label": "Value - This Period",
-            "fieldtype": "Currency",
-            "options": "parent.currency",
-            "read_only": 1,
-            "in_list_view": 1,
-            "width": "130"
-        },
-        {
-            "fieldname": "cumulative_value_of_work_done",
-            "label": "Value - Cumulative",
-            "fieldtype": "Currency",
-            "options": "parent.currency",
-            "read_only": 1,
-            "in_list_view": 1,
-            "width": "140",
-            "bold":1
-        },
-        {
-            "fieldname": "remarks",
-            "label": "Remarks",
-            "fieldtype": "Small Text",
-            "width": "150"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 12:35:00.000000",
+ "description": "Child table for Payment Certificate, detailing progress of individual BOQ items.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fetch_from": "boq_item_link.item_code",
+   "fieldname": "boq_item_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "BOQ Item Code",
+   "read_only": 1,
+   "width": "120"
+  },
+  {
+   "fetch_from": "boq_item_link.description",
+   "fieldname": "boq_item_description",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "BOQ Item Description",
+   "read_only": 1,
+   "width": "250"
+  },
+  {
+   "fetch_from": "boq_item_link.unit",
+   "fieldname": "boq_item_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "UOM",
+   "read_only": 1,
+   "width": "70"
+  },
+  {
+   "description": "Select the BOQ item from the referenced Cost Estimate.",
+   "fieldname": "boq_item_link",
+   "fieldtype": "Link",
+   "label": "Link to BOQ Item in Cost Estimate",
+   "options": "Bill of Quantities Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "boq_item_link.quantity",
+   "fieldname": "contract_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Contract Qty",
+   "read_only": 1,
+   "width": "100"
+  },
+  {
+   "fetch_from": "boq_item_link.unit_rate",
+   "fieldname": "unit_rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Rate",
+   "options": "parent.currency",
+   "read_only": 1,
+   "width": "110"
+  },
+  {
+   "fetch_from": "boq_item_link.amount",
+   "fieldname": "contract_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Contract Amount",
+   "options": "parent.currency",
+   "read_only": 1,
+   "width": "130"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": 0,
+   "description": "Cumulative quantity executed and certified in previous certificates.",
+   "fieldname": "previous_quantity_executed",
+   "fieldtype": "Float",
+   "label": "Previous Qty Executed",
+   "read_only": 1,
+   "width": "100"
+  },
+  {
+   "fieldname": "quantity_executed_this_period",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty Executed This Period",
+   "reqd": 1,
+   "width": "100"
+  },
+  {
+   "fieldname": "cumulative_quantity_executed",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Cumulative Qty Executed",
+   "read_only": 1,
+   "width": "110"
+  },
+  {
+   "fieldname": "percentage_complete",
+   "fieldtype": "Percent",
+   "label": "% Complete (Cumulative)",
+   "read_only": 1,
+   "width": "100"
+  },
+  {
+   "fieldname": "value_of_work_done_this_period",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Value - This Period",
+   "options": "parent.currency",
+   "read_only": 1,
+   "width": "130"
+  },
+  {
+   "bold": 1,
+   "fieldname": "cumulative_value_of_work_done",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Value - Cumulative",
+   "options": "parent.currency",
+   "read_only": 1,
+   "width": "140"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
+   "width": "150"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 12:35:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Payment Certificate Progress Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

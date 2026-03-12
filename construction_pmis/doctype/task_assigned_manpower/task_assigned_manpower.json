@@ -1,56 +1,58 @@
 {
-    "name": "Task Assigned Manpower",
-    "engine": "InnoDB",
-    "description": "Child table for Project Schedule Task to assign manpower resources.",
-    "creation": "2024-03-10 14:25:00.000000",
-    "modified": "2024-03-10 14:25:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "manpower_plan_item",
-            "label": "Manpower from Project Plan",
-            "fieldtype": "Link",
-            "options": "Manpower Plan Item",
-            "description": "Select a pre-planned manpower resource for this project.",
-            "get_query": "construction_pmis.construction_pmis.utils.get_manpower_plan_items_for_project"
-        },
-        {
-            "fieldname": "resource_type",
-            "label": "Resource Type/Trade",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "fetch_from": "manpower_plan_item.resource_type",
-            "description": "e.g., Skilled Labor, Mason. Fetched if Manpower Plan Item is selected."
-        },
-        {
-            "fieldname": "specific_employee",
-            "label": "Specific Employee",
-            "fieldtype": "Link",
-            "options": "Employee",
-            "in_list_view": 1,
-            "fetch_from": "manpower_plan_item.employee"
-        },
-        {
-            "fieldname": "quantity",
-            "label": "Quantity Assigned",
-            "fieldtype": "Int",
-            "default": 1,
-            "in_list_view": 1,
-            "fetch_from": "manpower_plan_item.required_quantity"
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:25:00.000000",
+ "description": "Child table for Project Schedule Task to assign manpower resources.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "Select a pre-planned manpower resource for this project.",
+   "fieldname": "manpower_plan_item",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_manpower_plan_items_for_project",
+   "label": "Manpower from Project Plan",
+   "options": "Manpower Plan Item"
+  },
+  {
+   "description": "e.g., Skilled Labor, Mason. Fetched if Manpower Plan Item is selected.",
+   "fetch_from": "manpower_plan_item.resource_type",
+   "fieldname": "resource_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Resource Type/Trade"
+  },
+  {
+   "fetch_from": "manpower_plan_item.employee",
+   "fieldname": "specific_employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Specific Employee",
+   "options": "Employee"
+  },
+  {
+   "default": 1,
+   "fetch_from": "manpower_plan_item.required_quantity",
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Quantity Assigned"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:25:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Task Assigned Manpower",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

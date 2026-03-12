@@ -1,42 +1,44 @@
 {
-    "name": "Site Inspection NCR Link",
-    "engine": "InnoDB",
-    "description": "Child table for Site Inspection to link to Non-Conformance Reports.",
-    "creation": "2024-03-10 17:50:00.000000",
-    "modified": "2024-03-10 17:50:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "ncr",
-            "label": "NCR (Non-Conformance Report)",
-            "fieldtype": "Link",
-            "options": "NCR",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "ncr_status",
-            "label": "NCR Status",
-            "fieldtype": "Data",
-            "read_only": 1,
-            "fetch_from": "ncr.status",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "ncr_description",
-            "label": "NCR Description",
-            "fieldtype": "Small Text",
-            "read_only": 1,
-            "fetch_from": "ncr.subject"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 17:50:00.000000",
+ "description": "Child table for Site Inspection to link to Non-Conformance Reports.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "ncr",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "NCR (Non-Conformance Report)",
+   "options": "NCR",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "ncr.status",
+   "fieldname": "ncr_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "NCR Status",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "ncr.subject",
+   "fieldname": "ncr_description",
+   "fieldtype": "Small Text",
+   "label": "NCR Description",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 17:50:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Site Inspection NCR Link",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

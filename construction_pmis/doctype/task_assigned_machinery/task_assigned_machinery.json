@@ -1,56 +1,58 @@
 {
-    "name": "Task Assigned Machinery",
-    "engine": "InnoDB",
-    "description": "Child table for Project Schedule Task to assign machinery resources.",
-    "creation": "2024-03-10 14:30:00.000000",
-    "modified": "2024-03-10 14:30:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "machinery_plan_item",
-            "label": "Machinery from Project Plan",
-            "fieldtype": "Link",
-            "options": "Machinery Plan Item",
-            "description": "Select a pre-planned machinery resource for this project.",
-            "get_query": "construction_pmis.construction_pmis.utils.get_machinery_plan_items_for_project"
-        },
-        {
-            "fieldname": "machinery_asset",
-            "label": "Specific Machinery/Asset",
-            "fieldtype": "Link",
-            "options": "Asset",
-            "in_list_view": 1,
-            "fetch_from": "machinery_plan_item.machinery_asset"
-        },
-        {
-            "fieldname": "machinery_type",
-            "label": "Machinery Type",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "fetch_from": "machinery_plan_item.machinery_type",
-            "description": "e.g., Excavator, Crane. Fetched if plan item is selected or from Asset."
-        },
-        {
-            "fieldname": "quantity",
-            "label": "Quantity Assigned",
-            "fieldtype": "Int",
-            "default": 1,
-            "in_list_view": 1,
-            "fetch_from": "machinery_plan_item.required_quantity"
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:30:00.000000",
+ "description": "Child table for Project Schedule Task to assign machinery resources.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "description": "Select a pre-planned machinery resource for this project.",
+   "fieldname": "machinery_plan_item",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_machinery_plan_items_for_project",
+   "label": "Machinery from Project Plan",
+   "options": "Machinery Plan Item"
+  },
+  {
+   "fetch_from": "machinery_plan_item.machinery_asset",
+   "fieldname": "machinery_asset",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Specific Machinery/Asset",
+   "options": "Asset"
+  },
+  {
+   "description": "e.g., Excavator, Crane. Fetched if plan item is selected or from Asset.",
+   "fetch_from": "machinery_plan_item.machinery_type",
+   "fieldname": "machinery_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Machinery Type"
+  },
+  {
+   "default": 1,
+   "fetch_from": "machinery_plan_item.required_quantity",
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Quantity Assigned"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Task Assigned Machinery",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

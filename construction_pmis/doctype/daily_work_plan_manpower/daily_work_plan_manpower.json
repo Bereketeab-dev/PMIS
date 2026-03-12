@@ -1,69 +1,71 @@
 {
-    "name": "Daily Work Plan Manpower",
-    "engine": "InnoDB",
-    "description": "Child table for Daily Work Plan, detailing manpower for the day.",
-    "creation": "2024-03-10 14:50:00.000000",
-    "modified": "2024-03-10 14:50:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "manpower_plan_item",
-            "label": "From Project Manpower Plan",
-            "fieldtype": "Link",
-            "options": "Manpower Plan Item",
-            "get_query": "construction_pmis.construction_pmis.utils.get_manpower_plan_items_for_project_daily"
-        },
-        {
-            "fieldname": "resource_type",
-            "label": "Resource Type/Trade",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "manpower_plan_item.resource_type"
-        },
-        {
-            "fieldname": "specific_employee",
-            "label": "Specific Employee",
-            "fieldtype": "Link",
-            "options": "Employee",
-            "fetch_from": "manpower_plan_item.employee"
-        },
-        {
-            "fieldname": "planned_quantity",
-            "label": "Planned Quantity",
-            "fieldtype": "Int",
-            "reqd": 1,
-            "default": 1,
-            "in_list_view": 1,
-            "fetch_from": "manpower_plan_item.required_quantity"
-        },
-        {
-            "fieldname": "planned_hours",
-            "label": "Planned Hours",
-            "fieldtype": "Float",
-            "default": 8,
-            "fetch_from": "manpower_plan_item.planned_hours_per_day"
-        },
-        {
-            "fieldname": "assigned_task",
-            "label": "Assigned Task (Optional)",
-            "fieldtype": "Link",
-            "options": "Daily Work Plan Task",
-            "description": "Link to a specific task in this daily plan."
-        },
-        {
-            "fieldname": "notes",
-            "label": "Notes",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:50:00.000000",
+ "description": "Child table for Daily Work Plan, detailing manpower for the day.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "manpower_plan_item",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_manpower_plan_items_for_project_daily",
+   "label": "From Project Manpower Plan",
+   "options": "Manpower Plan Item"
+  },
+  {
+   "fetch_from": "manpower_plan_item.resource_type",
+   "fieldname": "resource_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Resource Type/Trade",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "manpower_plan_item.employee",
+   "fieldname": "specific_employee",
+   "fieldtype": "Link",
+   "label": "Specific Employee",
+   "options": "Employee"
+  },
+  {
+   "default": 1,
+   "fetch_from": "manpower_plan_item.required_quantity",
+   "fieldname": "planned_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Planned Quantity",
+   "reqd": 1
+  },
+  {
+   "default": 8,
+   "fetch_from": "manpower_plan_item.planned_hours_per_day",
+   "fieldname": "planned_hours",
+   "fieldtype": "Float",
+   "label": "Planned Hours"
+  },
+  {
+   "description": "Link to a specific task in this daily plan.",
+   "fieldname": "assigned_task",
+   "fieldtype": "Link",
+   "label": "Assigned Task (Optional)",
+   "options": "Daily Work Plan Task"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:50:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Daily Work Plan Manpower",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

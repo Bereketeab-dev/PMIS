@@ -1,152 +1,198 @@
 {
-    "name": "Rebar Model",
-    "engine": "InnoDB",
-    "description": "Stores rebar modeling details, typically from Tekla or Revit, including BBS.",
-    "creation": "2024-03-10 10:25:00.000000",
-    "modified": "2024-03-10 10:25:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:RBMDL-{project}-{#####}",
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "title_field": "model_name",
-    "search_fields": "model_name, project, drawing_reference",
-    "permissions": [
-        {
-            "role": "System Manager",
-            "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager",
-            "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Structural Engineer",
-            "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project User",
-            "read": 1, "write": 0, "create": 0, "delete": 0, "report": 0, "share": 0, "export": 0, "print": 1, "email": 0
-        }
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"}
-    ],
-    "fields": [
-        {
-            "fieldname": "model_name",
-            "label": "Model Name / Identifier",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "structural_element",
-            "label": "Structural Element(s)",
-            "fieldtype": "Data",
-            "description": "e.g., Foundation F1, Beam B1, Column C1-C5",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "drawing_reference",
-            "label": "Drawing Reference",
-            "fieldtype": "Data",
-            "description": "Link to specific drawing number"
-        },
-        {
-            "fieldname": "model_date",
-            "label": "Model Date",
-            "fieldtype": "Date",
-            "default": "Today"
-        },
-        {
-            "fieldname": "modeled_by",
-            "label": "Modeled By",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "column_break_1",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "software_used",
-            "label": "Software Used",
-            "fieldtype": "Select",
-            "options": "Tekla Structures\nRevit\nSOFiSTiK\nOther"
-        },
-        {
-            "fieldname": "model_version",
-            "label": "Model Version",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "optimization_notes",
-            "label": "Bar Length Optimization Notes",
-            "fieldtype": "Small Text"
-        },
-        {
-            "fieldname": "rebar_details_tab",
-            "label": "Rebar Details & BBS",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "rebar_details_description",
-            "label": "Rebar Details Description",
-            "fieldtype": "TextEditor",
-            "description": "Details on bending shapes, laps, hooks, etc."
-        },
-        {
-            "fieldname": "bbs_attachment_section",
-            "label": "Bar Bending Schedule (BBS)",
-            "fieldtype": "Section Break"
-        },
-        {
-            "fieldname": "bbs_excel_csv",
-            "label": "BBS Attachment (Excel/CSV)",
-            "fieldtype": "Attach",
-            "description": "Upload the exported Bar Bending Schedule."
-        },
-        {
-            "fieldname": "bbs_data_preview",
-            "label": "BBS Data Preview (Optional)",
-            "fieldtype": "Table",
-            "options": "Rebar BBS Item",
-            "description": "Optionally, key in or import some BBS data for quick reference. Full data in attachment."
-        },
-        {
-            "fieldname": "model_files_tab",
-            "label": "Model Files",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "native_model_file",
-            "label": "Native Model File (e.g., .rvt, .db1)",
-            "fieldtype": "Attach"
-        },
-        {
-            "fieldname": "ifc_model_file",
-            "label": "IFC Model File (.ifc)",
-            "fieldtype": "Attach"
-        },
-        {
-            "fieldname": "other_attachments",
-            "label": "Other Attachments",
-            "fieldtype": "Attach"
-        }
-    ]
+ "autoname": "format:RBMDL-{project}-{#####}",
+ "creation": "2024-03-10 10:25:00.000000",
+ "description": "Stores rebar modeling details, typically from Tekla or Revit, including BBS.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "model_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model Name / Identifier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "description": "e.g., Foundation F1, Beam B1, Column C1-C5",
+   "fieldname": "structural_element",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Structural Element(s)"
+  },
+  {
+   "description": "Link to specific drawing number",
+   "fieldname": "drawing_reference",
+   "fieldtype": "Data",
+   "label": "Drawing Reference"
+  },
+  {
+   "default": "Today",
+   "fieldname": "model_date",
+   "fieldtype": "Date",
+   "label": "Model Date"
+  },
+  {
+   "fieldname": "modeled_by",
+   "fieldtype": "Link",
+   "label": "Modeled By",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "software_used",
+   "fieldtype": "Select",
+   "label": "Software Used",
+   "options": "Tekla Structures\nRevit\nSOFiSTiK\nOther"
+  },
+  {
+   "fieldname": "model_version",
+   "fieldtype": "Data",
+   "label": "Model Version"
+  },
+  {
+   "fieldname": "optimization_notes",
+   "fieldtype": "Small Text",
+   "label": "Bar Length Optimization Notes"
+  },
+  {
+   "fieldname": "rebar_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Rebar Details & BBS"
+  },
+  {
+   "description": "Details on bending shapes, laps, hooks, etc.",
+   "fieldname": "rebar_details_description",
+   "fieldtype": "TextEditor",
+   "label": "Rebar Details Description"
+  },
+  {
+   "fieldname": "bbs_attachment_section",
+   "fieldtype": "Section Break",
+   "label": "Bar Bending Schedule (BBS)"
+  },
+  {
+   "description": "Upload the exported Bar Bending Schedule.",
+   "fieldname": "bbs_excel_csv",
+   "fieldtype": "Attach",
+   "label": "BBS Attachment (Excel/CSV)"
+  },
+  {
+   "description": "Optionally, key in or import some BBS data for quick reference. Full data in attachment.",
+   "fieldname": "bbs_data_preview",
+   "fieldtype": "Table",
+   "label": "BBS Data Preview (Optional)",
+   "options": "Rebar BBS Item"
+  },
+  {
+   "fieldname": "model_files_tab",
+   "fieldtype": "Tab Break",
+   "label": "Model Files"
+  },
+  {
+   "fieldname": "native_model_file",
+   "fieldtype": "Attach",
+   "label": "Native Model File (e.g., .rvt, .db1)"
+  },
+  {
+   "fieldname": "ifc_model_file",
+   "fieldtype": "Attach",
+   "label": "IFC Model File (.ifc)"
+  },
+  {
+   "fieldname": "other_attachments",
+   "fieldtype": "Attach",
+   "label": "Other Attachments"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  }
+ ],
+ "modified": "2024-03-10 10:25:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Rebar Model",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Structural Engineer",
+   "share": 1,
+   "submit": 0,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 0,
+   "export": 0,
+   "print": 1,
+   "read": 1,
+   "report": 0,
+   "role": "Project User",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "search_fields": "model_name, project, drawing_reference",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "model_name",
+ "track_changes": 1
 }

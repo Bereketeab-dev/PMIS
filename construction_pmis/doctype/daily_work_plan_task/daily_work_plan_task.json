@@ -1,85 +1,87 @@
 {
-    "name": "Daily Work Plan Task",
-    "engine": "InnoDB",
-    "description": "Child table for Daily Work Plan, listing tasks for the day.",
-    "creation": "2024-03-10 14:45:00.000000",
-    "modified": "2024-03-10 14:45:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "project_schedule_task",
-            "label": "Project Schedule Task",
-            "fieldtype": "Link",
-            "options": "Project Schedule Task",
-            "in_list_view": 1,
-            "get_query": "construction_pmis.construction_pmis.utils.get_tasks_for_daily_plan"
-        },
-        {
-            "fieldname": "task_name",
-            "label": "Task Name / Description",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "project_schedule_task.task_name"
-        },
-        {
-            "fieldname": "wbs_reference",
-            "label": "WBS Ref",
-            "fieldtype": "Data",
-            "fetch_from": "project_schedule_task.wbs_reference",
-            "read_only": 1
-        },
-        {
-            "fieldname": "planned_start_time",
-            "label": "Planned Start Time",
-            "fieldtype": "Time"
-        },
-        {
-            "fieldname": "planned_end_time",
-            "label": "Planned End Time",
-            "fieldtype": "Time"
-        },
-        {
-            "fieldname": "location_area",
-            "label": "Location/Area",
-            "fieldtype": "Data",
-            "description": "Specific location for this task today."
-        },
-        {
-            "fieldname": "target_quantity",
-            "label": "Target Quantity",
-            "fieldtype": "Float",
-            "description": "e.g., 10 m³ concrete, 50m formwork"
-        },
-        {
-            "fieldname": "unit_of_measure",
-            "label": "Unit",
-            "fieldtype": "Link",
-            "options": "UOM"
-        },
-        {
-            "fieldname": "notes",
-            "label": "Specific Instructions",
-            "fieldtype": "Small Text"
-        },
-        {
-            "fieldname": "status",
-            "label": "Actual Status",
-            "fieldtype": "Select",
-            "options": "Pending\nNot Started\nIn Progress\nPartially Completed\nCompleted\nBlocked\nCancelled",
-            "default": "Pending",
-            "in_list_view": 1,
-            "read_only": 1,
-            "description": "This status will be updated from Daily Log."
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:45:00.000000",
+ "description": "Child table for Daily Work Plan, listing tasks for the day.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "project_schedule_task",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_tasks_for_daily_plan",
+   "in_list_view": 1,
+   "label": "Project Schedule Task",
+   "options": "Project Schedule Task"
+  },
+  {
+   "fetch_from": "project_schedule_task.task_name",
+   "fieldname": "task_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Task Name / Description",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "project_schedule_task.wbs_reference",
+   "fieldname": "wbs_reference",
+   "fieldtype": "Data",
+   "label": "WBS Ref",
+   "read_only": 1
+  },
+  {
+   "fieldname": "planned_start_time",
+   "fieldtype": "Time",
+   "label": "Planned Start Time"
+  },
+  {
+   "fieldname": "planned_end_time",
+   "fieldtype": "Time",
+   "label": "Planned End Time"
+  },
+  {
+   "description": "Specific location for this task today.",
+   "fieldname": "location_area",
+   "fieldtype": "Data",
+   "label": "Location/Area"
+  },
+  {
+   "description": "e.g., 10 m\u00b3 concrete, 50m formwork",
+   "fieldname": "target_quantity",
+   "fieldtype": "Float",
+   "label": "Target Quantity"
+  },
+  {
+   "fieldname": "unit_of_measure",
+   "fieldtype": "Link",
+   "label": "Unit",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Specific Instructions"
+  },
+  {
+   "default": "Pending",
+   "description": "This status will be updated from Daily Log.",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Actual Status",
+   "options": "Pending\nNot Started\nIn Progress\nPartially Completed\nCompleted\nBlocked\nCancelled",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:45:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Daily Work Plan Task",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

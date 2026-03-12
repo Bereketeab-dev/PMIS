@@ -1,215 +1,283 @@
 {
-    "name": "NCR",
-    "engine": "InnoDB",
-    "description": "Non-Conformance Report for quality, safety, or environmental issues.",
-    "creation": "2024-03-10 18:00:00.000000",
-    "modified": "2024-03-10 18:00:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:NCR-{project}-{YYYY}-{MM}-{#####}",
-    "sort_field": "creation",
-    "sort_order": "DESC",
-    "title_field": "subject",
-    "search_fields": "subject, project, status, severity, raised_by",
-    "permissions": [
-        {
-            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "QA QC Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Site Engineer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "cancel": 0, "amend": 0, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Safety Officer", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        }
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"},
-        {"link_doctype": "Site Inspection", "link_fieldname": "source_inspection"}
-    ],
-    "fields": [
-        {
-            "fieldname": "subject",
-            "label": "Subject / NCR Title",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Open\nUnder Investigation\nCorrective Action Proposed\nCorrective Action Implemented\nPending Verification\nClosed\nRejected",
-            "default": "Open",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "ncr_type",
-            "label": "NCR Type",
-            "fieldtype": "Select",
-            "options": "Quality\nSafety\nEnvironmental\nMaterial\nWorkmanship\nDocumentation\nOther",
-            "default": "Quality",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "severity",
-            "label": "Severity / Classification",
-            "fieldtype": "Select",
-            "options": "Minor\nMajor\nCritical\nObservation",
-            "default": "Minor"
-        },
-        {
-            "fieldname": "date_raised",
-            "label": "Date Raised",
-            "fieldtype": "Date",
-            "default": "Today",
-            "reqd": 1
-        },
-        {
-            "fieldname": "raised_by",
-            "label": "Raised By",
-            "fieldtype": "Link",
-            "options": "User",
-            "default": "__user",
-            "read_only": 1
-        },
-        {
-            "fieldname": "source_inspection",
-            "label": "Source Site Inspection (if any)",
-            "fieldtype": "Link",
-            "options": "Site Inspection"
-        },
-        {
-            "fieldname": "location_of_non_conformance",
-            "label": "Location of Non-Conformance",
-            "fieldtype": "Small Text"
-        },
-        {
-            "fieldname": "details_tab",
-            "label": "Details of Non-Conformance",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "description_of_non_conformance",
-            "label": "Description of Non-Conformance",
-            "fieldtype": "TextEditor",
-            "reqd": 1
-        },
-        {
-            "fieldname": "reference_documents_clauses",
-            "label": "Reference Documents/Clauses Violated",
-            "fieldtype": "Small Text",
-            "description": "e.g., Specification Sec X.Y, Drawing No. Z, Safety Manual Clause A.B"
-        },
-        {
-            "fieldname": "attachments_evidence",
-            "label": "Attachments / Evidence (Photos, etc.)",
-            "fieldtype": "Attach"
-        },
-        {
-            "fieldname": "analysis_action_tab",
-            "label": "Analysis & Corrective Action",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "root_cause_analysis",
-            "label": "Root Cause Analysis (Optional)",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "immediate_action_taken",
-            "label": "Immediate Action Taken (Containment)",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "proposed_corrective_action",
-            "label": "Proposed Corrective Action",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "proposed_preventive_action",
-            "label": "Proposed Preventive Action (Optional)",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "action_assigned_to",
-            "label": "Action Assigned To (User)",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "action_assigned_to_party",
-            "label": "Action Assigned To (Party/Department)",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "target_completion_date_action",
-            "label": "Target Completion Date for Action",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "verification_closure_tab",
-            "label": "Verification & Closure",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "action_taken_details",
-            "label": "Details of Action Taken & Evidence",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "action_completion_date",
-            "label": "Actual Completion Date of Action",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "verification_by",
-            "label": "Verified By",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "verification_date",
-            "label": "Verification Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "verification_remarks",
-            "label": "Verification Remarks / Effectiveness",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "closed_by",
-            "label": "Closed By",
-            "fieldtype": "Link",
-            "options": "User",
-            "read_only": 1
-        },
-        {
-            "fieldname": "date_closed",
-            "label": "Date Closed",
-            "fieldtype": "Date",
-            "read_only": 1
-        }
-    ],
-    "workflow": 1
+ "autoname": "format:NCR-{project}-{YYYY}-{MM}-{#####}",
+ "creation": "2024-03-10 18:00:00.000000",
+ "description": "Non-Conformance Report for quality, safety, or environmental issues.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Subject / NCR Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Open\nUnder Investigation\nCorrective Action Proposed\nCorrective Action Implemented\nPending Verification\nClosed\nRejected"
+  },
+  {
+   "default": "Quality",
+   "fieldname": "ncr_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "NCR Type",
+   "options": "Quality\nSafety\nEnvironmental\nMaterial\nWorkmanship\nDocumentation\nOther"
+  },
+  {
+   "default": "Minor",
+   "fieldname": "severity",
+   "fieldtype": "Select",
+   "label": "Severity / Classification",
+   "options": "Minor\nMajor\nCritical\nObservation"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date_raised",
+   "fieldtype": "Date",
+   "label": "Date Raised",
+   "reqd": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "raised_by",
+   "fieldtype": "Link",
+   "label": "Raised By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_inspection",
+   "fieldtype": "Link",
+   "label": "Source Site Inspection (if any)",
+   "options": "Site Inspection"
+  },
+  {
+   "fieldname": "location_of_non_conformance",
+   "fieldtype": "Small Text",
+   "label": "Location of Non-Conformance"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Details of Non-Conformance"
+  },
+  {
+   "fieldname": "description_of_non_conformance",
+   "fieldtype": "TextEditor",
+   "label": "Description of Non-Conformance",
+   "reqd": 1
+  },
+  {
+   "description": "e.g., Specification Sec X.Y, Drawing No. Z, Safety Manual Clause A.B",
+   "fieldname": "reference_documents_clauses",
+   "fieldtype": "Small Text",
+   "label": "Reference Documents/Clauses Violated"
+  },
+  {
+   "fieldname": "attachments_evidence",
+   "fieldtype": "Attach",
+   "label": "Attachments / Evidence (Photos, etc.)"
+  },
+  {
+   "fieldname": "analysis_action_tab",
+   "fieldtype": "Tab Break",
+   "label": "Analysis & Corrective Action"
+  },
+  {
+   "fieldname": "root_cause_analysis",
+   "fieldtype": "TextEditor",
+   "label": "Root Cause Analysis (Optional)"
+  },
+  {
+   "fieldname": "immediate_action_taken",
+   "fieldtype": "TextEditor",
+   "label": "Immediate Action Taken (Containment)"
+  },
+  {
+   "fieldname": "proposed_corrective_action",
+   "fieldtype": "TextEditor",
+   "label": "Proposed Corrective Action"
+  },
+  {
+   "fieldname": "proposed_preventive_action",
+   "fieldtype": "TextEditor",
+   "label": "Proposed Preventive Action (Optional)"
+  },
+  {
+   "fieldname": "action_assigned_to",
+   "fieldtype": "Link",
+   "label": "Action Assigned To (User)",
+   "options": "User"
+  },
+  {
+   "fieldname": "action_assigned_to_party",
+   "fieldtype": "Data",
+   "label": "Action Assigned To (Party/Department)"
+  },
+  {
+   "fieldname": "target_completion_date_action",
+   "fieldtype": "Date",
+   "label": "Target Completion Date for Action"
+  },
+  {
+   "fieldname": "verification_closure_tab",
+   "fieldtype": "Tab Break",
+   "label": "Verification & Closure"
+  },
+  {
+   "fieldname": "action_taken_details",
+   "fieldtype": "TextEditor",
+   "label": "Details of Action Taken & Evidence"
+  },
+  {
+   "fieldname": "action_completion_date",
+   "fieldtype": "Date",
+   "label": "Actual Completion Date of Action"
+  },
+  {
+   "fieldname": "verification_by",
+   "fieldtype": "Link",
+   "label": "Verified By",
+   "options": "User"
+  },
+  {
+   "fieldname": "verification_date",
+   "fieldtype": "Date",
+   "label": "Verification Date"
+  },
+  {
+   "fieldname": "verification_remarks",
+   "fieldtype": "TextEditor",
+   "label": "Verification Remarks / Effectiveness"
+  },
+  {
+   "fieldname": "closed_by",
+   "fieldtype": "Link",
+   "label": "Closed By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "date_closed",
+   "fieldtype": "Date",
+   "label": "Date Closed",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  },
+  {
+   "link_doctype": "Site Inspection",
+   "link_fieldname": "source_inspection"
+  }
+ ],
+ "modified": "2024-03-10 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "NCR",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "QA QC Engineer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 0,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Site Engineer",
+   "share": 1,
+   "submit": 0,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Officer",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "subject, project, status, severity, raised_by",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "title_field": "subject",
+ "track_changes": 1,
+ "workflow": 1
 }

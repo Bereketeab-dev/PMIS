@@ -1,86 +1,88 @@
 {
-    "name": "Daily Log Material",
-    "engine": "InnoDB",
-    "description": "Child table for Daily Log, recording materials consumed or received.",
-    "creation": "2024-03-10 16:20:00.000000",
-    "modified": "2024-03-10 16:20:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "daily_work_plan_material",
-            "label": "From Daily Work Plan Material",
-            "fieldtype": "Link",
-            "options": "Daily Work Plan Material",
-            "get_query": "construction_pmis.construction_pmis.utils.get_dwp_material_for_log"
-        },
-        {
-            "fieldname": "item_code",
-            "label": "Material/Item",
-            "fieldtype": "Link",
-            "options": "Item",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "daily_work_plan_material.item_code"
-        },
-        {
-            "fieldname": "item_name",
-            "label": "Item Name",
-            "fieldtype": "Data",
-            "fetch_from": "item_code.item_name",
-            "read_only": 1
-        },
-        {
-            "fieldname": "transaction_type",
-            "label": "Transaction Type",
-            "fieldtype": "Select",
-            "options": "Consumed\nReceived\nWastage\nReturned",
-            "default": "Consumed",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "quantity",
-            "label": "Quantity",
-            "fieldtype": "Float",
-            "reqd": 1,
-            "in_list_view": 1,
-            "fetch_from": "daily_work_plan_material.required_quantity"
-        },
-        {
-            "fieldname": "uom",
-            "label": "Unit of Measure",
-            "fieldtype": "Link",
-            "options": "UOM",
-            "reqd": 1,
-            "fetch_from": "daily_work_plan_material.uom",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "source_or_target_warehouse",
-            "label": "Warehouse",
-            "fieldtype": "Link",
-            "options": "Warehouse",
-            "fetch_from": "daily_work_plan_material.source_warehouse"
-        },
-        {
-            "fieldname": "task_related",
-            "label": "Related Task (Optional)",
-            "fieldtype": "Link",
-            "options": "Daily Log Task Progress"
-        },
-        {
-            "fieldname": "remarks",
-            "label": "Remarks",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 16:20:00.000000",
+ "description": "Child table for Daily Log, recording materials consumed or received.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "daily_work_plan_material",
+   "fieldtype": "Link",
+   "get_query": "construction_pmis.construction_pmis.utils.get_dwp_material_for_log",
+   "label": "From Daily Work Plan Material",
+   "options": "Daily Work Plan Material"
+  },
+  {
+   "fetch_from": "daily_work_plan_material.item_code",
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Material/Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "default": "Consumed",
+   "fieldname": "transaction_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Transaction Type",
+   "options": "Consumed\nReceived\nWastage\nReturned",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "daily_work_plan_material.required_quantity",
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "daily_work_plan_material.uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit of Measure",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "daily_work_plan_material.source_warehouse",
+   "fieldname": "source_or_target_warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "task_related",
+   "fieldtype": "Link",
+   "label": "Related Task (Optional)",
+   "options": "Daily Log Task Progress"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 16:20:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Daily Log Material",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

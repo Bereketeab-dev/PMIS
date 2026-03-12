@@ -1,44 +1,46 @@
 {
-    "name": "Project Task Predecessor",
-    "engine": "InnoDB",
-    "description": "Child table for Project Schedule Task to define predecessor relationships.",
-    "creation": "2024-03-10 14:20:00.000000",
-    "modified": "2024-03-10 14:20:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "predecessor_task",
-            "label": "Predecessor Task",
-            "fieldtype": "Link",
-            "options": "Project Schedule Task",
-            "reqd": 1,
-            "in_list_view": 1,
-            "getColumnDescription": "function(doc) { return doc.task_name; }"
-        },
-        {
-            "fieldname": "dependency_type",
-            "label": "Type",
-            "fieldtype": "Select",
-            "options": "Finish-to-Start (FS)\nStart-to-Start (SS)\nFinish-to-Finish (FF)\nStart-to-Finish (SF)",
-            "default": "Finish-to-Start (FS)",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "lag_days",
-            "label": "Lag (Days)",
-            "fieldtype": "Int",
-            "default": 0,
-            "in_list_view": 1,
-            "description": "Positive for lag, negative for lead time."
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 14:20:00.000000",
+ "description": "Child table for Project Schedule Task to define predecessor relationships.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "predecessor_task",
+   "fieldtype": "Link",
+   "getColumnDescription": "function(doc) { return doc.task_name; }",
+   "in_list_view": 1,
+   "label": "Predecessor Task",
+   "options": "Project Schedule Task",
+   "reqd": 1
+  },
+  {
+   "default": "Finish-to-Start (FS)",
+   "fieldname": "dependency_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Finish-to-Start (FS)\nStart-to-Start (SS)\nFinish-to-Finish (FF)\nStart-to-Finish (SF)"
+  },
+  {
+   "default": 0,
+   "description": "Positive for lag, negative for lead time.",
+   "fieldname": "lag_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Lag (Days)"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 14:20:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Project Task Predecessor",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

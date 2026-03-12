@@ -1,114 +1,114 @@
 {
-    "doctype": "Workflow",
-    "name": "RFI Workflow",
-    "module": "Construction PMIS",
-    "document_type": "RFI",
-    "workflow_name": "RFI Workflow",
-    "is_active": 1,
-    "send_email_alert": 1,
-    "workflow_state_field": "status",
-    "states": [
-        {
-            "state": "Open",
-            "doc_status": "0",
-            "allow_edit": "Site Engineer,Project Manager,Quantity Surveyor"
-        },
-        {
-            "state": "Submitted",
-            "doc_status": "1",
-            "allow_edit": "Project Manager",
-            "message": "RFI submitted. Awaiting response from assigned user."
-        },
-        {
-            "state": "Under Review",
-            "doc_status": "1",
-            "allow_edit": "User specified in assigned_to field,Project Manager",
-            "message": "RFI is under review by the assigned party."
-        },
-        {
-            "state": "Responded",
-            "doc_status": "1",
-            "allow_edit": "Site Engineer,Project Manager,Quantity Surveyor",
-            "message": "Response has been provided. Please review and close if satisfied."
-        },
-        {
-            "state": "Closed",
-            "doc_status": "1",
-            "allow_edit": "Project Manager,System Manager",
-            "update_field": "status",
-            "update_value": "Closed",
-            "message": "RFI has been closed."
-        },
-        {
-            "state": "Void",
-            "doc_status": "2",
-            "allow_edit": "Project Manager,System Manager",
-            "message": "RFI has been voided."
-        }
-    ],
-    "transitions": [
-        {
-            "state": "Open",
-            "action": "Submit",
-            "next_state": "Submitted",
-            "allowed": "Site Engineer,Project Manager,Quantity Surveyor",
-            "condition": "doc.assigned_to",
-            "allow_self_approval": 0
-        },
-        {
-            "state": "Submitted",
-            "action": "Assign for Review",
-            "next_state": "Under Review",
-            "allowed": "Project Manager",
-            "allow_self_approval": 0,
-            "condition": "doc.assigned_to"
-        },
-        {
-            "state": "Under Review",
-            "action": "Provide Response",
-            "next_state": "Responded",
-            "allowed": "User specified in assigned_to field,Project Manager",
-            "condition": "doc.response",
-            "allow_self_approval": 1
-        },
-        {
-            "state": "Responded",
-            "action": "Close RFI",
-            "next_state": "Closed",
-            "allowed": "Site Engineer,Project Manager,Quantity Surveyor",
-            "allow_self_approval": 0
-        },
-        {
-            "state": "Responded",
-            "action": "Request Further Clarification",
-            "next_state": "Submitted",
-            "allowed": "Site Engineer,Project Manager,Quantity Surveyor",
-            "description": "Response is not clear or insufficient. Re-assign or add comments and send back."
-        },
-        {
-            "state": "Submitted",
-            "action": "Void RFI",
-            "next_state": "Void",
-            "allowed": "Project Manager,System Manager"
-        },
-        {
-            "state": "Under Review",
-            "action": "Void RFI",
-            "next_state": "Void",
-            "allowed": "Project Manager,System Manager"
-        },
-        {
-            "state": "Responded",
-            "action": "Void RFI",
-            "next_state": "Void",
-            "allowed": "Project Manager,System Manager"
-        },
-        {
-            "state": "Closed",
-            "action": "Reopen RFI",
-            "next_state": "Open",
-            "allowed": "Project Manager,System Manager",
-            "description": "Reopen a closed RFI if further issues arise or response was incorrect."
-        }
-    ]
+ "doctype": "Workflow",
+ "document_type": "RFI",
+ "is_active": 1,
+ "module": "Construction PMIS",
+ "name": "RFI Workflow",
+ "send_email_alert": 1,
+ "states": [
+  {
+   "allow_edit": "Site Engineer,Project Manager,Quantity Surveyor",
+   "doc_status": "0",
+   "state": "Open"
+  },
+  {
+   "allow_edit": "Project Manager",
+   "doc_status": "1",
+   "message": "RFI submitted. Awaiting response from assigned user.",
+   "state": "Submitted"
+  },
+  {
+   "allow_edit": "User specified in assigned_to field,Project Manager",
+   "doc_status": "1",
+   "message": "RFI is under review by the assigned party.",
+   "state": "Under Review"
+  },
+  {
+   "allow_edit": "Site Engineer,Project Manager,Quantity Surveyor",
+   "doc_status": "1",
+   "message": "Response has been provided. Please review and close if satisfied.",
+   "state": "Responded"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "1",
+   "message": "RFI has been closed.",
+   "state": "Closed",
+   "update_field": "status",
+   "update_value": "Closed"
+  },
+  {
+   "allow_edit": "Project Manager,System Manager",
+   "doc_status": "2",
+   "message": "RFI has been voided.",
+   "state": "Void"
+  }
+ ],
+ "transitions": [
+  {
+   "action": "Submit",
+   "allow_self_approval": 0,
+   "allowed": "Site Engineer,Project Manager,Quantity Surveyor",
+   "condition": "doc.assigned_to",
+   "next_state": "Submitted",
+   "state": "Open"
+  },
+  {
+   "action": "Assign for Review",
+   "allow_self_approval": 0,
+   "allowed": "Project Manager",
+   "condition": "doc.assigned_to",
+   "next_state": "Under Review",
+   "state": "Submitted"
+  },
+  {
+   "action": "Provide Response",
+   "allow_self_approval": 1,
+   "allowed": "User specified in assigned_to field,Project Manager",
+   "condition": "doc.response",
+   "next_state": "Responded",
+   "state": "Under Review"
+  },
+  {
+   "action": "Close RFI",
+   "allow_self_approval": 0,
+   "allowed": "Site Engineer,Project Manager,Quantity Surveyor",
+   "next_state": "Closed",
+   "state": "Responded"
+  },
+  {
+   "action": "Request Further Clarification",
+   "allowed": "Site Engineer,Project Manager,Quantity Surveyor",
+   "description": "Response is not clear or insufficient. Re-assign or add comments and send back.",
+   "next_state": "Submitted",
+   "state": "Responded"
+  },
+  {
+   "action": "Void RFI",
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Void",
+   "state": "Submitted"
+  },
+  {
+   "action": "Void RFI",
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Void",
+   "state": "Under Review"
+  },
+  {
+   "action": "Void RFI",
+   "allowed": "Project Manager,System Manager",
+   "next_state": "Void",
+   "state": "Responded"
+  },
+  {
+   "action": "Reopen RFI",
+   "allowed": "Project Manager,System Manager",
+   "description": "Reopen a closed RFI if further issues arise or response was incorrect.",
+   "next_state": "Open",
+   "state": "Closed"
+  }
+ ],
+ "workflow_name": "RFI Workflow",
+ "workflow_state_field": "status"
 }

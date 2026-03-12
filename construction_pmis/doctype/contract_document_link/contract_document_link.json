@@ -1,39 +1,41 @@
 {
-    "name": "Contract Document Link",
-    "engine": "InnoDB",
-    "description": "Child table for Contract Document to link to other related contract documents.",
-    "creation": "2024-03-10 10:20:00.000000",
-    "modified": "2024-03-10 10:20:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "linked_document",
-            "label": "Linked Contract Document",
-            "fieldtype": "Link",
-            "options": "Contract Document",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "relationship_type",
-            "label": "Relationship Type",
-            "fieldtype": "Select",
-            "options": "Related\nAmendment To\nSupersedes\nAddendum To\nOther",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "description",
-            "label": "Description",
-            "fieldtype": "Small Text"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 10:20:00.000000",
+ "description": "Child table for Contract Document to link to other related contract documents.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "linked_document",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Linked Contract Document",
+   "options": "Contract Document",
+   "reqd": 1
+  },
+  {
+   "fieldname": "relationship_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Relationship Type",
+   "options": "Related\nAmendment To\nSupersedes\nAddendum To\nOther"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 10:20:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Contract Document Link",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

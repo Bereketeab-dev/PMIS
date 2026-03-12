@@ -1,232 +1,285 @@
 {
-    "name": "Variation Order",
-    "engine": "InnoDB",
-    "description": "Manages variation orders, scope changes, and their cost/time impacts.",
-    "creation": "2024-03-10 12:15:00.000000",
-    "modified": "2024-03-10 12:15:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 0,
-    "editable_grid": 1,
-    "track_changes": 1,
-    "autoname": "format:VO-{project}-{#####}",
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "title_field": "variation_title",
-    "search_fields": "variation_title, project, status, type_of_variation",
-    "track_seen": 1,
-    "permissions": [
-        {
-            "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Project Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Quantity Surveyor", "read": 1, "write": 1, "create": 1, "delete": 0, "submit": 1, "cancel": 0, "amend": 1, "report": 1, "share": 1, "export": 1, "print": 1, "email": 1
-        },
-        {
-            "role": "Client Representative", "read": 1, "write": 0, "create": 0, "report": 1, "share": 1}
-    ],
-    "links": [
-        {"link_doctype": "Project", "link_fieldname": "project"},
-        {"link_doctype": "RFI", "link_fieldname": "originating_rfi"},
-        {"link_doctype": "Cost Estimate", "link_fieldname": "linked_cost_estimate"}
-    ],
-    "fields": [
-        {
-            "fieldname": "variation_title",
-            "label": "Variation Title / Subject",
-            "fieldtype": "Data",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "project",
-            "label": "Project",
-            "fieldtype": "Link",
-            "options": "Project",
-            "reqd": 1,
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Draft\nPending Approval\nApproved\nRejected\nImplemented\nCancelled",
-            "default": "Draft",
-            "in_list_view": 1,
-            "read_only_on_submit": 1
-        },
-        {
-            "fieldname": "variation_date",
-            "label": "Variation Date",
-            "fieldtype": "Date",
-            "default": "Today",
-            "reqd": 1
-        },
-        {
-            "fieldname": "initiated_by",
-            "label": "Initiated By",
-            "fieldtype": "Link",
-            "options": "User",
-            "default": "__user",
-            "read_only": 1
-        },
-        {
-            "fieldname": "type_of_variation",
-            "label": "Type of Variation",
-            "fieldtype": "Select",
-            "options": "Addition\nOmission\nSubstitution\nDesign Change\nInstruction\nOther",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "column_break_1",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "originating_rfi",
-            "label": "Originating RFI (if any)",
-            "fieldtype": "Link",
-            "options": "RFI"
-        },
-        {
-            "fieldname": "client_instruction_ref",
-            "label": "Client Instruction Ref.",
-            "fieldtype": "Data"
-        },
-        {
-            "fieldname": "description_tab",
-            "label": "Description of Variation",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "description_of_change",
-            "label": "Detailed Description of Change",
-            "fieldtype": "TextEditor",
-            "reqd": 1
-        },
-        {
-            "fieldname": "reason_for_variation",
-            "label": "Reason for Variation",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "scope_of_works_affected",
-            "label": "Scope of Works Affected",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "attachments",
-            "label": "Supporting Documents/Drawings",
-            "fieldtype": "Attach"
-        },
-        {
-            "fieldname": "impact_tab",
-            "label": "Impact Assessment",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "cost_impact_section",
-            "label": "Cost Impact",
-            "fieldtype": "Section Break"
-        },
-        {
-            "fieldname": "cost_impact_type",
-            "label": "Cost Impact Type",
-            "fieldtype": "Select",
-            "options": "Addition\nDeduction\nNo Change",
-            "default": "No Change",
-            "reqd": 1
-        },
-        {
-            "fieldname": "estimated_cost_impact",
-            "label": "Estimated Cost Impact",
-            "fieldtype": "Currency",
-            "options": "project.company_currency",
-            "description": "Net financial impact. Positive for addition, negative for deduction."
-        },
-        {
-            "fieldname": "linked_cost_estimate",
-            "label": "Linked Cost Estimate for Variation",
-            "fieldtype": "Link",
-            "options": "Cost Estimate",
-            "description": "If a detailed breakdown is required, link to a Cost Estimate document."
-        },
-        {
-            "fieldname": "schedule_impact_section",
-            "label": "Schedule Impact",
-            "fieldtype": "Section Break"
-        },
-        {
-            "fieldname": "schedule_impact_type",
-            "label": "Schedule Impact Type",
-            "fieldtype": "Select",
-            "options": "Extension of Time\nAcceleration\nNo Change",
-            "default": "No Change"
-        },
-        {
-            "fieldname": "estimated_time_impact_days",
-            "label": "Estimated Time Impact (Days)",
-            "fieldtype": "Int",
-            "description": "Positive for extension, negative for acceleration (if applicable)."
-        },
-        {
-            "fieldname": "impact_on_contract_completion_date",
-            "label": "Impact on Contract Completion Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "other_impacts",
-            "label": "Other Impacts (Quality, Resources, etc.)",
-            "fieldtype": "TextEditor"
-        },
-        {
-            "fieldname": "approval_tab",
-            "label": "Approval Details",
-            "fieldtype": "Tab Break"
-        },
-        {
-            "fieldname": "approved_by_client",
-            "label": "Approved by Client",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "client_approval_date",
-            "label": "Client Approval Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "approved_by_consultant",
-            "label": "Approved by Consultant",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "consultant_approval_date",
-            "label": "Consultant Approval Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "internal_approval_by",
-            "label": "Internal Approval By",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "internal_approval_date",
-            "label": "Internal Approval Date",
-            "fieldtype": "Date"
-        },
-        {
-            "fieldname": "approval_remarks",
-            "label": "Approval Remarks",
-            "fieldtype": "TextEditor"
-        }
-    ],
-    "workflow": 1
+ "autoname": "format:VO-{project}-{#####}",
+ "creation": "2024-03-10 12:15:00.000000",
+ "description": "Manages variation orders, scope changes, and their cost/time impacts.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "variation_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Variation Title / Subject",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nPending Approval\nApproved\nRejected\nImplemented\nCancelled",
+   "read_only_on_submit": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "variation_date",
+   "fieldtype": "Date",
+   "label": "Variation Date",
+   "reqd": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "initiated_by",
+   "fieldtype": "Link",
+   "label": "Initiated By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "type_of_variation",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type of Variation",
+   "options": "Addition\nOmission\nSubstitution\nDesign Change\nInstruction\nOther"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "originating_rfi",
+   "fieldtype": "Link",
+   "label": "Originating RFI (if any)",
+   "options": "RFI"
+  },
+  {
+   "fieldname": "client_instruction_ref",
+   "fieldtype": "Data",
+   "label": "Client Instruction Ref."
+  },
+  {
+   "fieldname": "description_tab",
+   "fieldtype": "Tab Break",
+   "label": "Description of Variation"
+  },
+  {
+   "fieldname": "description_of_change",
+   "fieldtype": "TextEditor",
+   "label": "Detailed Description of Change",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reason_for_variation",
+   "fieldtype": "TextEditor",
+   "label": "Reason for Variation"
+  },
+  {
+   "fieldname": "scope_of_works_affected",
+   "fieldtype": "TextEditor",
+   "label": "Scope of Works Affected"
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Attach",
+   "label": "Supporting Documents/Drawings"
+  },
+  {
+   "fieldname": "impact_tab",
+   "fieldtype": "Tab Break",
+   "label": "Impact Assessment"
+  },
+  {
+   "fieldname": "cost_impact_section",
+   "fieldtype": "Section Break",
+   "label": "Cost Impact"
+  },
+  {
+   "default": "No Change",
+   "fieldname": "cost_impact_type",
+   "fieldtype": "Select",
+   "label": "Cost Impact Type",
+   "options": "Addition\nDeduction\nNo Change",
+   "reqd": 1
+  },
+  {
+   "description": "Net financial impact. Positive for addition, negative for deduction.",
+   "fieldname": "estimated_cost_impact",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost Impact",
+   "options": "project.company_currency"
+  },
+  {
+   "description": "If a detailed breakdown is required, link to a Cost Estimate document.",
+   "fieldname": "linked_cost_estimate",
+   "fieldtype": "Link",
+   "label": "Linked Cost Estimate for Variation",
+   "options": "Cost Estimate"
+  },
+  {
+   "fieldname": "schedule_impact_section",
+   "fieldtype": "Section Break",
+   "label": "Schedule Impact"
+  },
+  {
+   "default": "No Change",
+   "fieldname": "schedule_impact_type",
+   "fieldtype": "Select",
+   "label": "Schedule Impact Type",
+   "options": "Extension of Time\nAcceleration\nNo Change"
+  },
+  {
+   "description": "Positive for extension, negative for acceleration (if applicable).",
+   "fieldname": "estimated_time_impact_days",
+   "fieldtype": "Int",
+   "label": "Estimated Time Impact (Days)"
+  },
+  {
+   "fieldname": "impact_on_contract_completion_date",
+   "fieldtype": "Date",
+   "label": "Impact on Contract Completion Date"
+  },
+  {
+   "fieldname": "other_impacts",
+   "fieldtype": "TextEditor",
+   "label": "Other Impacts (Quality, Resources, etc.)"
+  },
+  {
+   "fieldname": "approval_tab",
+   "fieldtype": "Tab Break",
+   "label": "Approval Details"
+  },
+  {
+   "fieldname": "approved_by_client",
+   "fieldtype": "Link",
+   "label": "Approved by Client",
+   "options": "User"
+  },
+  {
+   "fieldname": "client_approval_date",
+   "fieldtype": "Date",
+   "label": "Client Approval Date"
+  },
+  {
+   "fieldname": "approved_by_consultant",
+   "fieldtype": "Link",
+   "label": "Approved by Consultant",
+   "options": "User"
+  },
+  {
+   "fieldname": "consultant_approval_date",
+   "fieldtype": "Date",
+   "label": "Consultant Approval Date"
+  },
+  {
+   "fieldname": "internal_approval_by",
+   "fieldtype": "Link",
+   "label": "Internal Approval By",
+   "options": "User"
+  },
+  {
+   "fieldname": "internal_approval_date",
+   "fieldtype": "Date",
+   "label": "Internal Approval Date"
+  },
+  {
+   "fieldname": "approval_remarks",
+   "fieldtype": "TextEditor",
+   "label": "Approval Remarks"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Project",
+   "link_fieldname": "project"
+  },
+  {
+   "link_doctype": "RFI",
+   "link_fieldname": "originating_rfi"
+  },
+  {
+   "link_doctype": "Cost Estimate",
+   "link_fieldname": "linked_cost_estimate"
+  }
+ ],
+ "modified": "2024-03-10 12:15:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Variation Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 0,
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Quantity Surveyor",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Client Representative",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "search_fields": "variation_title, project, status, type_of_variation",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "variation_title",
+ "track_changes": 1,
+ "track_seen": 1,
+ "workflow": 1
 }

@@ -1,89 +1,91 @@
 {
-    "name": "Rebar BBS Item",
-    "engine": "InnoDB",
-    "description": "Child table for Rebar Model to store Bar Bending Schedule items (optional preview).",
-    "creation": "2024-03-10 10:30:00.000000",
-    "modified": "2024-03-10 10:30:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "bar_mark",
-            "label": "Bar Mark",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "reqd": 1
-        },
-        {
-            "fieldname": "bar_type_grade",
-            "label": "Type & Grade",
-            "fieldtype": "Data",
-            "description": "e.g., T12, H20"
-        },
-        {
-            "fieldname": "number_of_bars",
-            "label": "Number of Bars",
-            "fieldtype": "Int",
-            "in_list_view": 1
-        },
-        {
-            "fieldname": "bar_length_mm",
-            "label": "Length (mm)",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "shape_code",
-            "label": "Shape Code",
-            "fieldtype": "Data",
-            "description": "As per standard (e.g., BS8666)"
-        },
-        {
-            "fieldname": "dimension_a",
-            "label": "Dim A (mm)",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "dimension_b",
-            "label": "Dim B (mm)",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "dimension_c",
-            "label": "Dim C (mm)",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "dimension_d",
-            "label": "Dim D (mm)",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "dimension_e",
-            "label": "Dim E (mm)",
-            "fieldtype": "Float"
-        },
-        {
-            "fieldname": "total_length_m",
-            "label": "Total Length (m)",
-            "fieldtype": "Float",
-            "in_list_view": 1,
-            "read_only": 1
-        },
-        {
-            "fieldname": "weight_kg",
-            "label": "Weight (kg)",
-            "fieldtype": "Float",
-            "in_list_view": 1,
-            "read_only": 1,
-            "description": "Calculated based on length and bar diameter/type."
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 10:30:00.000000",
+ "description": "Child table for Rebar Model to store Bar Bending Schedule items (optional preview).",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "bar_mark",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bar Mark",
+   "reqd": 1
+  },
+  {
+   "description": "e.g., T12, H20",
+   "fieldname": "bar_type_grade",
+   "fieldtype": "Data",
+   "label": "Type & Grade"
+  },
+  {
+   "fieldname": "number_of_bars",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Number of Bars"
+  },
+  {
+   "fieldname": "bar_length_mm",
+   "fieldtype": "Float",
+   "label": "Length (mm)"
+  },
+  {
+   "description": "As per standard (e.g., BS8666)",
+   "fieldname": "shape_code",
+   "fieldtype": "Data",
+   "label": "Shape Code"
+  },
+  {
+   "fieldname": "dimension_a",
+   "fieldtype": "Float",
+   "label": "Dim A (mm)"
+  },
+  {
+   "fieldname": "dimension_b",
+   "fieldtype": "Float",
+   "label": "Dim B (mm)"
+  },
+  {
+   "fieldname": "dimension_c",
+   "fieldtype": "Float",
+   "label": "Dim C (mm)"
+  },
+  {
+   "fieldname": "dimension_d",
+   "fieldtype": "Float",
+   "label": "Dim D (mm)"
+  },
+  {
+   "fieldname": "dimension_e",
+   "fieldtype": "Float",
+   "label": "Dim E (mm)"
+  },
+  {
+   "fieldname": "total_length_m",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Length (m)",
+   "read_only": 1
+  },
+  {
+   "description": "Calculated based on length and bar diameter/type.",
+   "fieldname": "weight_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight (kg)",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 10:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Rebar BBS Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

@@ -1,78 +1,80 @@
 {
-    "name": "Commissioning Checklist Item",
-    "engine": "InnoDB",
-    "description": "Child table for Commissioning Checklist, detailing individual checks.",
-    "creation": "2024-03-10 19:15:00.000000",
-    "modified": "2024-03-10 19:15:00.000000",
-    "modified_by": "Administrator",
-    "owner": "Administrator",
-    "docstatus": 0,
-    "idx": 0,
-    "issingle": 0,
-    "istable": 1,
-    "editable_grid": 1,
-    "track_changes": 0,
-    "autoname": "Prompt",
-    "permissions": [],
-    "fields": [
-        {
-            "fieldname": "check_item_sequence",
-            "label": "Seq.",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "width": "50"
-        },
-        {
-            "fieldname": "check_item_description",
-            "label": "Check Item / Test Description",
-            "fieldtype": "Text",
-            "reqd": 1,
-            "in_list_view": 1,
-            "width": "300"
-        },
-        {
-            "fieldname": "acceptance_criteria",
-            "label": "Acceptance Criteria",
-            "fieldtype": "Small Text",
-            "width": "200"
-        },
-        {
-            "fieldname": "method_of_check_test",
-            "label": "Method of Check/Test",
-            "fieldtype": "Small Text",
-            "width": "150"
-        },
-        {
-            "fieldname": "result_status",
-            "label": "Result/Status",
-            "fieldtype": "Select",
-            "options": "Pass\nFail\nN/A\nTo Be Tested\nIn Progress",
-            "default": "To Be Tested",
-            "in_list_view": 1,
-            "width": "120"
-        },
-        {
-            "fieldname": "observed_value_reading",
-            "label": "Observed Value / Reading",
-            "fieldtype": "Data",
-            "width": "150"
-        },
-        {
-            "fieldname": "remarks_observations",
-            "label": "Remarks / Observations",
-            "fieldtype": "Text",
-            "width": "200"
-        },
-        {
-            "fieldname": "verified_by",
-            "label": "Verified By",
-            "fieldtype": "Link",
-            "options": "User"
-        },
-        {
-            "fieldname": "verification_date",
-            "label": "Date Verified",
-            "fieldtype": "Date"
-        }
-    ]
+ "autoname": "Prompt",
+ "creation": "2024-03-10 19:15:00.000000",
+ "description": "Child table for Commissioning Checklist, detailing individual checks.",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "check_item_sequence",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Seq.",
+   "width": "50"
+  },
+  {
+   "fieldname": "check_item_description",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Check Item / Test Description",
+   "reqd": 1,
+   "width": "300"
+  },
+  {
+   "fieldname": "acceptance_criteria",
+   "fieldtype": "Small Text",
+   "label": "Acceptance Criteria",
+   "width": "200"
+  },
+  {
+   "fieldname": "method_of_check_test",
+   "fieldtype": "Small Text",
+   "label": "Method of Check/Test",
+   "width": "150"
+  },
+  {
+   "default": "To Be Tested",
+   "fieldname": "result_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Result/Status",
+   "options": "Pass\nFail\nN/A\nTo Be Tested\nIn Progress",
+   "width": "120"
+  },
+  {
+   "fieldname": "observed_value_reading",
+   "fieldtype": "Data",
+   "label": "Observed Value / Reading",
+   "width": "150"
+  },
+  {
+   "fieldname": "remarks_observations",
+   "fieldtype": "Text",
+   "label": "Remarks / Observations",
+   "width": "200"
+  },
+  {
+   "fieldname": "verified_by",
+   "fieldtype": "Link",
+   "label": "Verified By",
+   "options": "User"
+  },
+  {
+   "fieldname": "verification_date",
+   "fieldtype": "Date",
+   "label": "Date Verified"
+  }
+ ],
+ "idx": 0,
+ "issingle": 0,
+ "istable": 1,
+ "modified": "2024-03-10 19:15:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction PMIS",
+ "name": "Commissioning Checklist Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "track_changes": 0
 }

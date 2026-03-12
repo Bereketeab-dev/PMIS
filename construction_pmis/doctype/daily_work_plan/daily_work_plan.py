@@ -10,7 +10,9 @@ class DailyWorkPlan(Document):
         # format:DWP-{project}-{date}-{#####}
         project_abbr = frappe.get_cached_value('Project', self.project, 'project_name')[:5].upper() if self.project else "PROJ"
         current_date_str = getdate(self.date).strftime("%Y%m%d") if self.date else nowdate().replace("-","")
-        self.name = f"DWP-{project_abbr}-{current_date_str}-"
+        prefix = f"DWP-{project_abbr}-{current_date_str}-"
+        from frappe.model.naming import make_autoname
+        self.name = make_autoname(prefix + ".#####")
 
     def validate(self):
         if not self.plan_title:
